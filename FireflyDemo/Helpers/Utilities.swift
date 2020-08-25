@@ -16,9 +16,9 @@ class Utilities {
         // Create the bottom line
         let bottomLine = CALayer()
         
-        bottomLine.frame = CGRect(x: 0, y: textfield.frame.height - 2, width: textfield.frame.width, height: 2)
+        bottomLine.frame = CGRect(x: 0, y: textfield.frame.height - 2, width: textfield.frame.width-40, height: 2)
         
-        bottomLine.backgroundColor = UIColor.init(red: 48/255, green: 173/255, blue: 99/255, alpha: 1).cgColor
+        bottomLine.backgroundColor = UIColor.init(red: 102/255, green: 255/255, blue: 0/255, alpha: 0.70) /* #66ff00 */.cgColor
         
         // Remove border on text field
         textfield.borderStyle = .none
@@ -31,7 +31,8 @@ class Utilities {
     static func styleFilledButton(_ button:UIButton) {
         
         // Filled rounded corner style
-        button.backgroundColor = UIColor.init(red: 48/255, green: 173/255, blue: 99/255, alpha: 1)
+
+        button.backgroundColor = UIColor.init(red: 102/255, green: 255/255, blue: 0/255, alpha: 0.70) /* #66ff00 */
         button.layer.cornerRadius = 25.0
         button.tintColor = UIColor.white
     }
@@ -43,6 +44,7 @@ class Utilities {
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.cornerRadius = 25.0
         button.tintColor = UIColor.black
+        button.alpha = 0.70
     }
     
     static func isPasswordValid(_ password : String) -> Bool {
