@@ -412,6 +412,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
+  - Firebase/Storage
   - FirebaseUI
   - FirebaseUI/Auth
 
@@ -474,6 +475,6 @@ SPEC CHECKSUMS:
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
 
-PODFILE CHECKSUM: 26b4d295f3a376264c4e540ea63970c8eb6fc7a2
+PODFILE CHECKSUM: 060fcd8d051feea4a567b8a7b7ca3e4c37344821
 
 COCOAPODS: 1.9.3

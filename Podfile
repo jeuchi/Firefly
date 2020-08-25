@@ -12,4 +12,5 @@ target 'FireflyDemo' do
 	pod 'FirebaseUI/Auth'
 	pod 'Firebase/Core'
 	pod 'Firebase/Firestore'
+	pod 'Firebase/Storage'
 end

@@ -20,6 +20,7 @@
 		403BE33C24F3511F00A3AFD4 /* Sign Up ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403BE33B24F3511F00A3AFD4 /* Sign Up ViewController.swift */; };
 		403BE34024F356AE00A3AFD4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403BE33E24F356AE00A3AFD4 /* Constants.swift */; };
 		403BE34124F356AE00A3AFD4 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403BE33F24F356AE00A3AFD4 /* Utilities.swift */; };
+		40948A1B24F57F7A0062D79E /* DisplayVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40948A1A24F57F7A0062D79E /* DisplayVideo.swift */; };
 		40AB391824F4A3A80011FEAE /* LoginVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 40AB391724F4A3A80011FEAE /* LoginVideo.mp4 */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		403BE33B24F3511F00A3AFD4 /* Sign Up ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sign Up ViewController.swift"; sourceTree = "<group>"; };
 		403BE33E24F356AE00A3AFD4 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		403BE33F24F356AE00A3AFD4 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		40948A1A24F57F7A0062D79E /* DisplayVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayVideo.swift; sourceTree = "<group>"; };
 		40AB391724F4A3A80011FEAE /* LoginVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoginVideo.mp4; sourceTree = "<group>"; };
 		DE329698288248CDFD6DEE5D /* Pods-FireflyDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FireflyDemo.debug.xcconfig"; path = "Target Support Files/Pods-FireflyDemo/Pods-FireflyDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,6 +118,7 @@
 			children = (
 				403BE33E24F356AE00A3AFD4 /* Constants.swift */,
 				403BE33F24F356AE00A3AFD4 /* Utilities.swift */,
+				40948A1A24F57F7A0062D79E /* DisplayVideo.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				403BE32124F3313A00A3AFD4 /* AppDelegate.swift in Sources */,
 				403BE34024F356AE00A3AFD4 /* Constants.swift in Sources */,
 				403BE33C24F3511F00A3AFD4 /* Sign Up ViewController.swift in Sources */,
+				40948A1B24F57F7A0062D79E /* DisplayVideo.swift in Sources */,
 				403BE34124F356AE00A3AFD4 /* Utilities.swift in Sources */,
 				403BE32324F3313A00A3AFD4 /* SceneDelegate.swift in Sources */,
 			);
