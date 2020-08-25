@@ -79,7 +79,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Hb3-Y1-dGd">
-                                <rect key="frame" x="40" y="84" width="334" height="230.5"/>
+                                <rect key="frame" x="40" y="128" width="334" height="230.5"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P4v-SA-1C2">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
@@ -135,7 +135,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ptz-BC-mR7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2086" y="679"/>
+            <point key="canvasLocation" x="2230" y="461"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="rhe-3v-fRJ">
@@ -164,7 +164,7 @@
             </objects>
             <point key="canvasLocation" x="3077" y="88"/>
         </scene>
-        <!--Sign Up View Controller-->
+        <!--Sign Up-->
         <scene sceneID="Tc5-WK-nKO">
             <objects>
                 <viewController id="OGD-KH-vxU" customClass="Sign_Up_ViewController" customModule="FireflyDemo" customModuleProvider="target" sceneMemberID="viewController">
@@ -173,7 +173,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="778-RP-haL">
-                                <rect key="frame" x="40" y="84" width="334" height="370.5"/>
+                                <rect key="frame" x="40" y="128" width="334" height="370.5"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="evW-XW-QQT">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
@@ -228,7 +228,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uKi-f8-g8U"/>
                     </view>
-                    <navigationItem key="navigationItem" id="EgC-bv-5qa"/>
+                    <navigationItem key="navigationItem" title="Sign Up" id="EgC-bv-5qa"/>
                     <connections>
                         <outlet property="emailTextField" destination="XSS-ec-TnJ" id="2F9-LW-vmn"/>
                         <outlet property="errorLabel" destination="yt4-1b-92Z" id="bWQ-A0-REb"/>
@@ -245,9 +245,10 @@
         <!--Navigation Controller-->
         <scene sceneID="avE-o0-iTA">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="mhS-at-nBy" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mhS-at-nBy" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4qN-K4-DW1">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
