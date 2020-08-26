@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //playVideo()
+        // Most viewed videos sorted
         let videosRef = db.collection("videos")
         videosRef.order(by: "views", descending: false)
             .getDocuments() { (querySnapshot, err) in
@@ -43,6 +43,7 @@ class HomeViewController: UIViewController {
                     }
                     self.playVideo()
                     
+                    // recognize swipes up and down
                     let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
                            upSwipe.direction = .up
                     let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
@@ -78,9 +79,8 @@ class HomeViewController: UIViewController {
 
     
     func playVideo() {
-        print(arrayVideos)
         let storageRef = Storage.storage().reference(withPath: arrayVideos[indexOfVideos])
-        storageRef.getData(maxSize: 20 * 1024 * 1024) { (data, error) in
+        storageRef.getData(maxSize: 10 * 1024 * 1024) { (data, error) in
             if let error = error {
                 print("Got an error fetching data: \(error.localizedDescription)")
                 return
@@ -111,8 +111,6 @@ class HomeViewController: UIViewController {
         // Create the layer
         videoPlayerLayer = AVPlayerLayer(player: videoPlayer!)
 
-        //videoPlayerLayer?.frame = CGRect(x: -self.view.frame.size.width*0.80, y: 0, width: view.frame.size.width*4, height: self.view.frame.size.height)
-        
         videoPlayerLayer?.frame = self.view.frame
         videoPlayerLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
         

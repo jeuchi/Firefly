@@ -32,7 +32,7 @@ class Utilities {
         
         // Filled rounded corner style
 
-        button.backgroundColor = UIColor.init(red: 102/255, green: 255/255, blue: 0/255, alpha: 0.70) /* #66ff00 */
+        button.backgroundColor = UIColor.init(red: 102/255, green: 255/255, blue: 0/255, alpha: 1) /* #66ff00 */
         button.layer.cornerRadius = 25.0
         button.tintColor = UIColor.white
     }
@@ -52,5 +52,7 @@ class Utilities {
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
         return passwordTest.evaluate(with: password)
     }
+    
+    
     
 }

@@ -17,7 +17,7 @@
 		403BE33524F331DD00A3AFD4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 403BE33424F331DD00A3AFD4 /* GoogleService-Info.plist */; };
 		403BE33724F3501C00A3AFD4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403BE33624F3501C00A3AFD4 /* LoginViewController.swift */; };
 		403BE33924F3502B00A3AFD4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403BE33824F3502B00A3AFD4 /* HomeViewController.swift */; };
-		403BE33C24F3511F00A3AFD4 /* Sign Up ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403BE33B24F3511F00A3AFD4 /* Sign Up ViewController.swift */; };
+		403BE33C24F3511F00A3AFD4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403BE33B24F3511F00A3AFD4 /* SignUpViewController.swift */; };
 		403BE34024F356AE00A3AFD4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403BE33E24F356AE00A3AFD4 /* Constants.swift */; };
 		403BE34124F356AE00A3AFD4 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403BE33F24F356AE00A3AFD4 /* Utilities.swift */; };
 		40948A1B24F57F7A0062D79E /* DisplayVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40948A1A24F57F7A0062D79E /* DisplayVideo.swift */; };
@@ -38,7 +38,7 @@
 		403BE33424F331DD00A3AFD4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		403BE33624F3501C00A3AFD4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		403BE33824F3502B00A3AFD4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		403BE33B24F3511F00A3AFD4 /* Sign Up ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sign Up ViewController.swift"; sourceTree = "<group>"; };
+		403BE33B24F3511F00A3AFD4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		403BE33E24F356AE00A3AFD4 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		403BE33F24F356AE00A3AFD4 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		40948A1A24F57F7A0062D79E /* DisplayVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayVideo.swift; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 				403BE33824F3502B00A3AFD4 /* HomeViewController.swift */,
 				403BE32424F3313A00A3AFD4 /* ViewController.swift */,
 				403BE33624F3501C00A3AFD4 /* LoginViewController.swift */,
-				403BE33B24F3511F00A3AFD4 /* Sign Up ViewController.swift */,
+				403BE33B24F3511F00A3AFD4 /* SignUpViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -279,7 +279,7 @@
 				403BE32524F3313A00A3AFD4 /* ViewController.swift in Sources */,
 				403BE32124F3313A00A3AFD4 /* AppDelegate.swift in Sources */,
 				403BE34024F356AE00A3AFD4 /* Constants.swift in Sources */,
-				403BE33C24F3511F00A3AFD4 /* Sign Up ViewController.swift in Sources */,
+				403BE33C24F3511F00A3AFD4 /* SignUpViewController.swift in Sources */,
 				40948A1B24F57F7A0062D79E /* DisplayVideo.swift in Sources */,
 				403BE34124F356AE00A3AFD4 /* Utilities.swift in Sources */,
 				403BE32324F3313A00A3AFD4 /* SceneDelegate.swift in Sources */,

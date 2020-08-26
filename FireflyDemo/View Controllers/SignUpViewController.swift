@@ -1,5 +1,5 @@
 //
-//  Sign Up ViewController.swift
+//  SignUpViewController.swift
 //  FireflyDemo
 //
 //  Created by Jeremy  on 8/23/20.
@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 import Firebase
 
-class Sign_Up_ViewController: UIViewController {
+class SignUpViewController: UIViewController {
     
     
     @IBOutlet weak var firstNameTextField: UITextField!

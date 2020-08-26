@@ -170,7 +170,7 @@
         <!--Sign Up-->
         <scene sceneID="Tc5-WK-nKO">
             <objects>
-                <viewController id="OGD-KH-vxU" customClass="Sign_Up_ViewController" customModule="FireflyDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="OGD-KH-vxU" customClass="SignUpViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rvt-jD-RW5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
