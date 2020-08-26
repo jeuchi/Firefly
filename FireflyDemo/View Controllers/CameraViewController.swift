@@ -6,8 +6,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 
     @IBOutlet weak var camPreview: UIView!
     
-    let cameraButton = UIView()
+    //let cameraButton = UIView()
 
+    @IBOutlet weak var cameraButton: UIButton!
     let captureSession = AVCaptureSession()
 
     let movieOutput = AVCaptureMovieFileOutput()
@@ -32,9 +33,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     
         cameraButton.addGestureRecognizer(cameraButtonRecognizer)
     
-        cameraButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        //cameraButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
     
-        cameraButton.backgroundColor = UIColor.red
+       // cameraButton.backgroundColor = UIColor.red
     
         camPreview.addSubview(cameraButton)
     
