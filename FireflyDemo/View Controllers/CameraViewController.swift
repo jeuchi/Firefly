@@ -14,6 +14,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     var frontCamera: AVCaptureDevice?
     var backCamera: AVCaptureDevice?
     var currentCamera: AVCaptureDevice?
+    var whichCam: String?
     
 
     let captureSession = AVCaptureSession()
@@ -98,8 +99,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         }
         
         currentCamera = frontCamera
-        // Setup Camera
-       // let camera = AVCaptureDevice.default(for: AVMediaType.video)!
+        whichCam = "front"
     
         do {
         
@@ -292,4 +292,44 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     
     }
 
+    @IBAction func doubleTapFlipCamera(_ sender: Any) {
+        if movieOutput.isRecording == false {
+            let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes:
+            [.builtInTrueDepthCamera, .builtInDualCamera, .builtInWideAngleCamera],
+            mediaType: .video, position: .unspecified)
+            let devices = deviceDiscoverySession.devices
+            
+            for device in devices {
+                if device.position == AVCaptureDevice.Position.front {
+                    frontCamera = device
+                } else if device.position == AVCaptureDevice.Position.back {
+                    backCamera = device
+                }
+            }
+            if(whichCam == "front") {
+                currentCamera = backCamera
+                whichCam = "back"
+            } else {
+                currentCamera = frontCamera
+                whichCam = "front"
+            }
+            
+                do {
+                
+                    let input = try AVCaptureDeviceInput(device: currentCamera!)
+                    for ii in captureSession.inputs {
+                      captureSession.removeInput(ii as! AVCaptureInput)
+                    }
+                    if captureSession.canAddInput(input) {
+                        print("yes")
+                        captureSession.addInput(input)
+                        activeInput = input
+                    }
+                    
+                } catch {
+                    print("Error setting device video input: \(error)")
+                }
+        }
+    }
+    
 }
