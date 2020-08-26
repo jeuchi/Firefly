@@ -16,7 +16,8 @@ class HomeViewController: UIViewController {
     var videoPlayer:AVPlayer?
     var videoPlayerLayer:AVPlayerLayer?
     
-    @IBOutlet weak var VideoBox: UIStackView!
+    @IBOutlet weak var WelcomeText: UILabel!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,7 @@ class HomeViewController: UIViewController {
                         return
                     }
                     if let url = url {
+                        self.WelcomeText.alpha = 0
                         self.playVideo(url: url)
                         
                         
@@ -72,12 +74,23 @@ class HomeViewController: UIViewController {
         // Create the layer
         videoPlayerLayer = AVPlayerLayer(player: videoPlayer!)
 
-        videoPlayerLayer?.frame = CGRect(x: -self.view.frame.size.width*0.80, y: 0, width: view.frame.size.width*4, height: self.view.frame.size.height)
+        //videoPlayerLayer?.frame = CGRect(x: -self.view.frame.size.width*0.80, y: 0, width: view.frame.size.width*4, height: self.view.frame.size.height)
         
-        view.layer.insertSublayer(self.videoPlayerLayer!, at: 0)
+        videoPlayerLayer?.frame = self.view.frame
+        videoPlayerLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        
+        view.layer.insertSublayer(videoPlayerLayer!, at: 0)
+        
         
         // Add it to the view and play it
         videoPlayer?.playImmediately(atRate: 1)
+        loopVideo(videoPlayer: videoPlayer!)
     }
-    
+        
+    func loopVideo(videoPlayer: AVPlayer) {
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: videoPlayer.currentItem, queue: .main) { [weak self] _ in
+        videoPlayer.seek(to: CMTime.zero)
+        videoPlayer.play()
+        }
+    }
 }

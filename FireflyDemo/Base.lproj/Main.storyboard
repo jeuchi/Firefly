@@ -151,10 +151,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="B5U-qh-C0F">
-                                <rect key="frame" x="152" y="495" width="110" height="200"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -164,7 +160,7 @@
                         <viewLayoutGuide key="safeArea" id="NiU-mm-qrv"/>
                     </view>
                     <connections>
-                        <outlet property="VideoBox" destination="B5U-qh-C0F" id="rdy-Lk-Rhl"/>
+                        <outlet property="WelcomeText" destination="Wfk-Xd-evK" id="Q9t-6N-dUd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uh9-al-Opd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
