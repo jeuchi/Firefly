@@ -214,6 +214,11 @@
 			<key>orderHint</key>
 			<integer>35</integer>
 		</dict>
+		<key>SwiftyCam.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>36</integer>
+		</dict>
 		<key>abseil.xcscheme</key>
 		<dict>
 			<key>isShown</key>

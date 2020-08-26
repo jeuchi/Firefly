@@ -25,5 +25,13 @@ class VideoPlayback: UIViewController {
         avPlayer.replaceCurrentItem(with: playerItem)
     
         avPlayer.play()
+        loopVideo(videoPlayer: avPlayer)
+    }
+    
+    func loopVideo(videoPlayer: AVPlayer) {
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: videoPlayer.currentItem, queue: .main) { [weak self] _ in
+        videoPlayer.seek(to: CMTime.zero)
+        videoPlayer.play()
+        }
     }
 }

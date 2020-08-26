@@ -9,6 +9,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     //let cameraButton = UIView()
 
     @IBOutlet weak var cameraButton: UIButton!
+    var pulsePoint: CGPoint = CGPoint(x: 207, y: 788)
+    
+
     let captureSession = AVCaptureSession()
 
     let movieOutput = AVCaptureMovieFileOutput()
@@ -32,15 +35,12 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         let cameraButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(CameraViewController.startCapture))
     
         cameraButton.addGestureRecognizer(cameraButtonRecognizer)
-    
-        //cameraButton.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-    
-       // cameraButton.backgroundColor = UIColor.red
+
     
         camPreview.addSubview(cameraButton)
     
     }
-
+    
     func setupPreview() {
         // Configure previewLayer
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
@@ -126,12 +126,12 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         switch UIDevice.current.orientation {
             case .portrait:
                 orientation = AVCaptureVideoOrientation.portrait
-            case .landscapeRight:
-                orientation = AVCaptureVideoOrientation.landscapeLeft
-            case .portraitUpsideDown:
-                orientation = AVCaptureVideoOrientation.portraitUpsideDown
+           // case .landscapeRight:
+                //orientation = AVCaptureVideoOrientation.landscapeLeft
+         //  case .portraitUpsideDown:
+              //  orientation = AVCaptureVideoOrientation.portraitUpsideDown
             default:
-                 orientation = AVCaptureVideoOrientation.landscapeRight
+                 orientation = AVCaptureVideoOrientation.portrait
          }
     
          return orientation
@@ -167,8 +167,13 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     func startRecording() {
     
         if movieOutput.isRecording == false {
+            let pulse = PulseAnimation(numberOfPulse: Float.infinity, radius: 60, postion: pulsePoint)
+                   pulse.animationDuration = 1.0
+                   pulse.backgroundColor = #colorLiteral(red: 0.8993218541, green: 0.1372507513, blue: 0.2670814395, alpha: 1)
+                   self.view.layer.insertSublayer(pulse, below: self.view.layer)
         
             let connection = movieOutput.connection(with: AVMediaType.video)
+            
         
             if (connection?.isVideoOrientationSupported)! {
                 connection?.videoOrientation = currentVideoOrientation()
@@ -207,6 +212,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     
        if movieOutput.isRecording == true {
            movieOutput.stopRecording()
+        self.view.layer.sublayers?.popLast()
         }
    }
 
