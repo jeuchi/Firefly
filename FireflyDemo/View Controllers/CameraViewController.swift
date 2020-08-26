@@ -34,6 +34,15 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
             startSession()
         }
     
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+        
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
+
+        view.addGestureRecognizer(leftSwipe)
+        view.addGestureRecognizer(rightSwipe)
+        
         cameraButton.isUserInteractionEnabled = true
     
         let cameraButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(CameraViewController.startCapture))
@@ -43,6 +52,21 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     
         camPreview.addSubview(cameraButton)
     
+    }
+    
+    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer)
+    {
+        if sender.direction == .left
+        {
+           print("Swipe left")
+           // show the view from the right side
+        }
+
+        if sender.direction == .right
+        {
+           print("Swipe right")
+           performSegue(withIdentifier: "backHome", sender: self)
+        }
     }
     
     func setupPreview() {
@@ -176,11 +200,16 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    
-        let vc = segue.destination as! VideoPlayback
-    
-        vc.videoURL = sender as? URL
-    
+        switch segue.identifier {
+            case "showVideo":
+                let vc = segue.destination as! VideoPlayback
+                vc.videoURL = sender as? URL
+            case "backHome":
+                let vc = segue.destination as! HomeViewController
+            default:
+                break
+                
+        }
     }
 
     func startRecording() {

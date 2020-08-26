@@ -56,23 +56,28 @@ class HomeViewController: UIViewController {
         
     }
     
+    @IBAction func onClickCamera(_ sender: UIButton) {
+        performSegue(withIdentifier: "record", sender: nil)
+    }
+    
+    
     @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
         if sender.state == .ended {
             switch sender.direction {
-            case .up:
-                if indexOfVideos < (maxIndex-1) {
-                    indexOfVideos+=1
-                    videoPlayerLayer?.removeFromSuperlayer()
-                    playVideo()
-                }
-            case .down:
-                if indexOfVideos >= 1 {
-                    indexOfVideos-=1
-                    videoPlayerLayer?.removeFromSuperlayer()
-                    playVideo()
-                }
-            default:
-                break
+                case .up:
+                    if indexOfVideos < (maxIndex-1) {
+                        indexOfVideos+=1
+                        videoPlayerLayer?.removeFromSuperlayer()
+                        playVideo()
+                    }
+                case .down:
+                    if indexOfVideos >= 1 {
+                        indexOfVideos-=1
+                        videoPlayerLayer?.removeFromSuperlayer()
+                        playVideo()
+                    }
+                default:
+                    break
             }
         }
     }
