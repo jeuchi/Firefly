@@ -12,26 +12,74 @@ import AVKit
 
 class HomeViewController: UIViewController {
 
-    
+    let db = Firestore.firestore()
     var videoPlayer:AVPlayer?
     var videoPlayerLayer:AVPlayerLayer?
+    
+    
+    var arrayVideos: [String] = []
+    var indexOfVideos = 0
+    var maxIndex = 0
     
     @IBOutlet weak var WelcomeText: UILabel!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        playVideo()
+        //playVideo()
+        let videosRef = db.collection("videos")
+        videosRef.order(by: "views", descending: false)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        self.arrayVideos.append(document.get("path") as! String)
+                        self.maxIndex+=1
+                    }
+                    self.playVideo()
+                    
+                    let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
+                           upSwipe.direction = .up
+                    let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
+                    upSwipe.direction = .up
+                    downSwipe.direction = .down
+                    self.view.addGestureRecognizer(upSwipe)
+                    self.view.addGestureRecognizer(downSwipe)
+                }
+        }
         
     }
+    
+    @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
+        if sender.state == .ended {
+            switch sender.direction {
+            case .up:
+                if indexOfVideos < (maxIndex-1) {
+                    indexOfVideos+=1
+                    videoPlayerLayer?.removeFromSuperlayer()
+                    playVideo()
+                }
+            case .down:
+                if indexOfVideos >= 1 {
+                    indexOfVideos-=1
+                    videoPlayerLayer?.removeFromSuperlayer()
+                    playVideo()
+                }
+            default:
+                break
+            }
+        }
+    }
 
+    
     func playVideo() {
-        let storageRef = Storage.storage().reference(withPath: "videos/Firefly_Temp.mp4")
+        print(arrayVideos)
+        let storageRef = Storage.storage().reference(withPath: arrayVideos[indexOfVideos])
         storageRef.getData(maxSize: 20 * 1024 * 1024) { (data, error) in
             if let error = error {
                 print("Got an error fetching data: \(error.localizedDescription)")
@@ -45,17 +93,6 @@ class HomeViewController: UIViewController {
                     if let url = url {
                         self.WelcomeText.alpha = 0
                         self.playVideo(url: url)
-                        
-                        
-                        /*
-                        let player = AVPlayer(url: url)
-                        let playerViewController = AVPlayerViewController()
-                        playerViewController.player = player
-                        playerViewController.view.frame = self.VideoBox.bounds
-                        self.VideoBox.addSubview(playerViewController.view)
-                        self.present(playerViewController, animated: true) {
-                            playerViewController.player!.play()
-                        }*/
                         
                     }
                 }
@@ -79,6 +116,7 @@ class HomeViewController: UIViewController {
         videoPlayerLayer?.frame = self.view.frame
         videoPlayerLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
         
+        //videoPlayerLayer?.removeFromSuperlayer()
         view.layer.insertSublayer(videoPlayerLayer!, at: 0)
         
         
