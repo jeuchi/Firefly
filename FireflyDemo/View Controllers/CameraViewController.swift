@@ -11,6 +11,10 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     @IBOutlet weak var cameraButton: UIButton!
     var pulsePoint: CGPoint = CGPoint(x: 207, y: 788)
     
+    var frontCamera: AVCaptureDevice?
+    var backCamera: AVCaptureDevice?
+    var currentCamera: AVCaptureDevice?
+    
 
     let captureSession = AVCaptureSession()
 
@@ -47,6 +51,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         previewLayer.frame = camPreview.bounds
         previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         camPreview.layer.addSublayer(previewLayer)
+        
     }
 
     //MARK:- Setup Camera
@@ -55,12 +60,26 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     
         captureSession.sessionPreset = AVCaptureSession.Preset.high
     
+        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes:
+        [.builtInTrueDepthCamera, .builtInDualCamera, .builtInWideAngleCamera],
+        mediaType: .video, position: .unspecified)
+        let devices = deviceDiscoverySession.devices
+        
+        for device in devices {
+            if device.position == AVCaptureDevice.Position.front {
+                frontCamera = device
+            } else if device.position == AVCaptureDevice.Position.back {
+                backCamera = device
+            }
+        }
+        
+        currentCamera = frontCamera
         // Setup Camera
-        let camera = AVCaptureDevice.default(for: AVMediaType.video)!
+       // let camera = AVCaptureDevice.default(for: AVMediaType.video)!
     
         do {
         
-            let input = try AVCaptureDeviceInput(device: camera)
+            let input = try AVCaptureDeviceInput(device: currentCamera!)
         
             if captureSession.canAddInput(input) {
                 captureSession.addInput(input)
