@@ -205,6 +205,15 @@
                                     <outletCollection property="gestureRecognizers" destination="k9z-Qp-5I7" appends="YES" id="6g3-nT-Kbf"/>
                                 </connections>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IO3-ri-MGv">
+                                <rect key="frame" x="30" y="75" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="ColorFilterOff"/>
+                                <connections>
+                                    <action selector="tappedFilterButton:" destination="Xfq-g3-wfc" eventType="touchUpInside" id="ymc-Yc-OGF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="dEc-V1-ant"/>
@@ -212,6 +221,7 @@
                     <connections>
                         <outlet property="camPreview" destination="BdS-B2-8im" id="oWY-V7-H3i"/>
                         <outlet property="cameraButton" destination="c6D-mz-ovK" id="3kP-T2-hX9"/>
+                        <outlet property="filterButton" destination="IO3-ri-MGv" id="mCs-4F-Cdc"/>
                         <segue destination="VDf-iM-WvJ" kind="show" identifier="showVideo" id="ia5-8D-0fa"/>
                         <segue destination="3ws-GI-YNh" kind="presentation" identifier="backHome" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="J0I-tt-5Nf"/>
                     </connections>
@@ -380,6 +390,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ColorFilterOff" width="150" height="150"/>
         <image name="FireflyLogo" width="529" height="472"/>
         <image name="arrowshape.turn.up.left.fill" catalog="system" width="128" height="106"/>
         <image name="camera" catalog="system" width="128" height="96"/>

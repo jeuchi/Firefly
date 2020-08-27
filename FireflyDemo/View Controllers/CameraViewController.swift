@@ -6,7 +6,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 
     @IBOutlet weak var camPreview: UIView!
     
-    //let cameraButton = UIView()
+    @IBOutlet weak var filterButton: UIButton!
 
     @IBOutlet weak var cameraButton: UIButton!
     var pulsePoint: CGPoint = CGPoint(x: 207, y: 788)
@@ -15,6 +15,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     var backCamera: AVCaptureDevice?
     var currentCamera: AVCaptureDevice?
     var whichCam: String?
+    private var videoFilterOn: Bool = false
     
 
     let captureSession = AVCaptureSession()
@@ -331,5 +332,14 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
                 }
         }
     }
+    
+    @IBAction func tappedFilterButton(_ sender: Any) {
+        videoFilterOn = !videoFilterOn
+        let filteringEnabled = videoFilterOn
+        
+        let stateImage = UIImage(named: filteringEnabled ? "ColorFilterOn" : "ColorFilterOff")
+        self.filterButton.setImage(stateImage, for: .normal)
+    }
+    
     
 }
