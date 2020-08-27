@@ -41,6 +41,8 @@ class VideoPlayback: UIViewController {
     }
     
     @IBAction func tappedDiscard(_ sender: Any) {
+        
+        // Confirm if user wants to delete
         let alert = UIAlertController(title: "", message: "Are you sure you want to delete?", preferredStyle: UIAlertController.Style.alert)
 
         alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: { (action: UIAlertAction!) in

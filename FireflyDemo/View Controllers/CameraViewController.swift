@@ -45,12 +45,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         
         // set up cameraButton
         cameraButton.isUserInteractionEnabled = true
-       // let cameraButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(CameraViewController.startCapture))
-       // cameraButton.addGestureRecognizer(cameraButtonRecognizer)
-       //camPreview.addSubview(cameraButton)
-        
-        // Set up the video preview view.
-        //previewView.session = session
         
         /*
          Check the video authorization status. Video access is required and audio
@@ -153,43 +147,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
            //performSegue(withIdentifier: "backHome", sender: self)
         }
     }
-    
-    
-    
-    
-    
-    
-
-/*
-    func tempURL() -> URL? {
-        let directory = NSTemporaryDirectory() as NSString
-    
-        if directory != "" {
-            let path = directory.appendingPathComponent(NSUUID().uuidString + ".mp4")
-            return URL(fileURLWithPath: path)
-        }
-    
-        return nil
-    }
-     */
-
-
-    /*
-    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-    
-        if (error != nil) {
-        
-            print("Error recording movie: \(error!.localizedDescription)")
-        
-        } else {
-        
-            let videoRecorded = outputURL! as URL
-        
-            performSegue(withIdentifier: "showVideo", sender: videoRecorded)
-        
-        }
-    
-    }*/
     
     @IBAction func tapRecord(_ sender: Any) {
         // Check if not recording
