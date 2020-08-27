@@ -186,7 +186,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BdS-B2-8im">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BdS-B2-8im" userLabel="Preview">
                                 <rect key="frame" x="0.0" y="44" width="414" height="829"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -219,9 +219,9 @@
                         <viewLayoutGuide key="safeArea" id="dEc-V1-ant"/>
                     </view>
                     <connections>
-                        <outlet property="camPreview" destination="BdS-B2-8im" id="oWY-V7-H3i"/>
                         <outlet property="cameraButton" destination="c6D-mz-ovK" id="3kP-T2-hX9"/>
                         <outlet property="filterButton" destination="IO3-ri-MGv" id="mCs-4F-Cdc"/>
+                        <outlet property="preview" destination="BdS-B2-8im" id="3qc-0k-kb7"/>
                         <segue destination="VDf-iM-WvJ" kind="show" identifier="showVideo" id="ia5-8D-0fa"/>
                         <segue destination="3ws-GI-YNh" kind="presentation" identifier="backHome" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="J0I-tt-5Nf"/>
                     </connections>
