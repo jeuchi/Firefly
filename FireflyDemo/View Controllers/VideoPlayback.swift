@@ -6,16 +6,15 @@ class VideoPlayback: UIViewController {
     let avPlayer = AVPlayer()
     var avPlayerLayer: AVPlayerLayer!
 
+    var notificationObserver:NSObjectProtocol?
     var videoURL: URL!
     //connect this to your uiview in storyboard
     
     @IBOutlet weak var videoView: UIView!
-    @IBOutlet weak var toolTip: UILabel!
-    @IBOutlet weak var gestureImages: UIButton!
+    @IBOutlet weak var discardButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.toolTip.center = CGPoint(x: 50, y: 10)
 
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
         avPlayerLayer.frame = view.bounds
@@ -32,20 +31,23 @@ class VideoPlayback: UIViewController {
         
         loopVideo(videoPlayer: avPlayer)
     }
-    @IBAction func showToolTip(_ sender: Any) {
-        toolTip.alpha = 1
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
 
-        UIView.animate(withDuration: 1) {
-            self.gestureImages.alpha = 1
-            self.gestureImages.transform = CGAffineTransform(rotationAngle: -1.6)
-            self.toolTip.center = CGPoint(x: 90, y: 90)
-        }
+        NotificationCenter.default.removeObserver(self.notificationObserver)
+        avPlayer.pause()
+        avPlayerLayer.player = nil
+        avPlayerLayer.removeFromSuperlayer()
+    }
+    
+    @IBAction func tappedDiscard(_ sender: Any) {
+        performSegue(withIdentifier: "goVideo", sender: nil)
     }
     
     func loopVideo(videoPlayer: AVPlayer) {
-        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: videoPlayer.currentItem, queue: .main) { [weak self] _ in
-        videoPlayer.seek(to: CMTime.zero)
-        videoPlayer.play()
+        notificationObserver = NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: videoPlayer.currentItem, queue: .main) { [weak self] _ in
+            videoPlayer.seek(to: CMTime.zero)
+            videoPlayer.play()
         }
     }
 }

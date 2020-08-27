@@ -223,7 +223,7 @@
                         <outlet property="cameraButton" destination="c6D-mz-ovK" id="3kP-T2-hX9"/>
                         <outlet property="filterButton" destination="IO3-ri-MGv" id="mCs-4F-Cdc"/>
                         <outlet property="preview" destination="BdS-B2-8im" id="3qc-0k-kb7"/>
-                        <segue destination="VDf-iM-WvJ" kind="show" identifier="showVideo" id="ia5-8D-0fa"/>
+                        <segue destination="VDf-iM-WvJ" kind="presentation" identifier="showVideo" modalPresentationStyle="fullScreen" id="ia5-8D-0fa"/>
                         <segue destination="3ws-GI-YNh" kind="presentation" identifier="backHome" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="J0I-tt-5Nf"/>
                     </connections>
                 </viewController>
@@ -241,57 +241,38 @@
             <objects>
                 <viewController id="VDf-iM-WvJ" customClass="VideoPlayback" customModule="FireflyDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="97F-hd-Oif">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CpT-sM-1KF">
                                 <rect key="frame" x="0.0" y="-36" width="414" height="831"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOF-uo-vtV">
-                                        <rect key="frame" x="8" y="35" width="133" height="86"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="Swipe down to cancel">
-                                                <attributes>
-                                                    <font key="NSFont" metaFont="system" size="18"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hjH-UG-kYs">
-                                        <rect key="frame" x="37" y="115" width="34" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" image="arrowshape.turn.up.left.fill" catalog="system"/>
-                                    </button>
-                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="9g4-43-2ey" appends="YES" id="OoQ-0y-rwa"/>
-                                </connections>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1F-2t-zep">
+                                <rect key="frame" x="20" y="60" width="40" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" backgroundImage="x.square.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="tappedDiscard:" destination="VDf-iM-WvJ" eventType="touchUpInside" id="5H1-r5-37G"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="rvv-rQ-7Tb"/>
                     </view>
                     <navigationItem key="navigationItem" id="8IO-SF-YhM"/>
                     <connections>
-                        <outlet property="gestureImages" destination="hjH-UG-kYs" id="G8u-bg-lM2"/>
-                        <outlet property="toolTip" destination="DOF-uo-vtV" id="5pI-mN-co6"/>
+                        <outlet property="discardButton" destination="t1F-2t-zep" id="W8g-Cw-1jx"/>
                         <outlet property="videoView" destination="CpT-sM-1KF" id="3yN-eV-pCd"/>
+                        <segue destination="Xfq-g3-wfc" kind="presentation" identifier="goVideo" modalPresentationStyle="fullScreen" id="eU6-Er-LLu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zxh-FF-Q6g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="9g4-43-2ey">
-                    <connections>
-                        <action selector="showToolTip:" destination="VDf-iM-WvJ" id="Rml-3X-EzY"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4795.652173913044" y="97.767857142857139"/>
+            <point key="canvasLocation" x="4751" y="88"/>
         </scene>
         <!--Sign Up-->
         <scene sceneID="Tc5-WK-nKO">
@@ -390,11 +371,14 @@
             <point key="canvasLocation" x="137.68115942028987" y="88.392857142857139"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="eU6-Er-LLu"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="ColorFilterOff" width="150" height="150"/>
         <image name="FireflyLogo" width="529" height="472"/>
-        <image name="arrowshape.turn.up.left.fill" catalog="system" width="128" height="106"/>
         <image name="camera" catalog="system" width="128" height="96"/>
         <image name="square.fill" catalog="system" width="128" height="114"/>
+        <image name="x.square.fill" catalog="system" width="128" height="114"/>
     </resources>
 </document>

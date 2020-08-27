@@ -106,6 +106,19 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         else { return }
         captureSession.addInput(videoDeviceInputTry)
         videoDeviceInput = videoDeviceInputTry
+        
+        // microphone input
+        let microphone = AVCaptureDevice.default(for: AVMediaType.audio)!
+        do {
+            let microphoneDeviceInputTry = try AVCaptureDeviceInput(device: microphone)
+            if captureSession.canAddInput(microphoneDeviceInputTry) {
+                captureSession.addInput(microphoneDeviceInputTry)
+            }
+        } catch {
+            print("Error setting audio device: \(error)")
+        }
+           
+    
         print("Session inputs: \(captureSession.inputs)")
         
         // video output
@@ -225,10 +238,12 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
        }
     
     func removePulse() {
-        if let sublayers = view.layer.sublayers {
-            for layer in sublayers {
-                if layer.name == "pulseAnimation" {
-                    layer.removeFromSuperlayer()
+        DispatchQueue.main.async {
+            if let sublayers = self.view.layer.sublayers {
+                for layer in sublayers {
+                    if layer.name == "pulseAnimation" {
+                        layer.removeFromSuperlayer()
+                    }
                 }
             }
         }
@@ -294,6 +309,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
                     print("Error occurred while creating video device input: \(error)")
                 }
             }
+            
         }
         
     }
