@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Xfq-g3-wfc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3ws-GI-YNh">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -259,6 +259,14 @@
                                     <action selector="tappedDiscard:" destination="VDf-iM-WvJ" eventType="touchUpInside" id="5H1-r5-37G"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ivl-Pc-f0I">
+                                <rect key="frame" x="28" y="803" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="tappedEdit:" destination="VDf-iM-WvJ" eventType="touchUpInside" id="mq4-vQ-wVf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="rvv-rQ-7Tb"/>
@@ -266,6 +274,7 @@
                     <navigationItem key="navigationItem" id="8IO-SF-YhM"/>
                     <connections>
                         <outlet property="discardButton" destination="t1F-2t-zep" id="W8g-Cw-1jx"/>
+                        <outlet property="editButton" destination="Ivl-Pc-f0I" id="BJp-LG-NT9"/>
                         <outlet property="videoView" destination="CpT-sM-1KF" id="3yN-eV-pCd"/>
                         <segue destination="Xfq-g3-wfc" kind="presentation" identifier="goVideo" modalPresentationStyle="fullScreen" id="eU6-Er-LLu"/>
                     </connections>
@@ -372,7 +381,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="eU6-Er-LLu"/>
+        <segue reference="HZq-Ch-HUq"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="ColorFilterOff" width="150" height="150"/>

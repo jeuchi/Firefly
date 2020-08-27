@@ -1,13 +1,17 @@
 import UIKit
 import AVFoundation
 
-class VideoPlayback: UIViewController {
+class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoEditorControllerDelegate {
 
     let avPlayer = AVPlayer()
     var avPlayerLayer: AVPlayerLayer!
 
+    @IBOutlet weak var editButton: UIButton!
+    
     var notificationObserver:NSObjectProtocol?
     var videoURL: URL!
+    var editURL: URL!
+    
     //connect this to your uiview in storyboard
     
     @IBOutlet weak var videoView: UIView!
@@ -26,8 +30,8 @@ class VideoPlayback: UIViewController {
         let playerItem = AVPlayerItem(url: videoURL as URL)
         avPlayer.replaceCurrentItem(with: playerItem)
     
+        editURL = videoURL
         avPlayer.play()
-      
         
         loopVideo(videoPlayer: avPlayer)
     }
@@ -38,6 +42,37 @@ class VideoPlayback: UIViewController {
         avPlayer.pause()
         avPlayerLayer.player = nil
         avPlayerLayer.removeFromSuperlayer()
+    }
+    
+    @IBAction func tappedEdit(_ sender: Any) {
+        if UIVideoEditorController.canEditVideo(atPath: editURL.path) {
+            let editController = UIVideoEditorController()
+            editController.videoPath = editURL.path
+            editController.delegate = self
+            
+            var topMostViewController = UIApplication.shared.keyWindow?.rootViewController
+
+            while let presentedViewController = topMostViewController?.presentedViewController {
+                topMostViewController = presentedViewController
+            }
+            topMostViewController?.present(editController, animated: true) {
+                print("edit now")
+            }
+        }
+    }
+    
+    func videoEditorController(_ editor: UIVideoEditorController, didSaveEditedVideoToPath editedVideoPath: String) {
+        avPlayer.pause()
+        editURL = URL(fileURLWithPath: editedVideoPath)
+        let playerItem = AVPlayerItem(url: editURL as URL)
+        avPlayer.replaceCurrentItem(with: playerItem)
+        avPlayer.play()
+        loopVideo(videoPlayer: avPlayer)
+        
+    }
+    
+    func videoEditorControllerDidCancel(_ editor: UIVideoEditorController) {
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func tappedDiscard(_ sender: Any) {
@@ -51,6 +86,15 @@ class VideoPlayback: UIViewController {
 
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
             return
+          }))
+        
+        
+        alert.addAction(UIAlertAction(title: "Start Over", style: .default, handler: { (action: UIAlertAction!) in
+            self.avPlayer.pause()
+            self.editURL = self.videoURL
+            let playerItem = AVPlayerItem(url: self.videoURL as URL)
+            self.avPlayer.replaceCurrentItem(with: playerItem)
+            self.avPlayer.play()
           }))
 
         present(alert, animated: true, completion: nil)

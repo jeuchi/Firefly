@@ -85,7 +85,7 @@ class HomeViewController: UIViewController {
     
     func playVideo() {
         let storageRef = Storage.storage().reference(withPath: arrayVideos[indexOfVideos])
-        storageRef.getData(maxSize: 10 * 1024 * 1024) { (data, error) in
+        storageRef.getData(maxSize: 20 * 1024 * 1024) { (data, error) in
             if let error = error {
                 print("Got an error fetching data: \(error.localizedDescription)")
                 return
