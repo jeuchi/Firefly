@@ -2,25 +2,20 @@ import UIKit
 
 import AVFoundation
 
-class CameraViewController: UIViewController {
+class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate {
+    
 //AVCaptureFileOutputRecordingDelegate {
 
-    // Storyboard buttons
-    
+    // Storyboard buttons and preview layer
     @IBOutlet weak var preview: UIView!
-    
-    
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var cameraButton: UIButton!
     
     var pulsePoint: CGPoint = CGPoint(x: 207, y: 788)
-    var frontCamera: AVCaptureDevice?
-    var backCamera: AVCaptureDevice?
-    var currentCamera: AVCaptureDevice?
-    var whichCam: String?
     private var videoFilterOn: Bool = false
-    var previewView: AVCaptureVideoPreviewLayer!
     
+    private var movieOutput = AVCaptureMovieFileOutput()
+    var previewView: AVCaptureVideoPreviewLayer!
     @objc dynamic var videoDeviceInput: AVCaptureDeviceInput!
     
     // MARK: Discovery session
@@ -65,7 +60,6 @@ class CameraViewController: UIViewController {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
             // The user has previously granted access to the camera.
-            //print("authorized")
             let foundDevice = findDevices(in: AVCaptureDevice.Position.front)
             startSession(inputDevice: foundDevice)
             break
@@ -91,9 +85,6 @@ class CameraViewController: UIViewController {
             // The user has previously denied access.
             setupResult = .notAuthorized
         }
-        
-    
-    
     }
     
     func findDevices(in position: AVCaptureDevice.Position) -> AVCaptureDevice {
@@ -103,11 +94,12 @@ class CameraViewController: UIViewController {
         return devices.first(where: { device in device.position == position })!
     }
     
-    // set up inputs and outputs and startrunning()
+    // set up inputs and outputs and startRunning() capture session
     func startSession(inputDevice: AVCaptureDevice) {
         print("Starting session and found -> \(inputDevice)")
         captureSession.beginConfiguration()
         
+        // video input
         guard
             let videoDeviceInputTry = try? AVCaptureDeviceInput(device: inputDevice),
             captureSession.canAddInput(videoDeviceInputTry)
@@ -116,18 +108,20 @@ class CameraViewController: UIViewController {
         videoDeviceInput = videoDeviceInputTry
         print("Session inputs: \(captureSession.inputs)")
         
-        let movieOutput = AVCaptureMovieFileOutput()
+        // video output
         guard captureSession.canAddOutput(movieOutput) else { return }
         captureSession.sessionPreset = .hd1920x1080
         captureSession.addOutput(movieOutput)
         captureSession.commitConfiguration()
         print("Session outputs: \(captureSession.outputs)")
         
+        // set up live viewing
         previewView = AVCaptureVideoPreviewLayer(session: captureSession)
         previewView.frame = preview.bounds
         previewView.videoGravity = AVLayerVideoGravity.resizeAspectFill
         preview.layer.addSublayer(previewView)
         
+        // start data
         captureSession.startRunning()
     }
     
@@ -164,19 +158,7 @@ class CameraViewController: UIViewController {
     
         return nil
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-            case "showVideo":
-                let vc = segue.destination as! VideoPlayback
-                vc.videoURL = sender as? URL
-            case "backHome":
-                let vc = segue.destination as! HomeViewController
-            default:
-                break
-                
-        }
-    } */
+     */
 
 
     /*
@@ -195,9 +177,69 @@ class CameraViewController: UIViewController {
         }
     
     }*/
+    
+    @IBAction func tapRecord(_ sender: Any) {
+        // Check if not recording
+        if movieOutput.isRecording == false {
+            
+            // Set up pulse animation to notify user that recording is in progress
+            let pulse = PulseAnimation(numberOfPulse: Float.infinity, radius: 60, postion: pulsePoint)
+            pulse.animationDuration = 1.0
+            pulse.backgroundColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+            pulse.name = "pulseAnimation"
+            self.view.layer.insertSublayer(pulse, below:  self.view.layer)
+            
+            // Start recording video to a temporary file.
+                let outputFileName = NSUUID().uuidString
+                let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mov")!)
+                movieOutput.startRecording(to: URL(fileURLWithPath: outputFilePath), recordingDelegate: self)
+            } else {
+                // remove pulsing animation layer
+                removePulse()
+    
+                movieOutput.stopRecording()
+            }
+    }
+    
+    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        if error != nil {
+            print("Error recording movie: \(error!.localizedDescription)")
+        } else {
+            let videoRecorded = outputFileURL
+    
+            performSegue(withIdentifier: "showVideo", sender: videoRecorded)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+           switch segue.identifier {
+               case "showVideo":
+                   let vc = segue.destination as! VideoPlayback
+                   vc.videoURL = sender as? URL
+               case "backHome":
+                   let vc = segue.destination as! HomeViewController
+               default:
+                   break
+                   
+           }
+       }
+    
+    func removePulse() {
+        if let sublayers = view.layer.sublayers {
+            for layer in sublayers {
+                if layer.name == "pulseAnimation" {
+                    layer.removeFromSuperlayer()
+                }
+            }
+        }
+    }
 
+    // Flips between front and back cameras when user double taps screen
     @IBAction func doubleTapFlipCamera(_ sender: Any) {
-        print("video device: \(videoDeviceInput)")
+        
+        print("video device: \(videoDeviceInput!)")
+        
+        // sessionQueue to avoid main queue
         sessionQueue.async {
             let currentVideoDevice = self.videoDeviceInput.device
             let currentPosition = currentVideoDevice.position
@@ -205,6 +247,7 @@ class CameraViewController: UIViewController {
             let preferredPosition: AVCaptureDevice.Position
             let preferredDeviceType: AVCaptureDevice.DeviceType
             
+            // figure out either front->back or back->front
             switch currentPosition {
                 case .unspecified, .front:
                     preferredPosition = .back
@@ -231,6 +274,7 @@ class CameraViewController: UIViewController {
             
             if let videoDevice = newVideoDevice {
                 do {
+                    self.removePulse()
                     let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
                     
                     self.captureSession.beginConfiguration()
