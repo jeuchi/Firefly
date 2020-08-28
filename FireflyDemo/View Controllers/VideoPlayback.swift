@@ -81,7 +81,8 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
         let alert = UIAlertController(title: "", message: "Are you sure you want to delete?", preferredStyle: UIAlertController.Style.alert)
 
         alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: { (action: UIAlertAction!) in
-            self.performSegue(withIdentifier: "goVideo", sender: nil)
+            self.dismiss(animated: true, completion: nil)
+            //self.performSegue(withIdentifier: "goVideo", sender: nil)
           }))
 
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in

@@ -135,15 +135,10 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     
     @objc func handleSwipes(_ sender: UISwipeGestureRecognizer)
     {
-        if sender.direction == .left
-        {
-           print("Swipe left")
-           // show the view from the right side
-        }
-
         if sender.direction == .right
         {
-           print("Swipe right")
+           //print("Swipe right")
+            dismiss(animated: true, completion: nil)
            //performSegue(withIdentifier: "backHome", sender: self)
         }
     }

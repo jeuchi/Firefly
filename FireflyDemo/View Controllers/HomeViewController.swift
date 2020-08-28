@@ -14,7 +14,10 @@ class HomeViewController: UIViewController {
 
     let db = Firestore.firestore()
     var avPlayer = AVPlayer()
+    var avItem:AVPlayerItem?
     var avPlayerLayer:AVPlayerLayer!
+    
+    var isVideoPlaying: Bool = false
     
     
     var arrayVideos: [String] = []
@@ -23,7 +26,9 @@ class HomeViewController: UIViewController {
     var maxIndex = 0
     
     @IBOutlet weak var WelcomeText: UILabel!
-
+    @IBOutlet weak var cameraUIButton: UIButton!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,11 +40,10 @@ class HomeViewController: UIViewController {
         
         view.layoutIfNeeded()
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
+        
         // Most viewed videos sorted
         self.WelcomeText.alpha = 1
+        self.cameraUIButton.alpha = 1
         let videosRef = db.collection("videos")
         videosRef.order(by: "views", descending: false)
             .getDocuments() { (querySnapshot, err) in
@@ -65,7 +69,19 @@ class HomeViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print("recording? \(isVideoPlaying)")
+        if !isVideoPlaying {
+            avPlayer.play()
+            avPlayer.play()
+            isVideoPlaying = true
+        }
+    }
+    
+    
     @IBAction func onClickCamera(_ sender: UIButton) {
+        avPlayer.pause()
+        isVideoPlaying = false
         performSegue(withIdentifier: "record", sender: nil)
     }
     
@@ -108,10 +124,10 @@ class HomeViewController: UIViewController {
                         }
                         if let url = url {
                             self.arrayURLs.append(url)
+                            firebaseGroup.leave()
                         }
                     }
                 }
-                firebaseGroup.leave()
             }
         }
         firebaseGroup.notify(queue: .main) {
@@ -125,17 +141,29 @@ class HomeViewController: UIViewController {
     
 
     func playVideo(url: URL)  {
-        let playerItem = AVPlayerItem(url: url as URL)
-        avPlayer.replaceCurrentItem(with: playerItem)
+        avItem = AVPlayerItem(url: url as URL)
+        avPlayer.replaceCurrentItem(with: avItem)
         avPlayer.play()
+        isVideoPlaying = true
             
         loopVideo(videoPlayer: avPlayer)
     }
+    
+    @IBAction func tapPausePlay(_ sender: Any) {
         
+        if isVideoPlaying {
+            isVideoPlaying = false
+            avPlayer.pause()
+        } else {
+            isVideoPlaying = true
+            avPlayer.play()
+        }
+    }
+    
     func loopVideo(videoPlayer: AVPlayer) {
         NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: videoPlayer.currentItem, queue: .main) { [weak self] _ in
-        videoPlayer.seek(to: CMTime.zero)
-        videoPlayer.play()
+            videoPlayer.seek(to: CMTime.zero)
+            videoPlayer.play()
         }
     }
 }

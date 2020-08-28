@@ -151,32 +151,42 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ZS-Vm-XAx">
-                                <rect key="frame" x="172" y="770.5" width="71" height="58"/>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="esX-H2-UNU">
+                                <rect key="frame" x="168" y="805.5" width="79" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" backgroundImage="camera" catalog="system"/>
                                 <connections>
-                                    <action selector="onClickCamera:" destination="3ws-GI-YNh" eventType="touchUpInside" id="NqY-cR-2cH"/>
+                                    <action selector="onClickCamera:" destination="3ws-GI-YNh" eventType="touchUpInside" id="u7d-yv-g1v"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Wfk-Xd-evK" firstAttribute="centerY" secondItem="Ckg-50-L7D" secondAttribute="centerY" id="jfb-IM-vI2"/>
                             <constraint firstItem="Wfk-Xd-evK" firstAttribute="centerX" secondItem="Ckg-50-L7D" secondAttribute="centerX" id="zms-zv-w4W"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NiU-mm-qrv"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="6kf-oM-RRI" appends="YES" id="4z7-p7-Cfg"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="WHP-Wd-4UO"/>
                     <connections>
                         <outlet property="WelcomeText" destination="Wfk-Xd-evK" id="Q9t-6N-dUd"/>
+                        <outlet property="cameraUIButton" destination="esX-H2-UNU" id="8XD-NU-8uT"/>
                         <segue destination="Xfq-g3-wfc" kind="presentation" identifier="record" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="HZq-Ch-HUq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uh9-al-Opd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="6kf-oM-RRI">
+                    <connections>
+                        <action selector="tapPausePlay:" destination="3ws-GI-YNh" id="KTc-Bg-Dr4"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3045" y="88"/>
+            <point key="canvasLocation" x="3044.9275362318845" y="87.723214285714278"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="Ao0-Rj-lFa">
