@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3ws-GI-YNh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Xfq-g3-wfc">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -10,7 +10,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FireflyDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Firefly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -73,7 +73,7 @@
         <!--Login View Controller-->
         <scene sceneID="doM-V1-iDc">
             <objects>
-                <viewController id="YSP-4c-ZEI" customClass="LoginViewController" customModule="FireflyDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YSP-4c-ZEI" customClass="LoginViewController" customModule="Firefly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LJr-vz-XfR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -140,7 +140,7 @@
         <!--Home View Controller-->
         <scene sceneID="rhe-3v-fRJ">
             <objects>
-                <viewController storyboardIdentifier="HomeVC" id="3ws-GI-YNh" customClass="HomeViewController" customModule="FireflyDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeVC" id="3ws-GI-YNh" customClass="HomeViewController" customModule="Firefly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ckg-50-L7D">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -191,13 +191,13 @@
         <!--Camera View Controller-->
         <scene sceneID="Ao0-Rj-lFa">
             <objects>
-                <viewController id="Xfq-g3-wfc" customClass="CameraViewController" customModule="FireflyDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Xfq-g3-wfc" customClass="CameraViewController" customModule="Firefly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="idZ-2g-VtZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BdS-B2-8im" userLabel="Preview">
-                                <rect key="frame" x="0.0" y="44" width="414" height="829"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <gestureRecognizers/>
@@ -244,24 +244,24 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4010" y="88"/>
+            <point key="canvasLocation" x="4008.6956521739135" y="87.723214285714278"/>
         </scene>
         <!--Video Playback-->
         <scene sceneID="TfM-17-MrL">
             <objects>
-                <viewController id="VDf-iM-WvJ" customClass="VideoPlayback" customModule="FireflyDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VDf-iM-WvJ" customClass="VideoPlayback" customModule="Firefly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="97F-hd-Oif">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CpT-sM-1KF">
-                                <rect key="frame" x="0.0" y="-36" width="414" height="831"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <gestureRecognizers/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1F-2t-zep">
-                                <rect key="frame" x="20" y="60" width="40" height="35"/>
+                                <rect key="frame" x="20" y="60" width="47" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" backgroundImage="x.square.fill" catalog="system"/>
@@ -270,9 +270,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ivl-Pc-f0I">
-                                <rect key="frame" x="28" y="803" width="30" height="30"/>
+                                <rect key="frame" x="20" y="808" width="47" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Edit"/>
+                                <state key="normal" backgroundImage="square.and.pencil" catalog="system"/>
                                 <connections>
                                     <action selector="tappedEdit:" destination="VDf-iM-WvJ" eventType="touchUpInside" id="mq4-vQ-wVf"/>
                                 </connections>
@@ -291,7 +291,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zxh-FF-Q6g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4751" y="88"/>
+            <point key="canvasLocation" x="4750.7246376811599" y="87.723214285714278"/>
         </scene>
         <!--Sign Up-->
         <scene sceneID="Tc5-WK-nKO">
@@ -391,12 +391,13 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="HZq-Ch-HUq"/>
+        <segue reference="eU6-Er-LLu"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="ColorFilterOff" width="150" height="150"/>
         <image name="FireflyLogo" width="529" height="472"/>
         <image name="camera" catalog="system" width="128" height="96"/>
+        <image name="square.and.pencil" catalog="system" width="128" height="118"/>
         <image name="square.fill" catalog="system" width="128" height="114"/>
         <image name="x.square.fill" catalog="system" width="128" height="114"/>
     </resources>

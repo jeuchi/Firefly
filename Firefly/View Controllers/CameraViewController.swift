@@ -73,6 +73,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
                     self.setupResult = .notAuthorized
                 }
                 self.sessionQueue.resume()
+                let foundDevice = self.findDevices(in: AVCaptureDevice.Position.front)
+                self.startSession(inputDevice: foundDevice)
             })
             
         default:

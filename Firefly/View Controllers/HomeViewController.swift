@@ -104,7 +104,7 @@ class HomeViewController: UIViewController {
             }
         }
     }
-    
+
     func cacheVideosAsUrls() {
         let firebaseGroup = DispatchGroup()
         
@@ -115,12 +115,12 @@ class HomeViewController: UIViewController {
             storageRef.getData(maxSize: 20 * 1024 * 1024) { (data, error) in
                 if let error = error {
                     print("Got an error fetching data: \(error.localizedDescription)")
-                    return
+                    firebaseGroup.leave()
                 } else {
                     storageRef.downloadURL { (url, error) in
                         if let error = error {
                             print("Error generating URL \(error.localizedDescription)")
-                            return
+                            firebaseGroup.leave()
                         }
                         if let url = url {
                             self.arrayURLs.append(url)
@@ -133,7 +133,7 @@ class HomeViewController: UIViewController {
         firebaseGroup.notify(queue: .main) {
             print("Finished all requests.")
             self.WelcomeText.alpha = 0
-            print("URLS: \(self.arrayURLs)")
+            //print("URLS: \(self.arrayURLs)")
             self.playVideo(url: self.arrayURLs[self.indexOfVideos])
         }
     }

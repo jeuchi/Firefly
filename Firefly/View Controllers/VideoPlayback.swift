@@ -45,6 +45,7 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
     }
     
     @IBAction func tappedEdit(_ sender: Any) {
+        avPlayer.pause()
         if UIVideoEditorController.canEditVideo(atPath: editURL.path) {
             let editController = UIVideoEditorController()
             editController.videoPath = editURL.path
@@ -73,6 +74,7 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
     
     func videoEditorControllerDidCancel(_ editor: UIVideoEditorController) {
         dismiss(animated: true, completion: nil)
+        avPlayer.play()
     }
     
     @IBAction func tappedDiscard(_ sender: Any) {
@@ -91,11 +93,11 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
         
         
         alert.addAction(UIAlertAction(title: "Start Over", style: .default, handler: { (action: UIAlertAction!) in
-            self.avPlayer.pause()
             self.editURL = self.videoURL
             let playerItem = AVPlayerItem(url: self.videoURL as URL)
             self.avPlayer.replaceCurrentItem(with: playerItem)
             self.avPlayer.play()
+            self.loopVideo(videoPlayer: self.avPlayer)
           }))
 
         present(alert, animated: true, completion: nil)
