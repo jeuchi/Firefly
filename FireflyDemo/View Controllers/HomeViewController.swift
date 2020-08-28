@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
     
     
     var arrayVideos: [String] = []
+    var arrayURLs: [URL] = []
     var indexOfVideos = 0
     var maxIndex = 0
     
@@ -31,6 +32,7 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         // Most viewed videos sorted
+        self.WelcomeText.alpha = 1
         let videosRef = db.collection("videos")
         videosRef.order(by: "views", descending: false)
             .getDocuments() { (querySnapshot, err) in
@@ -41,7 +43,7 @@ class HomeViewController: UIViewController {
                         self.arrayVideos.append(document.get("path") as! String)
                         self.maxIndex+=1
                     }
-                    self.playVideo()
+                    self.cacheVideosAsUrls()
                     
                     // recognize swipes up and down
                     let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
@@ -68,44 +70,55 @@ class HomeViewController: UIViewController {
                     if indexOfVideos < (maxIndex-1) {
                         indexOfVideos+=1
                         videoPlayerLayer?.removeFromSuperlayer()
-                        playVideo()
+                        playVideo(url: arrayURLs[indexOfVideos])
                     }
                 case .down:
                     if indexOfVideos >= 1 {
                         indexOfVideos-=1
                         videoPlayerLayer?.removeFromSuperlayer()
-                        playVideo()
+                        playVideo(url: arrayURLs[indexOfVideos])
                     }
                 default:
                     break
             }
         }
     }
-
     
-    func playVideo() {
-        let storageRef = Storage.storage().reference(withPath: arrayVideos[indexOfVideos])
-        storageRef.getData(maxSize: 20 * 1024 * 1024) { (data, error) in
-            if let error = error {
-                print("Got an error fetching data: \(error.localizedDescription)")
-                return
-            } else {
-                storageRef.downloadURL { (url, error) in
-                    if let error = error {
-                        print("Error generating URL \(error.localizedDescription)")
-                        return
-                    }
-                    if let url = url {
-                        self.WelcomeText.alpha = 0
-                        self.playVideo(url: url)
-                        
+    func cacheVideosAsUrls() {
+        let firebaseGroup = DispatchGroup()
+        
+        for index in 0...(maxIndex-1) {
+            firebaseGroup.enter()
+            print(arrayVideos)
+            let storageRef = Storage.storage().reference(withPath: arrayVideos[index])
+            storageRef.getData(maxSize: 20 * 1024 * 1024) { (data, error) in
+                if let error = error {
+                    print("Got an error fetching data: \(error.localizedDescription)")
+                    return
+                } else {
+                    storageRef.downloadURL { (url, error) in
+                        if let error = error {
+                            print("Error generating URL \(error.localizedDescription)")
+                            return
+                        }
+                        if let url = url {
+                            self.arrayURLs.append(url)
+                        }
                     }
                 }
+                firebaseGroup.leave()
             }
-        
         }
-     
+        firebaseGroup.notify(queue: .main) {
+            print("Finished all requests.")
+            self.WelcomeText.alpha = 0
+            print("URLS: \(self.arrayURLs)")
+            self.playVideo(url: self.arrayURLs[self.indexOfVideos])
+        }
     }
+    
+    
+
     func playVideo(url: URL)  {
         // Create the video player item
         let item = AVPlayerItem(url: url)
