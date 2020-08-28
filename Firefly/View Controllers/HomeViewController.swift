@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
     
     var isVideoPlaying: Bool = false
     
-    
+    var initialCenter = CGPoint()
     var arrayVideos: [String] = []
     var arrayURLs: [URL] = []
     var indexOfVideos = 0
@@ -57,13 +57,16 @@ class HomeViewController: UIViewController {
                     self.cacheVideosAsUrls()
                     
                     // recognize swipes up and down
-                    let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
+                    /*let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
                            upSwipe.direction = .up
                     let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
                     upSwipe.direction = .up
                     downSwipe.direction = .down
                     self.view.addGestureRecognizer(upSwipe)
-                    self.view.addGestureRecognizer(downSwipe)
+                    self.view.addGestureRecognizer(downSwipe)*/
+                    
+                    let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.panPiece(sender:)))
+                    self.view.addGestureRecognizer(panGesture)
                 }
         }
         
@@ -85,25 +88,71 @@ class HomeViewController: UIViewController {
         performSegue(withIdentifier: "record", sender: nil)
     }
     
-    
+    /*
     @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
         if sender.state == .ended {
             switch sender.direction {
                 case .up:
-                    if indexOfVideos < (maxIndex-1) {
+                print("up")
+                    /*if indexOfVideos < (maxIndex-1) {
                         indexOfVideos+=1
                         playVideo(url: arrayURLs[indexOfVideos])
-                    }
+                    }*/
                 case .down:
-                    if indexOfVideos >= 1 {
+                print("down")
+                   /* if indexOfVideos >= 1 {
                         indexOfVideos-=1
                         playVideo(url: arrayURLs[indexOfVideos])
-                    }
+                    }*/
                 default:
                     break
             }
         }
+    }*/
+    
+    @objc func panPiece(sender: UIPanGestureRecognizer) {
+        guard sender.view != nil else {return}
+        let piece = sender.view!
+        // Get the changes in the X and Y directions relative to
+        // the superview's coordinate space.
+        let translation = sender.translation(in: piece.superview)
+        if sender.state == .began {
+           // Save the view's original position.
+           self.initialCenter = piece.center
+        }
+           // Update the position for the .began, .changed, and .ended states
+        if sender.state != .cancelled {
+           // Add the X and Y translation to the view's original position.
+           let newCenter = CGPoint(x: initialCenter.x, y: initialCenter.y + translation.y)
+           piece.center = newCenter
+        }
+        if(sender.state == .ended)
+        {
+            // All fingers are lifted.
+            // print(translation.y)
+            // print(piece.center.y)
+            if piece.center.y > 710 && translation.y > 0 {
+                //print("video up")
+                if indexOfVideos < (maxIndex-1) {
+                    indexOfVideos+=1
+                    playVideo(url: arrayURLs[indexOfVideos])
+                }
+                piece.center = initialCenter
+            }else if piece.center.y < 190 && translation.y < 0 {
+                //print("video down")
+                if indexOfVideos >= 1 {
+                    indexOfVideos-=1
+                    playVideo(url: arrayURLs[indexOfVideos])
+                }
+                piece.center = initialCenter
+            } else {
+                piece.center = initialCenter
+            }
+        }
     }
+    
+
+    
 
     func cacheVideosAsUrls() {
         let firebaseGroup = DispatchGroup()
