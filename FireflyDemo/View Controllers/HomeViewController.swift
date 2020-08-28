@@ -13,8 +13,8 @@ import AVKit
 class HomeViewController: UIViewController {
 
     let db = Firestore.firestore()
-    var videoPlayer:AVPlayer?
-    var videoPlayerLayer:AVPlayerLayer?
+    var avPlayer = AVPlayer()
+    var avPlayerLayer:AVPlayerLayer!
     
     
     var arrayVideos: [String] = []
@@ -27,6 +27,13 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        avPlayerLayer = AVPlayerLayer(player: avPlayer)
+        avPlayerLayer.frame = view.bounds
+        avPlayerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        view.layer.insertSublayer(avPlayerLayer, at: 0)
+        
+        view.layoutIfNeeded()
         // Do any additional setup after loading the view.
     }
     
@@ -69,13 +76,11 @@ class HomeViewController: UIViewController {
                 case .up:
                     if indexOfVideos < (maxIndex-1) {
                         indexOfVideos+=1
-                        videoPlayerLayer?.removeFromSuperlayer()
                         playVideo(url: arrayURLs[indexOfVideos])
                     }
                 case .down:
                     if indexOfVideos >= 1 {
                         indexOfVideos-=1
-                        videoPlayerLayer?.removeFromSuperlayer()
                         playVideo(url: arrayURLs[indexOfVideos])
                     }
                 default:
@@ -120,25 +125,11 @@ class HomeViewController: UIViewController {
     
 
     func playVideo(url: URL)  {
-        // Create the video player item
-        let item = AVPlayerItem(url: url)
-        
-        // Create the player
-        videoPlayer = AVPlayer(playerItem: item)
-        
-        // Create the layer
-        videoPlayerLayer = AVPlayerLayer(player: videoPlayer!)
-
-        videoPlayerLayer?.frame = self.view.frame
-        videoPlayerLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        
-        //videoPlayerLayer?.removeFromSuperlayer()
-        view.layer.insertSublayer(videoPlayerLayer!, at: 0)
-        
-        
-        // Add it to the view and play it
-        videoPlayer?.playImmediately(atRate: 1)
-        loopVideo(videoPlayer: videoPlayer!)
+        let playerItem = AVPlayerItem(url: url as URL)
+        avPlayer.replaceCurrentItem(with: playerItem)
+        avPlayer.play()
+            
+        loopVideo(videoPlayer: avPlayer)
     }
         
     func loopVideo(videoPlayer: AVPlayer) {
