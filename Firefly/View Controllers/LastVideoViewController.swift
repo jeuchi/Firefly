@@ -21,28 +21,35 @@ class LastVideoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if lastScreen == "next" {
-            currentIndex+=1
-        } else {
-            currentIndex-=1
-        }
-        print("last and \(currentIndex)")
-        lastScreen = "last"
+
 
         avPlayerLayerLast = AVPlayerLayer(player: avPlayerLast)
         avPlayerLayerLast.frame = view.bounds
         avPlayerLayerLast.videoGravity = AVLayerVideoGravity.resizeAspectFill
         view.layer.insertSublayer(avPlayerLayerLast, at: 0)
         
-        if currentIndex >= 0 && currentIndex < 10 {
-            avItemLast = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
-            avPlayerLast.replaceCurrentItem(with: avItemLast)
-        }else {
+        if currentIndex == 0 {
             avPlayerLast.replaceCurrentItem(with: nil)
         }
+        
+        
+        if currentIndex > 0 && currentIndex < 10 {
+            switch centerPage {
+            case 0:
+                avItemLast = AVPlayerItem(url: arrayURLs[currentIndex-1] as URL)
+                avPlayerLast.replaceCurrentItem(with: avItemLast)
+            case 1:
+                avItemLast = AVPlayerItem(url: arrayURLs[currentIndex+1] as URL)
+                avPlayerLast.replaceCurrentItem(with: avItemLast)
+            default:
+                avItemLast = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
+                avPlayerLast.replaceCurrentItem(with: avItemLast)
+            }
+        }
+        
         avPlayerLast.play()
     }
-
-
+    
+   
 
 }

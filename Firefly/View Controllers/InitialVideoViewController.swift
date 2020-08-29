@@ -15,8 +15,9 @@ var avPlayerLayer:AVPlayerLayer!
 var arrayURLs: [URL] = []
 var homeView = HomeViewController()
 
-var currentIndex = 0
-var lastScreen: String = "initial"
+var centerPage: Int = 0
+var currentIndex: Int = 0
+var newPage: Int? = nil
 
 class InitialVideoViewController: UIViewController {
 
@@ -44,26 +45,34 @@ class InitialVideoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if lastScreen == "next" {
-            currentIndex-=1
-        }else if lastScreen == "last"{
-            currentIndex+=1
-        }
-        print("initial and \(currentIndex)")
-        lastScreen = "initial"
+
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
         avPlayerLayer.frame = view.bounds
         avPlayerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         view.layer.insertSublayer(avPlayerLayer, at: 0)
         
-        if currentIndex >= 0 && currentIndex < 10 {
+        if currentIndex == 0 {
             avItem = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
             avPlayer.replaceCurrentItem(with: avItem)
-        } else {
-            avPlayer.replaceCurrentItem(with: nil)
         }
+        
+        if currentIndex > 0 && currentIndex < 10 {
+            switch centerPage {
+            case 2:
+                avItem = AVPlayerItem(url: arrayURLs[currentIndex+1] as URL)
+                avPlayer.replaceCurrentItem(with: avItem)
+            case 1:
+                avItem = AVPlayerItem(url: arrayURLs[currentIndex-1] as URL)
+                avPlayer.replaceCurrentItem(with: avItem)
+            default:
+                avItem = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
+                avPlayer.replaceCurrentItem(with: avItem)
+            }
+        }
+        
         avPlayer.play()
     }
+    
     
     
 
