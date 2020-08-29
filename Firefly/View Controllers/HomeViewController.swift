@@ -77,8 +77,14 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         print("recording? \(isVideoPlaying)")
         if !isVideoPlaying {
-            avPlayer.play()
-            avPlayer.play()
+            switch currentLayer {
+            case "main":
+                avPlayer.play()
+                avPlayer.play()
+            default:
+                avPlayerTemp.play()
+                avPlayerTemp.play()
+            }
             isVideoPlaying = true
         }
     }
@@ -86,6 +92,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func onClickCamera(_ sender: UIButton) {
         avPlayer.pause()
+        avPlayerTemp.pause()
         isVideoPlaying = false
         performSegue(withIdentifier: "record", sender: nil)
     }
@@ -152,7 +159,7 @@ class HomeViewController: UIViewController {
                         playVideo(url: arrayURLs[indexOfVideos])
                     }
                 }else if avPlayerLayer.frame.minY < -450 && translation.y < 0 {
-                    print("video down")
+                    //print("video down")
                     avPlayerLayer.frame = CGRect(x: 0, y: -1100, width: self.view.frame.width, height: self.view.frame.height)
                     if indexOfVideos >= 1 {
                         indexOfVideos-=1
@@ -180,7 +187,7 @@ class HomeViewController: UIViewController {
                         playVideo(url: arrayURLs[indexOfVideos])
                     }
                 }else if avPlayerLayerTemp.frame.minY < -450 && translation.y < 0 {
-                    print("video down")
+                    //print("video down")
                     avPlayerLayerTemp.frame = CGRect(x: 0, y: -1100, width: self.view.frame.width, height: self.view.frame.height)
                     if indexOfVideos >= 1 {
                         indexOfVideos-=1
@@ -207,8 +214,20 @@ class HomeViewController: UIViewController {
         
         //TEMP INSTEAD OF FETCH
         let bundlePath = Bundle.main.path(forResource: "LoginVideo", ofType: "mp4")
+        let bundlePath2 = Bundle.main.path(forResource: "kaidClip", ofType: "mp4")
         let tempurl = URL(fileURLWithPath: bundlePath!)
+        let tempurl2 = URL(fileURLWithPath: bundlePath2!)
         maxIndex = 10
+        arrayURLs.append(tempurl)
+        arrayURLs.append(tempurl2)
+        arrayURLs.append(tempurl)
+        arrayURLs.append(tempurl2)
+        arrayURLs.append(tempurl)
+        arrayURLs.append(tempurl2)
+        arrayURLs.append(tempurl)
+        arrayURLs.append(tempurl2)
+        arrayURLs.append(tempurl)
+        arrayURLs.append(tempurl2)
         
         for index in 0...(maxIndex-1) {
             firebaseGroup.enter()
@@ -217,8 +236,6 @@ class HomeViewController: UIViewController {
             storageRef.getData(maxSize: 20 * 1024 * 1024) { (data, error) in
                 if let error = error {
                     print("Got an error fetching data: \(error.localizedDescription)")
-                    
-                    self.arrayURLs.append(tempurl)
                     firebaseGroup.leave()
                 } else {
                     storageRef.downloadURL { (url, error) in
@@ -275,12 +292,23 @@ class HomeViewController: UIViewController {
     @IBAction func tapPausePlay(_ sender: Any) {
         
         //TO DO: TEMP PAUSE TOO
-        if isVideoPlaying {
-            isVideoPlaying = false
-            avPlayer.pause()
-        } else {
-            isVideoPlaying = true
-            avPlayer.play()
+        switch currentLayer {
+        case "main":
+            if isVideoPlaying {
+                isVideoPlaying = false
+                avPlayer.pause()
+            } else {
+                isVideoPlaying = true
+                avPlayer.play()
+            }
+        default:
+            if isVideoPlaying {
+                isVideoPlaying = false
+                avPlayerTemp.pause()
+            } else {
+                isVideoPlaying = true
+                avPlayerTemp.play()
+            }
         }
     }
     

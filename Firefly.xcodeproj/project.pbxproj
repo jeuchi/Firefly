@@ -21,6 +21,7 @@
 		403BE34024F356AE00A3AFD4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403BE33E24F356AE00A3AFD4 /* Constants.swift */; };
 		403BE34124F356AE00A3AFD4 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403BE33F24F356AE00A3AFD4 /* Utilities.swift */; };
 		4054783124F8198E00118F5B /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054783024F8198E00118F5B /* PreviewView.swift */; };
+		4054783324F9F41100118F5B /* kaidClip.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4054783224F9F2E200118F5B /* kaidClip.mp4 */; };
 		407C3EF324F6FC43001E6104 /* PulseAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407C3EF224F6FC43001E6104 /* PulseAnimation.swift */; };
 		40948A1B24F57F7A0062D79E /* DisplayVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40948A1A24F57F7A0062D79E /* DisplayVideo.swift */; };
 		40948A1D24F6D11A0062D79E /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40948A1C24F6D11A0062D79E /* CameraViewController.swift */; };
@@ -45,6 +46,7 @@
 		403BE33E24F356AE00A3AFD4 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		403BE33F24F356AE00A3AFD4 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		4054783024F8198E00118F5B /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		4054783224F9F2E200118F5B /* kaidClip.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = kaidClip.mp4; sourceTree = "<group>"; };
 		407C3EF224F6FC43001E6104 /* PulseAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulseAnimation.swift; sourceTree = "<group>"; };
 		40948A1A24F57F7A0062D79E /* DisplayVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayVideo.swift; sourceTree = "<group>"; };
 		40948A1C24F6D11A0062D79E /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		40AB391624F4A2D90011FEAE /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				4054783224F9F2E200118F5B /* kaidClip.mp4 */,
 				40AB391724F4A3A80011FEAE /* LoginVideo.mp4 */,
 			);
 			path = Media;
@@ -216,6 +219,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4054783324F9F41100118F5B /* kaidClip.mp4 in Resources */,
 				403BE32D24F3313C00A3AFD4 /* LaunchScreen.storyboard in Resources */,
 				403BE33524F331DD00A3AFD4 /* GoogleService-Info.plist in Resources */,
 				403BE32A24F3313C00A3AFD4 /* Assets.xcassets in Resources */,

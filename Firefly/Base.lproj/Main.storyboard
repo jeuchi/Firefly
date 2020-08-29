@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3ws-GI-YNh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -25,7 +25,7 @@
                                         </constraints>
                                         <state key="normal" title="Sign Up"/>
                                         <connections>
-                                            <segue destination="OGD-KH-vxU" kind="show" id="TDQ-3K-2Vs"/>
+                                            <segue destination="OGD-KH-vxU" kind="show" id="Hin-SH-RXB"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dAa-ci-nM5">
@@ -296,7 +296,7 @@
         <!--Sign Up-->
         <scene sceneID="Tc5-WK-nKO">
             <objects>
-                <viewController id="OGD-KH-vxU" customClass="SignUpViewController" sceneMemberID="viewController">
+                <viewController id="OGD-KH-vxU" customClass="SignUpViewController" customModule="Firefly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rvt-jD-RW5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -359,7 +359,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Sign Up" id="EgC-bv-5qa"/>
                     <connections>
-                        <outlet property="emailTextField" destination="XSS-ec-TnJ" id="2F9-LW-vmn"/>
+                        <outlet property="emailTextField" destination="XSS-ec-TnJ" id="fXb-fd-nX9"/>
                         <outlet property="errorLabel" destination="yt4-1b-92Z" id="bWQ-A0-REb"/>
                         <outlet property="firstNameTextField" destination="evW-XW-QQT" id="QT5-tn-SeB"/>
                         <outlet property="lastNameTextField" destination="b4r-d1-vRH" id="eR4-D0-n2o"/>
