@@ -25,31 +25,27 @@ class LastVideoViewController: UIViewController {
         
     }
     
-
-    override func viewWillAppear(_ animated: Bool) {
-        print("Last \(currentIndex)")
-        
-        if currentIndex == 0 {
-            avPlayerLast.replaceCurrentItem(with: nil)
-        }
-        
-        
-        if currentIndex > 0 && currentIndex < 10 {
-            switch centerPage {
+    override func viewDidAppear(_ animated: Bool) {
+        switch centerPage {
             case 0:
-                avItemLast = AVPlayerItem(url: arrayURLs[currentIndex-1] as URL)
-                avPlayerLast = AVPlayer(url: arrayURLs[currentIndex-1])
+                arrIndex = currentIndex-1
             case 1:
-                avItemLast = AVPlayerItem(url: arrayURLs[currentIndex+1] as URL)
-                avPlayerLast.replaceCurrentItem(with: avItemLast)
-                //avPlayerLast = AVPlayer(url: arrayURLs[currentIndex+1])
+                arrIndex = currentIndex+1
             default:
-                avItemLast = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
-                avPlayerLast = AVPlayer(url: arrayURLs[currentIndex])
-            }
+                arrIndex = currentIndex
         }
         
-        avPlayerLast.play()
+        if arrIndex < 10 && arrIndex > 0 {
+           // avItemLast = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
+           // avPlayerLast.replaceCurrentItem(with: avItemLast)
+            
+            avItem = AVPlayerItem(url: arrayURLs[arrIndex+1] as URL)
+            avPlayer.replaceCurrentItem(with: avItem)
+            
+            avItemNext = AVPlayerItem(url: arrayURLs[arrIndex-1] as URL)
+            avPlayerNext.replaceCurrentItem(with: avItemNext)
+            
+        }
     }
     
    

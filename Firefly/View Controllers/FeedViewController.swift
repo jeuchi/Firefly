@@ -106,6 +106,7 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
              */
             
             // INITIAL -> LAST
+            
             if centerPage == 0 && newPage == 2 {
                 centerPage = 2
                 currentIndex -= 1

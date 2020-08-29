@@ -17,6 +17,7 @@ var homeView = HomeViewController()
 
 var centerPage: Int = 0
 var currentIndex: Int = 0
+var arrIndex: Int = 0
 var newPage: Int? = nil
 
 class InitialVideoViewController: UIViewController {
@@ -46,38 +47,41 @@ class InitialVideoViewController: UIViewController {
         avPlayerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         view.layer.insertSublayer(avPlayerLayer, at: 0)
         
-    }
-
-    
-    override func viewWillAppear(_ animated: Bool) {
-        print("Initial \(currentIndex)")
-        
-        if currentIndex == 0 {
-            avItem = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
+        if arrIndex == 0 {
+            avItem = AVPlayerItem(url: arrayURLs[arrIndex] as URL)
             avPlayer.replaceCurrentItem(with: avItem)
             
+            avPlayerLast.replaceCurrentItem(with: nil)
             
-            //avPlayer = AVPlayer(url: arrayURLs[currentIndex])
+            avItemNext = AVPlayerItem(url: arrayURLs[arrIndex+1] as URL)
+            avPlayerNext.replaceCurrentItem(with: avItemNext)
         }
         
-        if currentIndex > 0 && currentIndex < 10 {
-            switch centerPage {
-            case 2:
-                print("HERE")
-                avItem = AVPlayerItem(url: arrayURLs[currentIndex+1] as URL)
-                avPlayer.replaceCurrentItem(with: avItem)
-                //avPlayer = AVPlayer(url: arrayURLs[currentIndex+1])
-            case 1:
-                avItem = AVPlayerItem(url: arrayURLs[currentIndex-1] as URL)
-                avPlayer = AVPlayer(url: arrayURLs[currentIndex-1])
-            default:
-                avItem = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
-                avPlayer = AVPlayer(url: arrayURLs[currentIndex])
-            }
-        }
-        
-        avPlayer.play()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        switch centerPage {
+            case 1:
+                arrIndex = currentIndex-1
+            case 2:
+                arrIndex = currentIndex+1
+            default:
+                arrIndex = currentIndex
+        }
+        
+        if arrIndex < 10 && arrIndex > 0 {
+           // avItem = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
+            //avPlayer.replaceCurrentItem(with: avItem)
+            
+            avItemNext = AVPlayerItem(url: arrayURLs[arrIndex+1] as URL)
+            avPlayerNext.replaceCurrentItem(with: avItemNext)
+            
+            avItemLast = AVPlayerItem(url: arrayURLs[arrIndex-1] as URL)
+            avPlayerLast.replaceCurrentItem(with: avItemLast)
+            
+        }
+    }
+
     
     
     
