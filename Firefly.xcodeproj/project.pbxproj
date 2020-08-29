@@ -22,6 +22,10 @@
 		403BE34124F356AE00A3AFD4 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403BE33F24F356AE00A3AFD4 /* Utilities.swift */; };
 		4054783124F8198E00118F5B /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054783024F8198E00118F5B /* PreviewView.swift */; };
 		4054783324F9F41100118F5B /* kaidClip.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4054783224F9F2E200118F5B /* kaidClip.mp4 */; };
+		4054783724FA25E100118F5B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054783624FA25E100118F5B /* FeedViewController.swift */; };
+		4054783924FA2EF000118F5B /* LastVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054783824FA2EF000118F5B /* LastVideoViewController.swift */; };
+		4054783B24FA324800118F5B /* InitialVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054783A24FA324800118F5B /* InitialVideoViewController.swift */; };
+		4054783D24FA360100118F5B /* NextVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054783C24FA360100118F5B /* NextVideoViewController.swift */; };
 		407C3EF324F6FC43001E6104 /* PulseAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407C3EF224F6FC43001E6104 /* PulseAnimation.swift */; };
 		40948A1B24F57F7A0062D79E /* DisplayVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40948A1A24F57F7A0062D79E /* DisplayVideo.swift */; };
 		40948A1D24F6D11A0062D79E /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40948A1C24F6D11A0062D79E /* CameraViewController.swift */; };
@@ -47,6 +51,10 @@
 		403BE33F24F356AE00A3AFD4 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		4054783024F8198E00118F5B /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		4054783224F9F2E200118F5B /* kaidClip.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = kaidClip.mp4; sourceTree = "<group>"; };
+		4054783624FA25E100118F5B /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		4054783824FA2EF000118F5B /* LastVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastVideoViewController.swift; sourceTree = "<group>"; };
+		4054783A24FA324800118F5B /* InitialVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialVideoViewController.swift; sourceTree = "<group>"; };
+		4054783C24FA360100118F5B /* NextVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextVideoViewController.swift; sourceTree = "<group>"; };
 		407C3EF224F6FC43001E6104 /* PulseAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulseAnimation.swift; sourceTree = "<group>"; };
 		40948A1A24F57F7A0062D79E /* DisplayVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayVideo.swift; sourceTree = "<group>"; };
 		40948A1C24F6D11A0062D79E /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +133,10 @@
 				403BE33B24F3511F00A3AFD4 /* SignUpViewController.swift */,
 				40948A1C24F6D11A0062D79E /* CameraViewController.swift */,
 				40948A1E24F6D24A0062D79E /* VideoPlayback.swift */,
+				4054783624FA25E100118F5B /* FeedViewController.swift */,
+				4054783824FA2EF000118F5B /* LastVideoViewController.swift */,
+				4054783A24FA324800118F5B /* InitialVideoViewController.swift */,
+				4054783C24FA360100118F5B /* NextVideoViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -295,11 +307,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4054783124F8198E00118F5B /* PreviewView.swift in Sources */,
+				4054783D24FA360100118F5B /* NextVideoViewController.swift in Sources */,
 				40948A1F24F6D24A0062D79E /* VideoPlayback.swift in Sources */,
 				403BE33924F3502B00A3AFD4 /* HomeViewController.swift in Sources */,
 				40948A1D24F6D11A0062D79E /* CameraViewController.swift in Sources */,
 				403BE33724F3501C00A3AFD4 /* LoginViewController.swift in Sources */,
 				407C3EF324F6FC43001E6104 /* PulseAnimation.swift in Sources */,
+				4054783B24FA324800118F5B /* InitialVideoViewController.swift in Sources */,
+				4054783724FA25E100118F5B /* FeedViewController.swift in Sources */,
 				403BE32524F3313A00A3AFD4 /* ViewController.swift in Sources */,
 				403BE32124F3313A00A3AFD4 /* AppDelegate.swift in Sources */,
 				403BE34024F356AE00A3AFD4 /* Constants.swift in Sources */,
@@ -307,6 +322,7 @@
 				40948A1B24F57F7A0062D79E /* DisplayVideo.swift in Sources */,
 				403BE34124F356AE00A3AFD4 /* Utilities.swift in Sources */,
 				403BE32324F3313A00A3AFD4 /* SceneDelegate.swift in Sources */,
+				4054783924FA2EF000118F5B /* LastVideoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
