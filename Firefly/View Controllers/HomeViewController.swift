@@ -24,6 +24,7 @@ class HomeViewController: UIViewController {
     var currentLayer: String = "main"
     
     var isVideoPlaying: Bool = false
+    var setVideoIndex: String = "none"
     
     var initialCenter = CGPoint()
     var arrayVideos: [String] = []
@@ -106,21 +107,25 @@ class HomeViewController: UIViewController {
         let translation = sender.translation(in: piece.superview)
         
         if sender.state == .began {
+            setVideoIndex = "none"
             switch currentLayer {
             case "main":
+                avPlayerTemp.replaceCurrentItem(with: nil)
                 avPlayerLayerTemp.frame = view.bounds
                 view.layer.insertSublayer(avPlayerLayerTemp, at: 0)
-                if indexOfVideos < (maxIndex-1) {
+            
+                /*if indexOfVideos < (maxIndex-1) {
                     avItemTemp = AVPlayerItem(url: arrayURLs[indexOfVideos+1] as URL)
                     avPlayerTemp.replaceCurrentItem(with: avItemTemp)
-                }
+                }*/
             default:
+                avPlayer.replaceCurrentItem(with: nil)
                 avPlayerLayer.frame = view.bounds
                 view.layer.insertSublayer(avPlayerLayer, at: 0)
-                if indexOfVideos < (maxIndex-1) {
+                /*if indexOfVideos < (maxIndex-1) {
                     avItem = AVPlayerItem(url: arrayURLs[indexOfVideos+1] as URL)
                     avPlayer.replaceCurrentItem(with: avItem)
-                }
+                }*/
             }
             
         }
@@ -131,8 +136,42 @@ class HomeViewController: UIViewController {
 
             switch currentLayer {
             case "main":
+                if setVideoIndex == "none" {
+                    if translation.y > 0 {
+                       // print("above 0")
+                        setVideoIndex = "temp"
+                        if indexOfVideos < (maxIndex-1) {
+                            avItemTemp = AVPlayerItem(url: arrayURLs[indexOfVideos+1] as URL)
+                            avPlayerTemp.replaceCurrentItem(with: avItemTemp)
+                        }
+                    } else if translation.y < 0 {
+                       // print("below 0")
+                        setVideoIndex = "temp"
+                        if indexOfVideos >= 1 {
+                            avItemTemp = AVPlayerItem(url: arrayURLs[indexOfVideos-1] as URL)
+                            avPlayerTemp.replaceCurrentItem(with: avItemTemp)
+                        }
+                    }
+                }
                 avPlayerLayer.frame = CGRect(x: 0, y: 0 + translation.y, width: self.view.frame.width, height: self.view.frame.height)
             default:
+                if setVideoIndex == "none" {
+                    if translation.y > 0 {
+                       // print("Temp layer: above 0")
+                        setVideoIndex = "temp"
+                        if indexOfVideos < (maxIndex-1) {
+                            avItem = AVPlayerItem(url: arrayURLs[indexOfVideos+1] as URL)
+                            avPlayer.replaceCurrentItem(with: avItem)
+                        }
+                    } else if translation.y < 0 {
+                       // print("Temp layer: below 0")
+                        setVideoIndex = "temp"
+                        if indexOfVideos >= 1 {
+                            avItem = AVPlayerItem(url: arrayURLs[indexOfVideos-1] as URL)
+                            avPlayer.replaceCurrentItem(with: avItem)
+                        }
+                    }
+                }
                 avPlayerLayerTemp.frame = CGRect(x: 0, y: 0 + translation.y, width: self.view.frame.width, height: self.view.frame.height)
             }
             
@@ -145,59 +184,33 @@ class HomeViewController: UIViewController {
             
             switch currentLayer {
             case "main":
-                if avPlayerLayer.frame.minY > 450 && translation.y > 0 {
-                    //print("video up")
+                if avPlayerLayer.frame.minY > 450 && translation.y > 0 && indexOfVideos < (maxIndex-1) {
                     avPlayerLayer.frame = CGRect(x: 1110, y: 1100, width: self.view.frame.width, height: self.view.frame.height)
-                    
-                    if indexOfVideos < (maxIndex-1) {
                         indexOfVideos+=1
-                        if currentLayer == "main" {
-                            currentLayer = "temp"
-                        } else {
-                            currentLayer = "main"
-                        }
+                        currentLayer = "temp"
                         playVideo(url: arrayURLs[indexOfVideos])
-                    }
-                }else if avPlayerLayer.frame.minY < -450 && translation.y < 0 {
-                    //print("video down")
-                    avPlayerLayer.frame = CGRect(x: 0, y: -1100, width: self.view.frame.width, height: self.view.frame.height)
-                    if indexOfVideos >= 1 {
+                    
+                }else if avPlayerLayer.frame.minY < -450 && translation.y < 0 && indexOfVideos >= 1 {
+                        avPlayerLayer.frame = CGRect(x: 0, y: -1100, width: self.view.frame.width, height: self.view.frame.height)
                         indexOfVideos-=1
-                        if currentLayer == "main" {
-                            currentLayer = "temp"
-                        } else {
-                            currentLayer = "main"
-                        }
+                        currentLayer = "temp"
                         playVideo(url: arrayURLs[indexOfVideos])
-                    }
                 } else {
                     avPlayerLayer.frame = view.bounds
                 }
             default:
-                if avPlayerLayerTemp.frame.minY > 450 && translation.y > 0 {
-                    //print("video up")
+                if avPlayerLayerTemp.frame.minY > 450 && translation.y > 0 && indexOfVideos < (maxIndex-1) {
+
                     avPlayerLayerTemp.frame = CGRect(x: 0, y: 1100, width: self.view.frame.width, height: self.view.frame.height)
-                    if indexOfVideos < (maxIndex-1) {
                         indexOfVideos+=1
-                        if currentLayer == "main" {
-                            currentLayer = "temp"
-                        } else {
-                            currentLayer = "main"
-                        }
+                        currentLayer = "main"
                         playVideo(url: arrayURLs[indexOfVideos])
-                    }
-                }else if avPlayerLayerTemp.frame.minY < -450 && translation.y < 0 {
-                    //print("video down")
+                    
+                }else if avPlayerLayerTemp.frame.minY < -450 && translation.y < 0 && indexOfVideos >= 1 {
                     avPlayerLayerTemp.frame = CGRect(x: 0, y: -1100, width: self.view.frame.width, height: self.view.frame.height)
-                    if indexOfVideos >= 1 {
                         indexOfVideos-=1
-                        if currentLayer == "main" {
-                            currentLayer = "temp"
-                        } else {
-                            currentLayer = "main"
-                        }
+                        currentLayer = "main"
                         playVideo(url: arrayURLs[indexOfVideos])
-                    }
                 } else {
                     avPlayerLayerTemp.frame = view.bounds
                 }
@@ -219,13 +232,13 @@ class HomeViewController: UIViewController {
         let tempurl2 = URL(fileURLWithPath: bundlePath2!)
         maxIndex = 10
         arrayURLs.append(tempurl)
-        arrayURLs.append(tempurl2)
+        arrayURLs.append(tempurl)
         arrayURLs.append(tempurl)
         arrayURLs.append(tempurl2)
-        arrayURLs.append(tempurl)
+        arrayURLs.append(tempurl2)
         arrayURLs.append(tempurl2)
         arrayURLs.append(tempurl)
-        arrayURLs.append(tempurl2)
+        arrayURLs.append(tempurl)
         arrayURLs.append(tempurl)
         arrayURLs.append(tempurl2)
         
