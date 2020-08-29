@@ -13,7 +13,7 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
     var pages = [UIViewController]()
     let pageControl = UIPageControl()
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,7 +32,6 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
             self.pages.append(page3)
             setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
 
-             
         
     }
     
@@ -126,10 +125,25 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
                 centerPage = 1
                 currentIndex -= 1
             }
+            
+            // Memory management
+            /*
+            if centerPage == 0 {
+                avPlayerLayerLast?.removeFromSuperlayer()
+                avPlayerLayerNext?.removeFromSuperlayer()
+            } else if centerPage == 1 {
+                avPlayerLayerLast?.removeFromSuperlayer()
+                avPlayerLayer?.removeFromSuperlayer()
+            } else if centerPage == 2 {
+                avPlayerLayerNext?.removeFromSuperlayer()
+                avPlayerLayer?.removeFromSuperlayer()
+            }*/
+            
             newPage = nil
             
-            print("current: \(currentIndex) and page: \(centerPage)")
+            //print("current: \(currentIndex) and page: \(centerPage)")
         }
+    
     }
     
     

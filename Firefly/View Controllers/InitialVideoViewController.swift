@@ -40,33 +40,39 @@ class InitialVideoViewController: UIViewController {
         arrayURLs.append(tempurl)
         arrayURLs.append(tempurl2)
         
-    
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
         avPlayerLayer.frame = view.bounds
         avPlayerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         view.layer.insertSublayer(avPlayerLayer, at: 0)
         
+    }
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("Initial \(currentIndex)")
+        
         if currentIndex == 0 {
             avItem = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
             avPlayer.replaceCurrentItem(with: avItem)
+            
+            
+            //avPlayer = AVPlayer(url: arrayURLs[currentIndex])
         }
         
         if currentIndex > 0 && currentIndex < 10 {
             switch centerPage {
             case 2:
+                print("HERE")
                 avItem = AVPlayerItem(url: arrayURLs[currentIndex+1] as URL)
                 avPlayer.replaceCurrentItem(with: avItem)
+                //avPlayer = AVPlayer(url: arrayURLs[currentIndex+1])
             case 1:
                 avItem = AVPlayerItem(url: arrayURLs[currentIndex-1] as URL)
-                avPlayer.replaceCurrentItem(with: avItem)
+                avPlayer = AVPlayer(url: arrayURLs[currentIndex-1])
             default:
                 avItem = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
-                avPlayer.replaceCurrentItem(with: avItem)
+                avPlayer = AVPlayer(url: arrayURLs[currentIndex])
             }
         }
         

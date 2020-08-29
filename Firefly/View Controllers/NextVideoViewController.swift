@@ -18,15 +18,15 @@ class NextVideoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
         avPlayerLayerNext = AVPlayerLayer(player: avPlayerNext)
         avPlayerLayerNext.frame = view.bounds
         avPlayerLayerNext.videoGravity = AVLayerVideoGravity.resizeAspectFill
         view.layer.insertSublayer(avPlayerLayerNext, at: 0)
+        
+    }
+        override func viewWillAppear(_ animated: Bool) {
+        print("Next \(currentIndex)")
+        
         
         if currentIndex == 0 {
             avItemNext = AVPlayerItem(url: arrayURLs[currentIndex+1] as URL)
@@ -38,13 +38,13 @@ class NextVideoViewController: UIViewController {
             switch centerPage {
             case 0:
                 avItemNext = AVPlayerItem(url: arrayURLs[currentIndex+1] as URL)
-                avPlayerNext.replaceCurrentItem(with: avItemNext)
+                avPlayerNext = AVPlayer(url: arrayURLs[currentIndex+1])
             case 2:
                 avItemNext = AVPlayerItem(url: arrayURLs[currentIndex-1] as URL)
-                avPlayerNext.replaceCurrentItem(with: avItemNext)
+                avPlayerNext = AVPlayer(url: arrayURLs[currentIndex-1])
             default:
                 avItemNext = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
-                avPlayerNext.replaceCurrentItem(with: avItemNext)
+                avPlayerNext = AVPlayer(url: arrayURLs[currentIndex])
             }
         }
         
