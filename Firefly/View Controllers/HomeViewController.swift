@@ -138,37 +138,84 @@ class HomeViewController: UIViewController {
             case "main":
                 if setVideoIndex == "none" {
                     if translation.y > 0 {
-                       // print("above 0")
-                        setVideoIndex = "temp"
+                        setVideoIndex = "positive"
                         if indexOfVideos < (maxIndex-1) {
                             avItemTemp = AVPlayerItem(url: arrayURLs[indexOfVideos+1] as URL)
                             avPlayerTemp.replaceCurrentItem(with: avItemTemp)
+                        } else {
+                            avPlayerTemp.replaceCurrentItem(with: nil)
                         }
                     } else if translation.y < 0 {
-                       // print("below 0")
-                        setVideoIndex = "temp"
+                        setVideoIndex = "negative"
                         if indexOfVideos >= 1 {
                             avItemTemp = AVPlayerItem(url: arrayURLs[indexOfVideos-1] as URL)
                             avPlayerTemp.replaceCurrentItem(with: avItemTemp)
+                        } else {
+                            avPlayerTemp.replaceCurrentItem(with: nil)
+                        }
+                    }
+                } else if setVideoIndex == "positive" {
+                    if translation.y < 0 {
+                         setVideoIndex = "negative"
+                         if indexOfVideos >= 1 {
+                             avItemTemp = AVPlayerItem(url: arrayURLs[indexOfVideos-1] as URL)
+                             avPlayerTemp.replaceCurrentItem(with: avItemTemp)
+                         } else {
+                            avPlayerTemp.replaceCurrentItem(with: nil)
+                        }
+                    }
+                } else if setVideoIndex == "negative" {
+                    if translation.y > 0 {
+                         setVideoIndex = "positive"
+                         if indexOfVideos < (maxIndex-1) {
+                             avItemTemp = AVPlayerItem(url: arrayURLs[indexOfVideos+1] as URL)
+                             avPlayerTemp.replaceCurrentItem(with: avItemTemp)
+                         } else {
+                            avPlayerTemp.replaceCurrentItem(with: nil)
                         }
                     }
                 }
+                
                 avPlayerLayer.frame = CGRect(x: 0, y: 0 + translation.y, width: self.view.frame.width, height: self.view.frame.height)
             default:
                 if setVideoIndex == "none" {
                     if translation.y > 0 {
                        // print("Temp layer: above 0")
-                        setVideoIndex = "temp"
+                        setVideoIndex = "positive"
                         if indexOfVideos < (maxIndex-1) {
                             avItem = AVPlayerItem(url: arrayURLs[indexOfVideos+1] as URL)
                             avPlayer.replaceCurrentItem(with: avItem)
+                        } else {
+                            avPlayer.replaceCurrentItem(with: nil)
                         }
                     } else if translation.y < 0 {
                        // print("Temp layer: below 0")
-                        setVideoIndex = "temp"
+                        setVideoIndex = "negative"
                         if indexOfVideos >= 1 {
                             avItem = AVPlayerItem(url: arrayURLs[indexOfVideos-1] as URL)
                             avPlayer.replaceCurrentItem(with: avItem)
+                        } else {
+                            avPlayer.replaceCurrentItem(with: nil)
+                        }
+                    }
+                } else if setVideoIndex == "positive" {
+                    if translation.y < 0 {
+                     setVideoIndex = "negative"
+                         if indexOfVideos >= 1 {
+                             avItem = AVPlayerItem(url: arrayURLs[indexOfVideos-1] as URL)
+                             avPlayer.replaceCurrentItem(with: avItem)
+                         } else {
+                            avPlayer.replaceCurrentItem(with: nil)
+                        }
+                    }
+                } else if setVideoIndex == "negative" {
+                    if translation.y > 0 {
+                     setVideoIndex = "positive"
+                         if indexOfVideos < (maxIndex-1) {
+                             avItem = AVPlayerItem(url: arrayURLs[indexOfVideos+1] as URL)
+                             avPlayer.replaceCurrentItem(with: avItem)
+                         } else {
+                            avPlayer.replaceCurrentItem(with: nil)
                         }
                     }
                 }
