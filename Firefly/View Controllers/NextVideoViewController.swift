@@ -27,6 +27,22 @@ class NextVideoViewController: UIViewController {
         
         setUpDataButtons(heart: heartButtonNext, likes: numberLikesNext)
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        view.addGestureRecognizer(tap)
+        
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        if(avPlayerNext.timeControlStatus==AVPlayer.TimeControlStatus.paused)
+        {
+        //Paused mode
+            avPlayerNext.play()
+        }
+        else if(avPlayerNext.timeControlStatus==AVPlayer.TimeControlStatus.playing)
+        {
+         //Play mode
+            avPlayerNext.pause()
+        }
     }
     
     func setUpDataButtons(heart: UIButton, likes: UILabel) {
@@ -39,7 +55,7 @@ class NextVideoViewController: UIViewController {
         heart.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         self.view.addSubview(heart)
         
-        likes.frame = CGRect(x: self.view.frame.size.width - 35, y: (self.view.frame.size.height/2) + 40, width: 50, height: 50)
+        likes.frame = CGRect(x: self.view.frame.size.width - 45, y: (self.view.frame.size.height/2) + 40, width: 50, height: 50)
         self.view.addSubview(likes)
     }
     
@@ -57,11 +73,17 @@ class NextVideoViewController: UIViewController {
                 arrIndex = currentIndex
         }
         
+        if arrIndex > 0 && arrIndex != (maxIndex) {
+            heartButtonNext.alpha = 1
+            numberLikesNext.alpha = 1
+        }
+        
         if arrIndex == (maxIndex - 1)  {
             avPlayerLast.replaceCurrentItem(with: nil)
             
-            avItem = AVPlayerItem(url: arrayURLs[arrIndex-1] as URL)
+            avItem = AVPlayerItem(url: dataCached[arrIndex - 1].url as URL)
             avPlayer.replaceCurrentItem(with: avItem)
+            numberLikesInitial.text = String(dataCached[arrIndex - 1].likes)
             
             avPlayerNext.play()
             avPlayer.pause()
@@ -74,11 +96,13 @@ class NextVideoViewController: UIViewController {
             //avItemNext = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
             //avPlayerNext.replaceCurrentItem(with: avItemNext)
             
-            avItem = AVPlayerItem(url: arrayURLs[arrIndex-1] as URL)
+            avItem = AVPlayerItem(url: dataCached[arrIndex - 1].url as URL)
             avPlayer.replaceCurrentItem(with: avItem)
+            numberLikesInitial.text = String(dataCached[arrIndex - 1].likes)
             
-            avItemLast = AVPlayerItem(url: arrayURLs[arrIndex+1] as URL)
+            avItemLast = AVPlayerItem(url: dataCached[arrIndex + 1].url as URL)
             avPlayerLast.replaceCurrentItem(with: avItemLast)
+            numberLikesLast.text = String(dataCached[arrIndex + 1].likes)
             
             avPlayerNext.play()
             avPlayer.pause()

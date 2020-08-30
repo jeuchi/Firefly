@@ -59,27 +59,12 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
         }
         return nil
     }
-    
-    /*func pageViewController(_ pageViewController: UIPageViewController,
-                            willTransitionTo pendingViewControllers: [UIViewController]) {
-        if currentIndex == 0 && centerPage == 0 {
-            print("Error")
-            guard let currentViewController = self.viewControllers?.first else { return }
-            guard let previousViewController = dataSource?.pageViewController( self, viewControllerBefore: currentViewController ) else { return }
-            setViewControllers([previousViewController], direction: .reverse, animated: false, completion: nil)
-        }
-    }*/
+
 
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-            
-    // set the pageControl.currentPage to the index of the current viewController in pages
-       /* if let viewControllers = pageViewController.viewControllers {
-            if let viewControllerIndex = self.pages.firstIndex(of: viewControllers[0]) {
-                self.pageControl.currentPage = viewControllerIndex
-            }
-        }*/
         
         if completed {
+            
             if let viewControllers = pageViewController.viewControllers {
                 if let viewControllerIndex = self.pages.firstIndex(of: viewControllers[0]) {
                     self.pageControl.currentPage = viewControllerIndex
@@ -133,12 +118,20 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
                 print("refresh")
                 currentIndex = (maxIndex - 1)
                 
-                if centerPage == 2 {
+                if centerPage == 2 { // last
+                    print("here")
                     centerPage = 1
-                } else if centerPage == 1 {
+                    heartButtonLast.alpha = 0
+                    numberLikesLast.alpha = 0
+                } else if centerPage == 1 { // next
+                    print("next here")
                     centerPage = 0
-                } else if centerPage == 0 {
+                    heartButtonNext.alpha = 0
+                    numberLikesNext.alpha = 0
+                } else if centerPage == 0 { // initial
                     centerPage = 2
+                    heartButtonInitial.alpha = 0
+                    numberLikesInitial.alpha = 0
                 }
                 
                 DispatchQueue.main.async {
@@ -147,20 +140,7 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
                 }
                 //return
             }
-            
-            
-            // Memory management
-            /*
-            if centerPage == 0 {
-                avPlayerLayerLast?.removeFromSuperlayer()
-                avPlayerLayerNext?.removeFromSuperlayer()
-            } else if centerPage == 1 {
-                avPlayerLayerLast?.removeFromSuperlayer()
-                avPlayerLayer?.removeFromSuperlayer()
-            } else if centerPage == 2 {
-                avPlayerLayerNext?.removeFromSuperlayer()
-                avPlayerLayer?.removeFromSuperlayer()
-            }*/
+
             
             newPage = nil
             
