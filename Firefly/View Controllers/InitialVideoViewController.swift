@@ -19,6 +19,7 @@ var centerPage: Int = 0
 var currentIndex: Int = 0
 var arrIndex: Int = 0
 var newPage: Int? = nil
+var maxIndex = 0
 
 class InitialVideoViewController: UIViewController {
 
@@ -30,6 +31,8 @@ class InitialVideoViewController: UIViewController {
         let tempurl = URL(fileURLWithPath: bundlePath!)
         let tempurl2 = URL(fileURLWithPath: bundlePath2!)
 
+        
+        maxIndex = 10
         arrayURLs.append(tempurl)
         arrayURLs.append(tempurl)
         arrayURLs.append(tempurl)
@@ -75,7 +78,7 @@ class InitialVideoViewController: UIViewController {
             avPlayerNext.replaceCurrentItem(with: avItemNext)
         }
         
-        if arrIndex == 9 {
+        if arrIndex == (maxIndex - 1) {
             avPlayerNext.replaceCurrentItem(with: nil)
             
             avItemLast = AVPlayerItem(url: arrayURLs[arrIndex-1] as URL)
@@ -87,7 +90,7 @@ class InitialVideoViewController: UIViewController {
             utilities.loopVideo(videoPlayer: avPlayer)
         }
         
-        if arrIndex < 9 && arrIndex > 0 {
+        if arrIndex < (maxIndex - 1)  && arrIndex > 0 {
            // avItem = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
             //avPlayer.replaceCurrentItem(with: avItem)
             

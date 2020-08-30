@@ -129,10 +129,18 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
             
             // If user tries to go down outside array of loaded videos, load more
             // TO DO: Refresh videos from database when completed animation
-            if currentIndex >= 10 {
+            if currentIndex >= maxIndex {
                 print("refresh")
-                currentIndex = 9
-                centerPage-=1
+                currentIndex = (maxIndex - 1)
+                
+                if centerPage == 2 {
+                    centerPage = 1
+                } else if centerPage == 1 {
+                    centerPage = 0
+                } else if centerPage == 0 {
+                    centerPage = 2
+                }
+                
                 DispatchQueue.main.async {
                     self.setViewControllers([self.pages[centerPage]], direction: .reverse, animated: true, completion: nil)
 
