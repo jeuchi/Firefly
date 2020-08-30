@@ -13,11 +13,12 @@ class FeedHelperViewController: UIViewController {
     
     @IBOutlet weak var cameraButton: UIButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+ 
     }
+    
     
     @IBAction func tappedCamera(_ sender: Any) {
         switch centerPage {

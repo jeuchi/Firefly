@@ -16,6 +16,8 @@ var avPlayerLayerLast:AVPlayerLayer!
 var heartButtonLast = UIButton(type: .custom)
 var numberLikesLast = UILabel()
 
+var playImageLast = UIButton()
+
 class LastVideoViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -26,8 +28,8 @@ class LastVideoViewController: UIViewController {
         avPlayerLayerLast.videoGravity = AVLayerVideoGravity.resizeAspectFill
         view.layer.insertSublayer(avPlayerLayerLast, at: 0)
         
-        setUpDataButtons(heart: heartButtonLast
-            , likes: numberLikesLast)
+        setUpDataButtons(heart: heartButtonLast, likes: numberLikesLast, playImage: playImageLast)
+
         
         heartButtonLast.alpha = 0
         numberLikesLast.alpha = 0
@@ -37,7 +39,7 @@ class LastVideoViewController: UIViewController {
         
     }
     
-    func setUpDataButtons(heart: UIButton, likes: UILabel) {
+    func setUpDataButtons(heart: UIButton, likes: UILabel, playImage: UIButton) {
         let image = UIImage(systemName: "suit.heart")
         heart.frame = CGRect(x: self.view.frame.size.width - 60, y: self.view.frame.size.height/2, width: 50, height: 50)
         heart.setTitle("", for: .normal)
@@ -49,6 +51,16 @@ class LastVideoViewController: UIViewController {
         
         likes.frame = CGRect(x: self.view.frame.size.width - 45, y: (self.view.frame.size.height/2) + 40, width: 50, height: 50)
         self.view.addSubview(likes)
+        
+        let playimage = UIImage(systemName: "play.fill")
+        playImage.frame = CGRect(x: self.view.frame.size.width, y: self.view.frame.size.height, width: 50, height: 50)
+        playImage.center.x = self.view.frame.midX
+        playImage.center.y = self.view.frame.midY
+        playImage.setTitle("", for: .normal)
+        playImage.setBackgroundImage(playimage, for: .normal)
+        playImage.tintColor = UIColor.green
+        playImage.alpha = 0
+        self.view.addSubview(playImage)
     }
     
     @objc func buttonAction() {
@@ -60,15 +72,18 @@ class LastVideoViewController: UIViewController {
         {
         //Paused mode
             avPlayerLast.play()
+            playImageLast.alpha = 0
         }
         else if(avPlayerLast.timeControlStatus==AVPlayer.TimeControlStatus.playing)
         {
          //Play mode
             avPlayerLast.pause()
+            playImageLast.alpha = 1
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        playImageLast.alpha = 0
         switch centerPage {
             case 0:
                 arrIndex = currentIndex-1

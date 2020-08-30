@@ -39,9 +39,10 @@ var dataCached: [data] = []
 
 var heartButtonInitial = UIButton(type: .custom)
 var numberLikesInitial = UILabel()
+var playImageInitial = UIButton()
 
 class InitialVideoViewController: UIViewController {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -66,7 +67,7 @@ class InitialVideoViewController: UIViewController {
         avItem = AVPlayerItem(url: dataCached[0].url as URL)
         avPlayer.replaceCurrentItem(with: avItem)
         
-        setUpDataButtons(heart: heartButtonInitial, likes: numberLikesInitial)
+        setUpDataButtons(heart: heartButtonInitial, likes: numberLikesInitial, playImage: playImageInitial)
         numberLikesInitial.text = String(dataCached[arrIndex].likes)
         
         // Pause and play with tap gesture
@@ -80,15 +81,17 @@ class InitialVideoViewController: UIViewController {
         {
         //Paused mode
             avPlayer.play()
+            playImageInitial.alpha = 0
         }
         else if(avPlayer.timeControlStatus==AVPlayer.TimeControlStatus.playing)
         {
          //Play mode
             avPlayer.pause()
+            playImageInitial.alpha = 1
         }
     }
     
-    func setUpDataButtons(heart: UIButton, likes: UILabel) {
+    func setUpDataButtons(heart: UIButton, likes: UILabel, playImage: UIButton) {
         let image = UIImage(systemName: "suit.heart")
         heart.frame = CGRect(x: self.view.frame.size.width - 60, y: self.view.frame.size.height/2, width: 50, height: 50)
         heart.setTitle("", for: .normal)
@@ -100,6 +103,16 @@ class InitialVideoViewController: UIViewController {
         
         likes.frame = CGRect(x: self.view.frame.size.width - 45, y: (self.view.frame.size.height/2) + 40, width: 50, height: 50)
         self.view.addSubview(likes)
+        
+        let playimage = UIImage(systemName: "play.fill")
+        playImage.frame = CGRect(x: self.view.frame.size.width, y: self.view.frame.size.height, width: 50, height: 50)
+        playImage.center.x = self.view.frame.midX
+        playImage.center.y = self.view.frame.midY
+        playImage.setTitle("", for: .normal)
+        playImage.setBackgroundImage(playimage, for: .normal)
+        playImage.tintColor = UIColor.green
+        playImage.alpha = 0
+        self.view.addSubview(playImage)
     }
     
     // TO DO FILL HEART AND UPLOAD 'liked'
@@ -108,6 +121,8 @@ class InitialVideoViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        playImageInitial.alpha = 0
+
         switch centerPage {
             case 1:
                 arrIndex = currentIndex-1
