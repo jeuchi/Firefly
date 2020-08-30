@@ -13,6 +13,8 @@ var avPlayerNext = AVPlayer()
 var avItemNext:AVPlayerItem?
 var avPlayerLayerNext:AVPlayerLayer!
 
+var heartButtonNext = UIButton(type: .custom)
+var numberLikesNext = UILabel()
 
 class NextVideoViewController: UIViewController {
 
@@ -23,27 +25,27 @@ class NextVideoViewController: UIViewController {
         avPlayerLayerNext.videoGravity = AVLayerVideoGravity.resizeAspectFill
         view.layer.insertSublayer(avPlayerLayerNext, at: 0)
         
+        setUpDataButtons(heart: heartButtonNext, likes: numberLikesNext)
+        
     }
-        /*override func viewWillAppear(_ animated: Bool) {
-        print("Next \(currentIndex)")
     
+    func setUpDataButtons(heart: UIButton, likes: UILabel) {
+        let image = UIImage(systemName: "suit.heart")
+        heart.frame = CGRect(x: self.view.frame.size.width - 60, y: self.view.frame.size.height/2, width: 50, height: 50)
+        heart.setTitle("", for: .normal)
+        heart.setBackgroundImage(image, for: .normal)
+        heart.tintColor = UIColor.white
+        heart.alpha = 1
+        heart.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        self.view.addSubview(heart)
         
-        if currentIndex < 10 && currentIndex > 0 {
-            switch centerPage {
-            case 0:
-                avItemNext = AVPlayerItem(url: arrayURLs[currentIndex+1] as URL)
-                avPlayerNext = AVPlayer(url: arrayURLs[currentIndex+1])
-            case 2:
-                avItemNext = AVPlayerItem(url: arrayURLs[currentIndex-1] as URL)
-                avPlayerNext = AVPlayer(url: arrayURLs[currentIndex-1])
-            default:
-                avItemNext = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
-                avPlayerNext = AVPlayer(url: arrayURLs[currentIndex])
-            }
-        }
-        
-        avPlayerNext.play()
-    }*/
+        likes.frame = CGRect(x: self.view.frame.size.width - 35, y: (self.view.frame.size.height/2) + 40, width: 50, height: 50)
+        self.view.addSubview(likes)
+    }
+    
+    @objc func buttonAction() {
+        print("hit heart")
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         switch centerPage {

@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class FeedHelperViewController: UIViewController {
     
     @IBOutlet weak var cameraButton: UIButton!
@@ -15,7 +16,6 @@ class FeedHelperViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     

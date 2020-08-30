@@ -169,14 +169,26 @@
                     <view key="view" contentMode="scaleToFill" id="e7m-f9-G8A">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0h-j1-4Bh">
+                                <rect key="frame" x="352" y="524" width="42" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="wjO-bn-LMp"/>
                     </view>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="numberLikesInitial" destination="o0h-j1-4Bh" id="NEy-QD-8Od"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zhd-sL-ar5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3109" y="1946"/>
+            <point key="canvasLocation" x="3108.6956521739135" y="1945.9821428571427"/>
         </scene>
         <!--Next Video View Controller-->
         <scene sceneID="wbI-Ql-dft">
@@ -298,7 +310,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3044.9275362318845" y="87.723214285714278"/>
+            <point key="canvasLocation" x="2865" y="71"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="Ao0-Rj-lFa">

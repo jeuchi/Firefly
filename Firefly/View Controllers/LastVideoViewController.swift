@@ -13,6 +13,9 @@ var avPlayerLast = AVPlayer()
 var avItemLast:AVPlayerItem?
 var avPlayerLayerLast:AVPlayerLayer!
 
+var heartButtonLast = UIButton(type: .custom)
+var numberLikesLast = UILabel()
+
 class LastVideoViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -23,6 +26,27 @@ class LastVideoViewController: UIViewController {
         avPlayerLayerLast.videoGravity = AVLayerVideoGravity.resizeAspectFill
         view.layer.insertSublayer(avPlayerLayerLast, at: 0)
         
+        setUpDataButtons(heart: heartButtonLast
+            , likes: numberLikesLast)
+        
+    }
+    
+    func setUpDataButtons(heart: UIButton, likes: UILabel) {
+        let image = UIImage(systemName: "suit.heart")
+        heart.frame = CGRect(x: self.view.frame.size.width - 60, y: self.view.frame.size.height/2, width: 50, height: 50)
+        heart.setTitle("", for: .normal)
+        heart.setBackgroundImage(image, for: .normal)
+        heart.tintColor = UIColor.white
+        heart.alpha = 1
+        heart.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        self.view.addSubview(heart)
+        
+        likes.frame = CGRect(x: self.view.frame.size.width - 35, y: (self.view.frame.size.height/2) + 40, width: 50, height: 50)
+        self.view.addSubview(likes)
+    }
+    
+    @objc func buttonAction() {
+        print("hit heart")
     }
     
     override func viewDidAppear(_ animated: Bool) {
