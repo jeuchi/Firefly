@@ -18,19 +18,18 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
         self.dataSource = self
-            self.delegate = self
-            let initialPage = 0
-            let page1 = InitialVideoViewController()
-            let page2 = NextVideoViewController()
-            let page3 = LastVideoViewController()
+        self.delegate = self
+        let initialPage = 0
+        let page1 = InitialVideoViewController()
+        let page2 = NextVideoViewController()
+        let page3 = LastVideoViewController()
                     
-            // add the individual viewControllers to the pageViewController
-            self.pages.append(page1)
-            self.pages.append(page2)
-            self.pages.append(page3)
-            setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
+        // add the individual viewControllers to the pageViewController
+        self.pages.append(page1)
+        self.pages.append(page2)
+        self.pages.append(page3)
+        setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
 
         
     }

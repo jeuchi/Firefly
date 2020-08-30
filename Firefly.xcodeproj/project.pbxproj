@@ -26,6 +26,7 @@
 		4054783924FA2EF000118F5B /* LastVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054783824FA2EF000118F5B /* LastVideoViewController.swift */; };
 		4054783B24FA324800118F5B /* InitialVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054783A24FA324800118F5B /* InitialVideoViewController.swift */; };
 		4054783D24FA360100118F5B /* NextVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054783C24FA360100118F5B /* NextVideoViewController.swift */; };
+		4054783F24FB36C200118F5B /* FeedHelperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054783E24FB36C200118F5B /* FeedHelperViewController.swift */; };
 		407C3EF324F6FC43001E6104 /* PulseAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407C3EF224F6FC43001E6104 /* PulseAnimation.swift */; };
 		40948A1B24F57F7A0062D79E /* DisplayVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40948A1A24F57F7A0062D79E /* DisplayVideo.swift */; };
 		40948A1D24F6D11A0062D79E /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40948A1C24F6D11A0062D79E /* CameraViewController.swift */; };
@@ -55,6 +56,7 @@
 		4054783824FA2EF000118F5B /* LastVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastVideoViewController.swift; sourceTree = "<group>"; };
 		4054783A24FA324800118F5B /* InitialVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialVideoViewController.swift; sourceTree = "<group>"; };
 		4054783C24FA360100118F5B /* NextVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextVideoViewController.swift; sourceTree = "<group>"; };
+		4054783E24FB36C200118F5B /* FeedHelperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedHelperViewController.swift; sourceTree = "<group>"; };
 		407C3EF224F6FC43001E6104 /* PulseAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulseAnimation.swift; sourceTree = "<group>"; };
 		40948A1A24F57F7A0062D79E /* DisplayVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayVideo.swift; sourceTree = "<group>"; };
 		40948A1C24F6D11A0062D79E /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				4054783824FA2EF000118F5B /* LastVideoViewController.swift */,
 				4054783A24FA324800118F5B /* InitialVideoViewController.swift */,
 				4054783C24FA360100118F5B /* NextVideoViewController.swift */,
+				4054783E24FB36C200118F5B /* FeedHelperViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				4054783B24FA324800118F5B /* InitialVideoViewController.swift in Sources */,
 				4054783724FA25E100118F5B /* FeedViewController.swift in Sources */,
 				403BE32524F3313A00A3AFD4 /* ViewController.swift in Sources */,
+				4054783F24FB36C200118F5B /* FeedHelperViewController.swift in Sources */,
 				403BE32124F3313A00A3AFD4 /* AppDelegate.swift in Sources */,
 				403BE34024F356AE00A3AFD4 /* Constants.swift in Sources */,
 				403BE33C24F3511F00A3AFD4 /* SignUpViewController.swift in Sources */,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="55a-xq-mxD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XP4-oi-aqM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -191,6 +191,42 @@
             </objects>
             <point key="canvasLocation" x="3912" y="1946"/>
         </scene>
+        <!--Feed Helper View Controller-->
+        <scene sceneID="Ywo-lg-x7n">
+            <objects>
+                <viewController id="XP4-oi-aqM" customClass="FeedHelperViewController" customModule="Firefly" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ma4-2O-ZQU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yKN-jn-rcp">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="55a-xq-mxD" kind="embed" id="wZX-vt-6lN"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cEz-ZQ-jb2">
+                                <rect key="frame" x="184" y="799" width="46" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" backgroundImage="camera.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="tappedCamera:" destination="XP4-oi-aqM" eventType="touchUpInside" id="gVC-py-4N4"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="WZX-fg-Q3w"/>
+                    </view>
+                    <connections>
+                        <outlet property="cameraButton" destination="cEz-ZQ-jb2" id="Vbk-X8-aud"/>
+                        <segue destination="Xfq-g3-wfc" kind="presentation" identifier="record" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="3fU-fH-ALH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Xc-nO-g4O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4009" y="1219"/>
+        </scene>
         <!--Feed View Controller-->
         <scene sceneID="ZHD-3k-kXV">
             <objects>
@@ -291,6 +327,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="dEc-V1-ant"/>
                     </view>
+                    <navigationItem key="navigationItem" id="JZa-pz-xI8"/>
                     <connections>
                         <outlet property="cameraButton" destination="c6D-mz-ovK" id="3kP-T2-hX9"/>
                         <outlet property="filterButton" destination="IO3-ri-MGv" id="mCs-4F-Cdc"/>
@@ -453,12 +490,13 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="HZq-Ch-HUq"/>
+        <segue reference="3fU-fH-ALH"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="ColorFilterOff" width="150" height="150"/>
         <image name="FireflyLogo" width="529" height="472"/>
         <image name="camera" catalog="system" width="128" height="96"/>
+        <image name="camera.fill" catalog="system" width="128" height="96"/>
         <image name="square.and.pencil" catalog="system" width="128" height="118"/>
         <image name="square.fill" catalog="system" width="128" height="114"/>
         <image name="x.square.fill" catalog="system" width="128" height="114"/>
