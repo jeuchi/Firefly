@@ -142,7 +142,7 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
             
             newPage = nil
             
-            //print("current: \(currentIndex) and page: \(centerPage)")
+            print("current: \(currentIndex) and page: \(centerPage)")
         }
     
     }

@@ -39,11 +39,17 @@ class LastVideoViewController: UIViewController {
            // avItemLast = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
            // avPlayerLast.replaceCurrentItem(with: avItemLast)
             
+            
             avItem = AVPlayerItem(url: arrayURLs[arrIndex+1] as URL)
             avPlayer.replaceCurrentItem(with: avItem)
             
             avItemNext = AVPlayerItem(url: arrayURLs[arrIndex-1] as URL)
             avPlayerNext.replaceCurrentItem(with: avItemNext)
+            
+            avPlayerLast.play()
+            avPlayer.pause()
+            avPlayerNext.pause()
+            utilities.loopVideo(videoPlayer: avPlayerLast)
             
         }
     }

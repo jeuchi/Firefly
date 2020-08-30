@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import AVKit
 
 class Utilities {
     
@@ -51,6 +52,13 @@ class Utilities {
         
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
         return passwordTest.evaluate(with: password)
+    }
+    
+    func loopVideo(videoPlayer: AVPlayer) {
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: videoPlayer.currentItem, queue: .main) { [weak self] _ in
+            videoPlayer.seek(to: CMTime.zero)
+            videoPlayer.play()
+        }
     }
     
     
