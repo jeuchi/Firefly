@@ -2,6 +2,7 @@ import UIKit
 
 import AVFoundation
 
+
 class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate {
     
 //AVCaptureFileOutputRecordingDelegate {
@@ -9,7 +10,10 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     // Storyboard buttons and preview layer
     @IBOutlet weak var preview: UIView!
     @IBOutlet weak var filterButton: UIButton!
+    @IBOutlet weak var backFeedButton: UIButton!
+    
     @IBOutlet weak var cameraButton: UIButton!
+    var cameraSquareFrame: CGFloat = 0.0
     
     var pulsePoint: CGPoint = CGPoint(x: 207, y: 788)
     private var videoFilterOn: Bool = false
@@ -45,6 +49,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         
         // set up cameraButton
         cameraButton.isUserInteractionEnabled = true
+        cameraSquareFrame = cameraButton.layer.cornerRadius
+        cameraButton.layer.cornerRadius = cameraButton.bounds.size.width / 2
+        cameraButton.clipsToBounds = true
         
         /*
          Check the video authorization status. Video access is required and audio
@@ -139,11 +146,16 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     {
         if sender.direction == .right
         {
-           //print("Swipe right")
             dismiss(animated: true, completion: nil)
-           //performSegue(withIdentifier: "backHome", sender: self)
         }
     }
+    
+    @IBAction func tappedBackButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+
+    }
+    
+    
     
     @IBAction func tapRecord(_ sender: Any) {
         // Check if not recording
@@ -156,6 +168,11 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
             pulse.name = "pulseAnimation"
             self.view.layer.insertSublayer(pulse, below:  self.view.layer)
             
+            UIView.animate(withDuration: 0.3) {
+                self.cameraButton.layer.cornerRadius = self.cameraSquareFrame
+                self.cameraButton.clipsToBounds = false
+            }
+            
             // Start recording video to a temporary file.
                 let outputFileName = NSUUID().uuidString
                 let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mov")!)
@@ -163,6 +180,11 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
             } else {
                 // remove pulsing animation layer
                 removePulse()
+            
+                UIView.animate(withDuration: 0.1) {
+                    self.cameraButton.layer.cornerRadius = self.cameraButton.bounds.size.width / 2
+                    self.cameraButton.clipsToBounds = true
+                }
     
                 movieOutput.stopRecording()
             }
