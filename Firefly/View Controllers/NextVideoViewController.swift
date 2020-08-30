@@ -55,8 +55,20 @@ class NextVideoViewController: UIViewController {
                 arrIndex = currentIndex
         }
         
+        if arrIndex == 9 {
+            avPlayerLast.replaceCurrentItem(with: nil)
+            
+            avItem = AVPlayerItem(url: arrayURLs[arrIndex-1] as URL)
+            avPlayer.replaceCurrentItem(with: avItem)
+            
+            avPlayerNext.play()
+            avPlayer.pause()
+            avPlayerLast.pause()
+            utilities.loopVideo(videoPlayer: avPlayerNext)
+        }
         
-        if arrIndex < 10 && arrIndex > 0 {
+        
+        if arrIndex < 9 && arrIndex > 0 {
             //avItemNext = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
             //avPlayerNext.replaceCurrentItem(with: avItemNext)
             

@@ -44,6 +44,7 @@ class InitialVideoViewController: UIViewController {
         
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
         avPlayerLayer.frame = view.bounds
+
         avPlayerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         view.layer.insertSublayer(avPlayerLayer, at: 0)
         
@@ -64,6 +65,8 @@ class InitialVideoViewController: UIViewController {
         
         if arrIndex == 0 {
             avPlayer.play()
+            avPlayerNext.pause()
+            avPlayerLast.pause()
             utilities.loopVideo(videoPlayer: avPlayer)
             
             avPlayerLast.replaceCurrentItem(with: nil)
@@ -72,7 +75,19 @@ class InitialVideoViewController: UIViewController {
             avPlayerNext.replaceCurrentItem(with: avItemNext)
         }
         
-        if arrIndex < 10 && arrIndex > 0 {
+        if arrIndex == 9 {
+            avPlayerNext.replaceCurrentItem(with: nil)
+            
+            avItemLast = AVPlayerItem(url: arrayURLs[arrIndex-1] as URL)
+            avPlayerLast.replaceCurrentItem(with: avItemLast)
+            
+            avPlayer.play()
+            avPlayerNext.pause()
+            avPlayerLast.pause()
+            utilities.loopVideo(videoPlayer: avPlayer)
+        }
+        
+        if arrIndex < 9 && arrIndex > 0 {
            // avItem = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
             //avPlayer.replaceCurrentItem(with: avItem)
             

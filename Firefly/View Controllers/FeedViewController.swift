@@ -98,6 +98,7 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
                     newPage = nil
                 }
             }
+        
             
             /* PAGE INFO
              0 - Initial
@@ -126,6 +127,20 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
                 centerPage = 1
                 currentIndex -= 1
             }
+            
+            // If user tries to go down outside array of loaded videos, load more
+            // TO DO: Refresh videos from database when completed animation
+            if currentIndex >= 10 {
+                print("refresh")
+                currentIndex = 9
+                centerPage-=1
+                DispatchQueue.main.async {
+                    self.setViewControllers([self.pages[centerPage]], direction: .reverse, animated: true, completion: nil)
+
+                }
+                //return
+            }
+            
             
             // Memory management
             /*
