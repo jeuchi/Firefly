@@ -16,7 +16,6 @@
 		403BE32D24F3313C00A3AFD4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 403BE32B24F3313C00A3AFD4 /* LaunchScreen.storyboard */; };
 		403BE33524F331DD00A3AFD4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 403BE33424F331DD00A3AFD4 /* GoogleService-Info.plist */; };
 		403BE33724F3501C00A3AFD4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403BE33624F3501C00A3AFD4 /* LoginViewController.swift */; };
-		403BE33924F3502B00A3AFD4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403BE33824F3502B00A3AFD4 /* HomeViewController.swift */; };
 		403BE33C24F3511F00A3AFD4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403BE33B24F3511F00A3AFD4 /* SignUpViewController.swift */; };
 		403BE34024F356AE00A3AFD4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403BE33E24F356AE00A3AFD4 /* Constants.swift */; };
 		403BE34124F356AE00A3AFD4 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403BE33F24F356AE00A3AFD4 /* Utilities.swift */; };
@@ -46,7 +45,6 @@
 		403BE32E24F3313C00A3AFD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		403BE33424F331DD00A3AFD4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		403BE33624F3501C00A3AFD4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		403BE33824F3502B00A3AFD4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		403BE33B24F3511F00A3AFD4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		403BE33E24F356AE00A3AFD4 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		403BE33F24F356AE00A3AFD4 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -129,17 +127,12 @@
 		403BE33A24F3503000A3AFD4 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				403BE33824F3502B00A3AFD4 /* HomeViewController.swift */,
+				4054784024FB7F2000118F5B /* Feed  */,
 				403BE32424F3313A00A3AFD4 /* ViewController.swift */,
 				403BE33624F3501C00A3AFD4 /* LoginViewController.swift */,
 				403BE33B24F3511F00A3AFD4 /* SignUpViewController.swift */,
 				40948A1C24F6D11A0062D79E /* CameraViewController.swift */,
 				40948A1E24F6D24A0062D79E /* VideoPlayback.swift */,
-				4054783624FA25E100118F5B /* FeedViewController.swift */,
-				4054783824FA2EF000118F5B /* LastVideoViewController.swift */,
-				4054783A24FA324800118F5B /* InitialVideoViewController.swift */,
-				4054783C24FA360100118F5B /* NextVideoViewController.swift */,
-				4054783E24FB36C200118F5B /* FeedHelperViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -154,6 +147,18 @@
 				4054783024F8198E00118F5B /* PreviewView.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		4054784024FB7F2000118F5B /* Feed  */ = {
+			isa = PBXGroup;
+			children = (
+				4054783624FA25E100118F5B /* FeedViewController.swift */,
+				4054783824FA2EF000118F5B /* LastVideoViewController.swift */,
+				4054783A24FA324800118F5B /* InitialVideoViewController.swift */,
+				4054783C24FA360100118F5B /* NextVideoViewController.swift */,
+				4054783E24FB36C200118F5B /* FeedHelperViewController.swift */,
+			);
+			path = "Feed ";
 			sourceTree = "<group>";
 		};
 		40AB391624F4A2D90011FEAE /* Media */ = {
@@ -312,7 +317,6 @@
 				4054783124F8198E00118F5B /* PreviewView.swift in Sources */,
 				4054783D24FA360100118F5B /* NextVideoViewController.swift in Sources */,
 				40948A1F24F6D24A0062D79E /* VideoPlayback.swift in Sources */,
-				403BE33924F3502B00A3AFD4 /* HomeViewController.swift in Sources */,
 				40948A1D24F6D11A0062D79E /* CameraViewController.swift in Sources */,
 				403BE33724F3501C00A3AFD4 /* LoginViewController.swift in Sources */,
 				407C3EF324F6FC43001E6104 /* PulseAnimation.swift in Sources */,

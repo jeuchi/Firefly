@@ -184,7 +184,8 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
                    let vc = segue.destination as! VideoPlayback
                    vc.videoURL = sender as? URL
                case "backHome":
-                   let vc = segue.destination as! HomeViewController
+            print("backHome segue")
+                   //let vc = segue.destination as! HomeViewController
                default:
                    break
                    

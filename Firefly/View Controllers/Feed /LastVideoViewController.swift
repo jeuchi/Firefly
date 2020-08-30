@@ -78,11 +78,13 @@ class LastVideoViewController: UIViewController {
                 arrIndex = currentIndex
         }
         
+        // bring back buttons
         if arrIndex > 0 && arrIndex != (maxIndex) {
             heartButtonLast.alpha = 1
             numberLikesLast.alpha = 1
         }
         
+        // if this page is the last
         if arrIndex == (maxIndex - 1)  {
             avPlayer.replaceCurrentItem(with: nil)
             
@@ -96,10 +98,8 @@ class LastVideoViewController: UIViewController {
             utilities.loopVideo(videoPlayer: avPlayerLast)
         }
         
+        // update this page
         if arrIndex < (maxIndex - 1)  && arrIndex > 0 {
-           // avItemLast = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
-           // avPlayerLast.replaceCurrentItem(with: avItemLast)
-            
             
             avItem = AVPlayerItem(url: dataCached[arrIndex + 1].url as URL)
             avPlayer.replaceCurrentItem(with: avItem)

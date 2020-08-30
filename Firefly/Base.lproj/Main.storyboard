@@ -135,7 +135,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ptz-BC-mR7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2230" y="461"/>
+            <point key="canvasLocation" x="2086" y="478"/>
         </scene>
         <!--Last Video View Controller-->
         <scene sceneID="bTl-1p-Oee">
@@ -249,7 +249,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Xc-nO-g4O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4008.6956521739135" y="1218.75"/>
+            <point key="canvasLocation" x="3109" y="203"/>
         </scene>
         <!--Feed View Controller-->
         <scene sceneID="ZHD-3k-kXV">
@@ -260,57 +260,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nTi-ie-yHU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3045" y="1220"/>
-        </scene>
-        <!--Home View Controller-->
-        <scene sceneID="rhe-3v-fRJ">
-            <objects>
-                <viewController storyboardIdentifier="HomeVC" id="3ws-GI-YNh" customClass="HomeViewController" customModule="Firefly" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ckg-50-L7D">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wfk-Xd-evK">
-                                <rect key="frame" x="144.5" y="430.5" width="125" height="35"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="esX-H2-UNU">
-                                <rect key="frame" x="168" y="805.5" width="79" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" backgroundImage="camera" catalog="system"/>
-                                <connections>
-                                    <action selector="onClickCamera:" destination="3ws-GI-YNh" eventType="touchUpInside" id="u7d-yv-g1v"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="Wfk-Xd-evK" firstAttribute="centerY" secondItem="Ckg-50-L7D" secondAttribute="centerY" id="jfb-IM-vI2"/>
-                            <constraint firstItem="Wfk-Xd-evK" firstAttribute="centerX" secondItem="Ckg-50-L7D" secondAttribute="centerX" id="zms-zv-w4W"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="NiU-mm-qrv"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="6kf-oM-RRI" appends="YES" id="4z7-p7-Cfg"/>
-                        </connections>
-                    </view>
-                    <navigationItem key="navigationItem" id="WHP-Wd-4UO"/>
-                    <connections>
-                        <outlet property="WelcomeText" destination="Wfk-Xd-evK" id="Q9t-6N-dUd"/>
-                        <outlet property="cameraUIButton" destination="esX-H2-UNU" id="8XD-NU-8uT"/>
-                        <segue destination="Xfq-g3-wfc" kind="presentation" identifier="record" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="HZq-Ch-HUq"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Uh9-al-Opd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="6kf-oM-RRI">
-                    <connections>
-                        <action selector="tapPausePlay:" destination="3ws-GI-YNh" id="KTc-Bg-Dr4"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="2865" y="71"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="Ao0-Rj-lFa">
@@ -359,7 +308,6 @@
                         <outlet property="filterButton" destination="IO3-ri-MGv" id="mCs-4F-Cdc"/>
                         <outlet property="preview" destination="BdS-B2-8im" id="3qc-0k-kb7"/>
                         <segue destination="VDf-iM-WvJ" kind="presentation" identifier="showVideo" modalPresentationStyle="fullScreen" id="ia5-8D-0fa"/>
-                        <segue destination="3ws-GI-YNh" kind="presentation" identifier="backHome" animates="NO" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="J0I-tt-5Nf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZLr-VJ-pv1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -521,7 +469,6 @@
     <resources>
         <image name="ColorFilterOff" width="150" height="150"/>
         <image name="FireflyLogo" width="529" height="472"/>
-        <image name="camera" catalog="system" width="128" height="96"/>
         <image name="camera.fill" catalog="system" width="128" height="96"/>
         <image name="square.and.pencil" catalog="system" width="128" height="118"/>
         <image name="square.fill" catalog="system" width="128" height="114"/>

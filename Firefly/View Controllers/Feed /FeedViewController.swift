@@ -90,9 +90,7 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
              2 - Last
              */
             
-            // INITIAL -> LAST
-            
-            if centerPage == 0 && newPage == 2 {
+            if centerPage == 0 && newPage == 2 { // INITIAL -> LAST
                 centerPage = 2
                 currentIndex -= 1
             } else if centerPage == 0 && newPage == 1 { // INITIAL -> NEXT
@@ -115,16 +113,13 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
             // If user tries to go down outside array of loaded videos, load more
             // TO DO: Refresh videos from database when completed animation
             if currentIndex >= maxIndex {
-                print("refresh")
                 currentIndex = (maxIndex - 1)
                 
                 if centerPage == 2 { // last
-                    print("here")
                     centerPage = 1
                     heartButtonLast.alpha = 0
                     numberLikesLast.alpha = 0
                 } else if centerPage == 1 { // next
-                    print("next here")
                     centerPage = 0
                     heartButtonNext.alpha = 0
                     numberLikesNext.alpha = 0
@@ -138,12 +133,9 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
                     self.setViewControllers([self.pages[centerPage]], direction: .reverse, animated: true, completion: nil)
 
                 }
-                //return
             }
-
             
             newPage = nil
-            
             print("current: \(currentIndex) and page: \(centerPage)")
         }
     

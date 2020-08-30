@@ -8,7 +8,7 @@
 
 import UIKit
 
-
+// Container view for navigation bar on the bottom to appear on all pages
 class FeedHelperViewController: UIViewController {
     
     @IBOutlet weak var cameraButton: UIButton!

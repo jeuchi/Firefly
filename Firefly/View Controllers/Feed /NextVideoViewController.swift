@@ -93,9 +93,6 @@ class NextVideoViewController: UIViewController {
         
         
         if arrIndex < (maxIndex - 1)  && arrIndex > 0 {
-            //avItemNext = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
-            //avPlayerNext.replaceCurrentItem(with: avItemNext)
-            
             avItem = AVPlayerItem(url: dataCached[arrIndex - 1].url as URL)
             avPlayer.replaceCurrentItem(with: avItem)
             numberLikesInitial.text = String(dataCached[arrIndex - 1].likes)

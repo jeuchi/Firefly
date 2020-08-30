@@ -16,14 +16,13 @@ var avPlayerLayer:AVPlayerLayer!
 
 var utilities = Utilities()
 
-var centerPage: Int = 0
+var centerPage: Int = 0 // current page 0 -> initial, 1 -> next, 2 -> last
 var currentIndex: Int = 0
 var arrIndex: Int = 0
 var newPage: Int? = nil
 var maxIndex = 0
 
-var isVideoPlayingInitial: Bool = false
-
+// Data object received from db
 class data {
     var likes: Int
     var path: String
@@ -62,18 +61,15 @@ class InitialVideoViewController: UIViewController {
         
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
         avPlayerLayer.frame = view.bounds
-
         avPlayerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         view.layer.insertSublayer(avPlayerLayer, at: 0)
-        
         avItem = AVPlayerItem(url: dataCached[0].url as URL)
         avPlayer.replaceCurrentItem(with: avItem)
         
-        
         setUpDataButtons(heart: heartButtonInitial, likes: numberLikesInitial)
-        
         numberLikesInitial.text = String(dataCached[arrIndex].likes)
         
+        // Pause and play with tap gesture
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         view.addGestureRecognizer(tap)
         
@@ -156,9 +152,6 @@ class InitialVideoViewController: UIViewController {
         }
         
         if arrIndex < (maxIndex - 1)  && arrIndex > 0 {
-           // avItem = AVPlayerItem(url: arrayURLs[currentIndex] as URL)
-            //avPlayer.replaceCurrentItem(with: avItem)
-            
             avItemNext = AVPlayerItem(url: dataCached[arrIndex + 1].url as URL)
             avPlayerNext.replaceCurrentItem(with: avItemNext)
             numberLikesNext.text = String(dataCached[arrIndex + 1].likes)
