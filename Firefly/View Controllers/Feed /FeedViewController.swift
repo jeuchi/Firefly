@@ -13,6 +13,8 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
     var pages = [UIViewController]()
     let pageControl = UIPageControl()
     
+    var refreshVideos = InitialVideoViewController()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +65,8 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
 
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         
+        let group = DispatchGroup()
+        
         if completed {
             
             if let viewControllers = pageViewController.viewControllers {
@@ -77,9 +81,11 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
             if currentIndex == 0 && centerPage == 0 && newPage == 2 {
                 DispatchQueue.main.async {
                     self.setViewControllers([self.pages[0]], direction: .forward, animated: true, completion: nil)
+                    self.refreshVideos.loadData()
                     currentIndex = 0
                     centerPage = 0
                     newPage = nil
+                   // pageViewController.view.isUserInteractionEnabled = true
                 }
             }
         
@@ -110,28 +116,46 @@ class FeedViewController: UIPageViewController, UIPageViewControllerDataSource, 
                 currentIndex -= 1
             }
             
+            if currentIndex == (maxIndex-2) {
+                endOfVideosLabelInitial.alpha = 0
+                endOfVideosLabelLast.alpha = 0
+                endOfVideosLabelNext.alpha = 0
+            }
+            
+            // Disable button for the next screen at the end
+            if currentIndex == (maxIndex-1) {
+                if centerPage == 2 { // last
+                    heartButtonInitial.alpha = 0
+                    numberLikesInitial.alpha = 0
+                    endOfVideosLabelInitial.alpha = 1
+                } else if centerPage == 1 { // next
+                    heartButtonLast.alpha = 0
+                    numberLikesLast.alpha = 0
+                    endOfVideosLabelLast.alpha = 1
+                } else if centerPage == 0 { // initial
+                    heartButtonNext.alpha = 0
+                    numberLikesNext.alpha = 0
+                    endOfVideosLabelNext.alpha = 1
+                }
+            }
+            
             // If user tries to go down outside array of loaded videos, load more
             // TO DO: Refresh videos from database when completed animation
             if currentIndex >= maxIndex {
+                pageViewController.view.isUserInteractionEnabled = false
                 currentIndex = (maxIndex - 1)
                 
                 if centerPage == 2 { // last
                     centerPage = 1
-                    heartButtonLast.alpha = 0
-                    numberLikesLast.alpha = 0
                 } else if centerPage == 1 { // next
                     centerPage = 0
-                    heartButtonNext.alpha = 0
-                    numberLikesNext.alpha = 0
                 } else if centerPage == 0 { // initial
                     centerPage = 2
-                    heartButtonInitial.alpha = 0
-                    numberLikesInitial.alpha = 0
                 }
                 
                 DispatchQueue.main.async {
                     self.setViewControllers([self.pages[centerPage]], direction: .reverse, animated: true, completion: nil)
-
+                    pageViewController.view.isUserInteractionEnabled = true
                 }
             }
             

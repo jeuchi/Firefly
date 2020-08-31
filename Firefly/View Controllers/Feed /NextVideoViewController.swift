@@ -18,6 +18,8 @@ var numberLikesNext = UILabel()
 
 var playImageNext = UIButton()
 
+var endOfVideosLabelNext = UILabel()
+
 class NextVideoViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -28,6 +30,14 @@ class NextVideoViewController: UIViewController {
         view.layer.insertSublayer(avPlayerLayerNext, at: 0)
         
         setUpDataButtons(heart: heartButtonNext, likes: numberLikesNext, playImage: playImageNext)
+        
+        endOfVideosLabelNext.frame = CGRect(x: view.frame.size.width, y: view.frame.size.height, width: 100, height: 100)
+        endOfVideosLabelNext.center.x = view.frame.midX
+        endOfVideosLabelNext.center.y = view.frame.midY
+        view.addSubview(endOfVideosLabelNext)
+        endOfVideosLabelNext.alpha = 0
+        endOfVideosLabelNext.numberOfLines = 0
+        endOfVideosLabelNext.text = "No more videos :("
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         view.addGestureRecognizer(tap)

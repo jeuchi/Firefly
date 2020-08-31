@@ -41,24 +41,14 @@ var heartButtonInitial = UIButton(type: .custom)
 var numberLikesInitial = UILabel()
 var playImageInitial = UIButton()
 
+var endOfVideosLabelInitial = UILabel()
+
 class InitialVideoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // TESTING (NO DATA RETRIEVAL)
-        let bundlePath = Bundle.main.path(forResource: "LoginVideo", ofType: "mp4")
-        let bundlePath2 = Bundle.main.path(forResource: "kaidClip", ofType: "mp4")
-        let tempurl = URL(fileURLWithPath: bundlePath!)
-        let tempurl2 = URL(fileURLWithPath: bundlePath2!)
-
-        maxIndex = 2
-        let video1 = data(likes: 25, path: bundlePath!, url: tempurl)
-        let video2 = data(likes: 55, path: bundlePath2!, url: tempurl2)
-        dataCached.append(video1)
-        dataCached.append(video2)
-        // TESTING
-        
+        loadData()
         
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
         avPlayerLayer.frame = view.bounds
@@ -70,10 +60,50 @@ class InitialVideoViewController: UIViewController {
         setUpDataButtons(heart: heartButtonInitial, likes: numberLikesInitial, playImage: playImageInitial)
         numberLikesInitial.text = String(dataCached[arrIndex].likes)
         
+        endOfVideosLabelInitial.frame = CGRect(x: view.frame.size.width, y: view.frame.size.height, width: 100, height: 100)
+        endOfVideosLabelInitial.center.x = view.frame.midX
+        endOfVideosLabelInitial.center.y = view.frame.midY
+        view.addSubview(endOfVideosLabelInitial)
+        endOfVideosLabelInitial.alpha = 0
+        endOfVideosLabelInitial.numberOfLines = 0
+        endOfVideosLabelInitial.text = "No more videos :("
+        
         // Pause and play with tap gesture
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         view.addGestureRecognizer(tap)
         
+    }
+    
+   func loadData() {
+        // TESTING (NO DATA RETRIEVAL)
+        dataCached.removeAll()
+        let bundlePath = Bundle.main.path(forResource: "LoginVideo", ofType: "mp4")
+        let bundlePath2 = Bundle.main.path(forResource: "kaidClip", ofType: "mp4")
+        let tempurl = URL(fileURLWithPath: bundlePath!)
+        let tempurl2 = URL(fileURLWithPath: bundlePath2!)
+
+        maxIndex = 10
+        let video1 = data(likes: 25, path: bundlePath!, url: tempurl)
+        let video2 = data(likes: 55, path: bundlePath2!, url: tempurl2)
+        let video3 = data(likes: 155, path: bundlePath2!, url: tempurl2)
+        let video4 = data(likes: 0, path: bundlePath!, url: tempurl)
+        let video5 = data(likes: 1155, path: bundlePath2!, url: tempurl2)
+        let video6 = data(likes: 22255, path: bundlePath2!, url: tempurl2)
+        let video7 = data(likes: 5, path: bundlePath!, url: tempurl)
+        let video8 = data(likes: 100, path: bundlePath!, url: tempurl)
+        let video9 = data(likes: 26, path: bundlePath2!, url: tempurl2)
+        let video10 = data(likes: 867, path: bundlePath2!, url: tempurl2)
+        dataCached.append(video1)
+        dataCached.append(video2)
+        dataCached.append(video3)
+        dataCached.append(video4)
+        dataCached.append(video5)
+        dataCached.append(video6)
+        dataCached.append(video7)
+        dataCached.append(video8)
+        dataCached.append(video9)
+        dataCached.append(video10)
+        // TESTING
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
@@ -131,6 +161,7 @@ class InitialVideoViewController: UIViewController {
             default:
                 arrIndex = currentIndex
         }
+        
         
         if arrIndex > 0 && arrIndex != (maxIndex) {
             heartButtonInitial.alpha = 1

@@ -16,6 +16,8 @@ var avPlayerLayerLast:AVPlayerLayer!
 var heartButtonLast = UIButton(type: .custom)
 var numberLikesLast = UILabel()
 
+var endOfVideosLabelLast = UILabel()
+
 var playImageLast = UIButton()
 
 class LastVideoViewController: UIViewController {
@@ -30,6 +32,13 @@ class LastVideoViewController: UIViewController {
         
         setUpDataButtons(heart: heartButtonLast, likes: numberLikesLast, playImage: playImageLast)
 
+        endOfVideosLabelLast.frame = CGRect(x: view.frame.size.width, y: view.frame.size.height, width: 100, height: 100)
+        endOfVideosLabelLast.center.x = view.frame.midX
+        endOfVideosLabelLast.center.y = view.frame.midY
+        view.addSubview(endOfVideosLabelLast)
+        endOfVideosLabelLast.alpha = 0
+        endOfVideosLabelLast.numberOfLines = 0
+        endOfVideosLabelLast.text = "No more videos :("
         
         heartButtonLast.alpha = 0
         numberLikesLast.alpha = 0
@@ -97,11 +106,13 @@ class LastVideoViewController: UIViewController {
         if arrIndex > 0 && arrIndex != (maxIndex) {
             heartButtonLast.alpha = 1
             numberLikesLast.alpha = 1
+            
         }
         
         // if this page is the last
         if arrIndex == (maxIndex - 1)  {
             avPlayer.replaceCurrentItem(with: nil)
+            
             
             avItemNext = AVPlayerItem(url: dataCached[arrIndex - 1].url as URL)
             avPlayerNext.replaceCurrentItem(with: avItemNext)
