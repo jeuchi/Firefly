@@ -86,6 +86,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
     
     // Subviews
     var player: AVPlayer?
+    var playerView = AVPlayerLayer()
     
     private var model: VideoModel?
     
@@ -98,6 +99,9 @@ class VideoCollectionViewCell: UICollectionViewCell {
     
     private func addSubviews() {
         
+        playerView.frame = contentView.bounds
+        playerView.videoGravity = .resizeAspectFill
+        videoContainer.layer.addSublayer(playerView)
         
         
         contentView.addSubview(videoContainer)
@@ -194,13 +198,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
             return
         }
         player = AVPlayer(url: URL(fileURLWithPath: path))
-        
-        let playerView = AVPlayerLayer()
         playerView.player = player
-        playerView.frame = contentView.bounds
-        playerView.videoGravity = .resizeAspectFill
-        videoContainer.layer.addSublayer(playerView)
-        player?.play()
     }
 }
 

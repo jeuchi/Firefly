@@ -26,7 +26,7 @@ class HomeFeedViewController: UIViewController {
         super.viewDidLoad()
         
         for _ in 0..<10 {
-            let model = VideoModel(caption: "This is a nice group", username: "@jeuchi", audioTrackName: "Ios song", videoFileName: "LoginVideo", videoFileFormat: "mp4")
+            let model = VideoModel(caption: "This is a nice group", username: "@jeuchi", audioTrackName: "Ios song", videoFileName: "kaidClip", videoFileFormat: "mp4")
             data.append(model)
         }
         
@@ -41,6 +41,7 @@ class HomeFeedViewController: UIViewController {
         
         collectionView?.isPagingEnabled = true
         collectionView?.dataSource = self
+        collectionView?.delegate = self
 
         
         view.addSubview(collectionView!)
@@ -53,6 +54,23 @@ class HomeFeedViewController: UIViewController {
     
     @objc func clickOnButton() {
         print("lol")
+    }
+
+}
+
+extension HomeFeedViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        print("HERE")
+      if let videoCell = cell as? VideoCollectionViewCell {
+        videoCell.player?.pause()
+      }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let videoCell = cell as? VideoCollectionViewCell {
+          videoCell.player?.play()
+          utilities.loopVideo(videoPlayer: videoCell.player!)
+        }
     }
 
 }
