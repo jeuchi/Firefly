@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVKit
 
 struct VideoModel {
     let caption: String
@@ -21,6 +22,9 @@ class HomeFeedViewController: UIViewController {
     private var collectionView: UICollectionView?
     
     private var data = [VideoModel]()
+    
+    private var currentCell: VideoCollectionViewCell? = nil
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +49,24 @@ class HomeFeedViewController: UIViewController {
 
         
         view.addSubview(collectionView!)
+        
+        // Pause and play with tap gesture
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        print("CUR: \(currentCell)")
+        if(currentCell?.player!.timeControlStatus==AVPlayer.TimeControlStatus.paused)
+        {
+        //Paused mode
+            currentCell?.player!.play()
+        }
+        else if(currentCell?.player!.timeControlStatus==AVPlayer.TimeControlStatus.playing)
+        {
+         //Play mode
+            currentCell?.player!.pause()
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -60,16 +82,16 @@ class HomeFeedViewController: UIViewController {
 
 extension HomeFeedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print("HERE")
       if let videoCell = cell as? VideoCollectionViewCell {
-        videoCell.player?.pause()
+            videoCell.player?.pause()
       }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let videoCell = cell as? VideoCollectionViewCell {
-          videoCell.player?.play()
-          utilities.loopVideo(videoPlayer: videoCell.player!)
+            currentCell = videoCell
+            videoCell.player?.play()
+            utilities.loopVideo(videoPlayer: videoCell.player!)
         }
     }
 
@@ -84,9 +106,9 @@ extension HomeFeedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let model = data[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCollectionViewCell.identifier, for: indexPath) as! VideoCollectionViewCell
-        
         cell.configure(with: model)
         cell.delegate = self
+        
         return cell
     }
 }
