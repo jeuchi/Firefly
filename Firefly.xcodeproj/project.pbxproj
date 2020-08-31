@@ -33,6 +33,7 @@
 		40AB391824F4A3A80011FEAE /* LoginVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 40AB391724F4A3A80011FEAE /* LoginVideo.mp4 */; };
 		40D1EC8324FC948500FECE63 /* HomeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D1EC8224FC948500FECE63 /* HomeFeedViewController.swift */; };
 		40D1EC8524FC95B800FECE63 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D1EC8424FC95B800FECE63 /* VideoCollectionViewCell.swift */; };
+		40D1EC9124FCE2D600FECE63 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D1EC9024FCE2D600FECE63 /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		40AB391724F4A3A80011FEAE /* LoginVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoginVideo.mp4; sourceTree = "<group>"; };
 		40D1EC8224FC948500FECE63 /* HomeFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedViewController.swift; sourceTree = "<group>"; };
 		40D1EC8424FC95B800FECE63 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
+		40D1EC9024FCE2D600FECE63 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarController.swift; path = "/Users/jeremybellemur/Desktop/MyApp/Firefly2/Firefly/Firefly/View Controllers/TabBarController.swift"; sourceTree = "<absolute>"; };
 		450DED8EB908467A8C674EE4 /* Pods-Firefly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Firefly.debug.xcconfig"; path = "Target Support Files/Pods-Firefly/Pods-Firefly.debug.xcconfig"; sourceTree = "<group>"; };
 		658510CF36434447C7B579E3 /* Pods_Firefly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Firefly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A26B0CE3F6002935640E326 /* Pods-Firefly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Firefly.release.xcconfig"; path = "Target Support Files/Pods-Firefly/Pods-Firefly.release.xcconfig"; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				40948A1E24F6D24A0062D79E /* VideoPlayback.swift */,
 				40D1EC8224FC948500FECE63 /* HomeFeedViewController.swift */,
 				40D1EC8424FC95B800FECE63 /* VideoCollectionViewCell.swift */,
+				40D1EC9024FCE2D600FECE63 /* TabBarController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				4054783F24FB36C200118F5B /* FeedHelperViewController.swift in Sources */,
 				403BE32124F3313A00A3AFD4 /* AppDelegate.swift in Sources */,
 				40D1EC8324FC948500FECE63 /* HomeFeedViewController.swift in Sources */,
+				40D1EC9124FCE2D600FECE63 /* TabBarController.swift in Sources */,
 				403BE34024F356AE00A3AFD4 /* Constants.swift in Sources */,
 				403BE33C24F3511F00A3AFD4 /* SignUpViewController.swift in Sources */,
 				40948A1B24F57F7A0062D79E /* DisplayVideo.swift in Sources */,

@@ -17,6 +17,7 @@ protocol VideoCollectionViewCellDelegate: AnyObject {
     func didTapShareButton(with model: VideoModel)
     
     func didTapCommentButton(with model: VideoModel)
+    
 }
 
 class VideoCollectionViewCell: UICollectionViewCell {
@@ -51,28 +52,33 @@ class VideoCollectionViewCell: UICollectionViewCell {
     private let profileButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(systemName: "person.circle"), for: .normal)
+        button.tintColor = .white
         return button
     }()
     
     private let likeButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+        button.tintColor = .white
         return button
     }()
     
     private let commentButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(systemName: "text.bubble.fill"), for: .normal)
+        button.tintColor = .white
         return button
     }()
     
     private let shareButton: UIButton = {
         let button = UIButton()
-        button.setBackgroundImage(UIImage(systemName: "arrorshape.turn.up.right.fill"), for: .normal)
+        button.setBackgroundImage(UIImage(systemName: "arrowshape.turn.up.right.fill"), for: .normal)
+        button.tintColor = .white
         return button
     }()
     
     private let videoContainer = UIView()
+    
     
     // Delegate
     
@@ -92,6 +98,8 @@ class VideoCollectionViewCell: UICollectionViewCell {
     
     private func addSubviews() {
         
+        
+        
         contentView.addSubview(videoContainer)
         
         contentView.addSubview(usernameLabel)
@@ -102,7 +110,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(likeButton)
         contentView.addSubview(commentButton)
         contentView.addSubview(shareButton)
-        
+
         // Add actions
         likeButton.addTarget(self, action: #selector(didTapLikeButton), for: .touchDown)
         profileButton.addTarget(self, action: #selector(didTapProfileButton), for: .touchDown)
@@ -110,6 +118,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
         shareButton.addTarget(self, action: #selector(didTapShareButton), for: .touchDown)
     
         videoContainer.clipsToBounds = true
+    
         contentView.sendSubviewToBack(videoContainer)
     }
     
@@ -147,7 +156,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
         commentButton.frame = CGRect(x: width-size, y: height-(size*2)-10, width: size, height: size)
         likeButton.frame = CGRect(x: width-size, y: height-(size*3)-10, width: size, height: size)
         profileButton.frame = CGRect(x: width-size, y: height-(size*4)-10, width: size, height: size)
-    
+        
         // Labels
         // username, caption, audio
         audioLabel.frame = CGRect(x: 5, y: height-30, width: width-size-10, height: 50)

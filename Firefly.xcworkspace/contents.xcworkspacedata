@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/jeremybellemur/Desktop/MyApp/Firefly2/Firefly/Firefly/View Controllers/TabBarController.swift">
+   </FileRef>
+   <FileRef
       location = "group:Firefly.xcodeproj">
    </FileRef>
    <FileRef
