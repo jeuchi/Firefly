@@ -23,8 +23,12 @@ class HomeFeedViewController: UIViewController {
     
     private var data = [VideoModel]()
     
-    private var currentCell: VideoCollectionViewCell? = nil
-    
+    private let playButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(systemName: "play.fill"), for: .normal)
+        button.tintColor = .green
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,25 +51,36 @@ class HomeFeedViewController: UIViewController {
         collectionView?.dataSource = self
         collectionView?.delegate = self
 
+        playButton.frame = CGRect(x: 100, y: 100, width: 50, height: 50)
+        playButton.center = view.center
+        playButton.alpha = 0
         
         view.addSubview(collectionView!)
-        
+        view.addSubview(playButton)
         // Pause and play with tap gesture
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         view.addGestureRecognizer(tap)
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        print("CUR: \(currentCell)")
-        if(currentCell?.player!.timeControlStatus==AVPlayer.TimeControlStatus.paused)
+        guard let indexPath = collectionView!.indexPathsForVisibleItems.first else {
+            return
+        }
+        
+        let cell = collectionView!.cellForItem(at: indexPath) as! VideoCollectionViewCell
+        // Do whatever with the index path here.
+        
+        if(cell.player!.timeControlStatus==AVPlayer.TimeControlStatus.paused)
         {
         //Paused mode
-            currentCell?.player!.play()
+            cell.player!.play()
+            playButton.alpha = 0
         }
-        else if(currentCell?.player!.timeControlStatus==AVPlayer.TimeControlStatus.playing)
+        else if(cell.player!.timeControlStatus==AVPlayer.TimeControlStatus.playing)
         {
          //Play mode
-            currentCell?.player!.pause()
+            cell.player!.pause()
+            playButton.alpha = 1
         }
     }
     
@@ -89,7 +104,6 @@ extension HomeFeedViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let videoCell = cell as? VideoCollectionViewCell {
-            currentCell = videoCell
             videoCell.player?.play()
             utilities.loopVideo(videoPlayer: videoCell.player!)
         }
@@ -107,8 +121,8 @@ extension HomeFeedViewController: UICollectionViewDataSource {
         let model = data[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCollectionViewCell.identifier, for: indexPath) as! VideoCollectionViewCell
         cell.configure(with: model)
+        playButton.alpha = 0 
         cell.delegate = self
-        
         return cell
     }
 }

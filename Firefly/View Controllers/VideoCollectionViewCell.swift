@@ -88,6 +88,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
     var player: AVPlayer?
     var playerView = AVPlayerLayer()
     
+    
     private var model: VideoModel?
     
     override init(frame: CGRect) {
