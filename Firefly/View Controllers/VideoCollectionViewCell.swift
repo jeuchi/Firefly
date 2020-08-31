@@ -155,12 +155,12 @@ class VideoCollectionViewCell: UICollectionViewCell {
         usernameLabel.frame = CGRect(x: 5, y: height-120, width: width-size-10, height: 50)
     }
     
-   /* override func prepareForReuse() {
+    override func prepareForReuse() {
         super.prepareForReuse()
         captionLabel.text = nil
         audioLabel.text = nil
         usernameLabel.text = nil
-    }*/
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -168,8 +168,9 @@ class VideoCollectionViewCell: UICollectionViewCell {
     
     public func configure(with model: VideoModel) {
         self.model = model
-        configureVideo()
         
+        self.player?.replaceCurrentItem(with: nil)
+        configureVideo()
         // labels
         captionLabel.text = model.caption
         audioLabel.text = model.audioTrackName
