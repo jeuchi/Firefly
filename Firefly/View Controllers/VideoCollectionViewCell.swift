@@ -152,15 +152,15 @@ class VideoCollectionViewCell: UICollectionViewCell {
         
         videoContainer.frame = contentView.bounds
         
-        let size = contentView.frame.size.width/7
+        let size = contentView.frame.size.width/11
         let width = contentView.frame.size.width
         let height = contentView.frame.size.height - 100
         
         // Buttons
-        shareButton.frame = CGRect(x: width-size, y: height-size, width: size, height: size)
-        commentButton.frame = CGRect(x: width-size, y: height-(size*2)-10, width: size, height: size)
-        likeButton.frame = CGRect(x: width-size, y: height-(size*3)-10, width: size, height: size)
-        profileButton.frame = CGRect(x: width-size, y: height-(size*4)-10, width: size, height: size)
+        shareButton.frame = CGRect(x: width-size, y: height-size - 40, width: size, height: size)
+        commentButton.frame = CGRect(x: width-size, y: height-(size*2)-60, width: size, height: size)
+        likeButton.frame = CGRect(x: width-size, y: height-(size*3)-80, width: size, height: size)
+        profileButton.frame = CGRect(x: width-size, y: height-(size*4)-100, width: size, height: size)
         
         // Labels
         // username, caption, audio
