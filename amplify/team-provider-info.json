@@ -1,0 +1,20 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-firefly-dev-155128-authRole",
+            "UnauthRoleArn": "arn:aws:iam::244341045496:role/amplify-firefly-dev-155128-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::244341045496:role/amplify-firefly-dev-155128-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "amplify-firefly-dev-155128-deployment",
+            "UnauthRoleName": "amplify-firefly-dev-155128-unauthRole",
+            "StackName": "amplify-firefly-dev-155128",
+            "StackId": "arn:aws:cloudformation:us-west-2:244341045496:stack/amplify-firefly-dev-155128/58375a30-eb13-11ea-a0e2-02f6ffa9fe66",
+            "AmplifyAppId": "d2ft6bun7gepu5"
+        },
+        "categories": {
+            "auth": {
+                "firefly93b9f180": {}
+            }
+        }
+    }
+}

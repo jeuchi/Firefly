@@ -1,0 +1,15 @@
+{
+	"auth": {
+		"firefly93b9f180": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	},
+	"storage": {
+		"S3friendlyName": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
+		}
+	}
+}
