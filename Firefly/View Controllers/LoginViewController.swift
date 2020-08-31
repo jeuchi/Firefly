@@ -26,6 +26,7 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
     func setUpElements() {
         // Hide the error label
         errorLabel.alpha = 0

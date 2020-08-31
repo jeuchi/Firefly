@@ -36,16 +36,13 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     private let sessionQueue = DispatchQueue(label: "session queue")
     private var setupResult: SessionSetupResult = .success
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        // set up swipe gestures [RIGHT: Home screen]
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-        leftSwipe.direction = .left
-        rightSwipe.direction = .right
-        view.addGestureRecognizer(leftSwipe)
-        view.addGestureRecognizer(rightSwipe)
         
         // set up cameraButton
         cameraButton.isUserInteractionEnabled = true
@@ -142,17 +139,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     }
     
     
-    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer)
-    {
-        if sender.direction == .right
-        {
-            dismiss(animated: true, completion: nil)
-        }
-    }
-    
     @IBAction func tappedBackButton(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-
+        self.tabBarController?.selectedIndex = 0
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     

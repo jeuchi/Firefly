@@ -7,17 +7,20 @@
 
 import UIKit
 
-class TabBarController: UIViewController {
+class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         print("loaded")
-        view.backgroundColor = .red
-        var tabBarCnt = UITabBarController()
-        tabBarCnt = UITabBarController()
-        tabBarCnt.tabBar.barStyle = .black
         
-        view.addSubview(tabBarCnt.view)
+        self.delegate = self
+    }
+
+}
+
+extension TabBarController: UITabBarControllerDelegate {
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        print("selected item")
     }
 
 }
