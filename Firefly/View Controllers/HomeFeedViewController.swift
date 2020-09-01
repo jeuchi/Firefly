@@ -30,6 +30,7 @@ class HomeFeedViewController: UIViewController {
         return button
     }()
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +44,7 @@ class HomeFeedViewController: UIViewController {
         layout.minimumLineSpacing = 0
         layout.itemSize = CGSize(width: view.frame.size.width, height: view.frame.size.height)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView?.register(VideoCollectionViewCell.self, forCellWithReuseIdentifier: VideoCollectionViewCell.identifier)
@@ -50,6 +52,8 @@ class HomeFeedViewController: UIViewController {
         collectionView?.isPagingEnabled = true
         collectionView?.dataSource = self
         collectionView?.delegate = self
+        collectionView?.bounces = true
+        
 
         playButton.frame = CGRect(x: 100, y: 100, width: 50, height: 50)
         playButton.center = view.center
@@ -86,7 +90,11 @@ class HomeFeedViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        print("kik")
         collectionView?.frame = view.bounds
+        let indexPath = NSIndexPath(item: 0, section: 0)
+        collectionView?.scrollToItem(at: indexPath as IndexPath, at: .centeredVertically, animated: true)
+        
     }
     
     @objc func clickOnButton() {
@@ -109,6 +117,8 @@ extension HomeFeedViewController: UICollectionViewDelegate {
         }
     }
 
+    
+
 }
 
 
@@ -117,12 +127,14 @@ extension HomeFeedViewController: UICollectionViewDataSource {
         return data.count
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let model = data[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCollectionViewCell.identifier, for: indexPath) as! VideoCollectionViewCell
         cell.configure(with: model)
         playButton.alpha = 0 
         cell.delegate = self
+    
         return cell
     }
 }

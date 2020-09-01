@@ -149,7 +149,6 @@ class VideoCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         videoContainer.frame = contentView.bounds
         
         let size = contentView.frame.size.width/11

@@ -479,7 +479,7 @@
         <scene sceneID="2YR-xA-gRZ">
             <objects>
                 <tabBarController id="Hoe-LH-mcz" customClass="TabBarController" customModule="Firefly" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="TQc-9H-xYk">
+                    <tabBar key="tabBar" alpha="0.0" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="TQc-9H-xYk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -532,7 +532,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3fU-fH-ALH"/>
+        <segue reference="mfw-RK-b7c"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="ColorFilterOff" width="150" height="150"/>
