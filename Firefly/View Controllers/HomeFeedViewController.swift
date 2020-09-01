@@ -30,12 +30,26 @@ class HomeFeedViewController: UIViewController {
         return button
     }()
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        guard let indexPath = collectionView!.indexPathsForVisibleItems.first else {
+            return
+        }
+        let cell = collectionView!.cellForItem(at: indexPath) as! VideoCollectionViewCell
+        cell.player!.pause()
+        playButton.alpha = 1
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for _ in 0..<10 {
+        for _ in 0..<5 {
             let model = VideoModel(caption: "This is a nice group", username: "@jeuchi", audioTrackName: "Ios song", videoFileName: "kaidClip", videoFileFormat: "mp4")
+            data.append(model)
+        }
+        
+        for _ in 0..<5 {
+            let model = VideoModel(caption: "My friends", username: "@jeuchi99", audioTrackName: "Beets by dr. d", videoFileName: "LoginVideo", videoFileFormat: "mp4")
             data.append(model)
         }
         
@@ -90,7 +104,6 @@ class HomeFeedViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print("kik")
         collectionView?.frame = view.bounds
         let indexPath = NSIndexPath(item: 0, section: 0)
         collectionView?.scrollToItem(at: indexPath as IndexPath, at: .centeredVertically, animated: true)

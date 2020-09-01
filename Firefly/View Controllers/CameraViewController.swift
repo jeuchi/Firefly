@@ -96,7 +96,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     
     // set up inputs and outputs and startRunning() capture session
     func startSession(inputDevice: AVCaptureDevice) {
-        print("Starting session and found -> \(inputDevice)")
+        //print("Starting session and found -> \(inputDevice)")
         captureSession.beginConfiguration()
         
         // video input
