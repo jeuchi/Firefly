@@ -9,6 +9,7 @@
 import UIKit
 import AVKit
 
+// Each video will be a VideoModel
 struct VideoModel {
     let caption: String
     let username: String
@@ -23,8 +24,9 @@ class HomeFeedViewController: UIViewController {
     
     private var data = [VideoModel]()
     
-    private var initialCell: Bool = true
+    private var initialCell: Bool = true //auto play first cell
     
+    // When segue to another tab, pause current cell
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         guard let indexPath = collectionView!.indexPathsForVisibleItems.first else {
@@ -37,6 +39,7 @@ class HomeFeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // TESTING VIDEOS
         for _ in 0..<5 {
             let model = VideoModel(caption: "This is a nice group", username: "@jeuchi", audioTrackName: "Ios song", videoFileName: "kaidClip", videoFileFormat: "mp4")
             data.append(model)
@@ -46,7 +49,9 @@ class HomeFeedViewController: UIViewController {
             let model = VideoModel(caption: "My friends", username: "@jeuchi99", audioTrackName: "Beets by dr. d", videoFileName: "LoginVideo", videoFileFormat: "mp4")
             data.append(model)
         }
+        // END TESTING
         
+        // Set cell layout
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 0
@@ -57,11 +62,10 @@ class HomeFeedViewController: UIViewController {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView?.register(VideoCollectionViewCell.self, forCellWithReuseIdentifier: VideoCollectionViewCell.identifier)
         
-        collectionView?.isPagingEnabled = true
+        collectionView?.isPagingEnabled = true // snap cell to view
         collectionView?.dataSource = self
         collectionView?.delegate = self
-        collectionView?.bounces = true
-        
+        collectionView?.bounces = true // scroll bouncing top and bottom
         view.addSubview(collectionView!)
 
         // Pause and play with tap gesture
@@ -75,17 +79,16 @@ class HomeFeedViewController: UIViewController {
         }
         
         let cell = collectionView!.cellForItem(at: indexPath) as! VideoCollectionViewCell
-        // Do whatever with the index path here.
         
         if(cell.player!.timeControlStatus==AVPlayer.TimeControlStatus.paused)
         {
-            //Paused mode
+            //Play video
             cell.player!.play()
             cell.playButton.alpha = 0
         }
         else if(cell.player!.timeControlStatus==AVPlayer.TimeControlStatus.playing)
         {
-            //Play mode
+            //Pause video
             cell.player!.pause()
             cell.playButton.alpha = 1
         }
@@ -94,37 +97,20 @@ class HomeFeedViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView?.frame = view.bounds
+        
+        // This controls where the index starts at (Here is first video cell)
         let indexPath = NSIndexPath(item: 0, section: 0)
         collectionView?.scrollToItem(at: indexPath as IndexPath, at: .centeredVertically, animated: true)
         
     }
-    
-    @objc func clickOnButton() {
-        print("lol")
-    }
-
 }
 
 extension HomeFeedViewController: UICollectionViewDelegate {
-    /*func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-      if let videoCell = cell as? VideoCollectionViewCell {
-            print("PAUSING")
-            //videoCell.player?.pause()
-      }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let videoCell = cell as? VideoCollectionViewCell {
-            print("...")
-            //videoCell.player?.play()
-            //utilities.loopVideo(videoPlayer: videoCell.player!)
-        }
-    }*/
-    
+
+    // Once user starts to scroll, pause current video cell
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if let iPath = collectionView?.indexPathsForVisibleItems.first {
-            print("DidStartDragging - visible cell is: ", iPath)
-            // do what you want here..
+            //print("DidStartDragging - visible cell is: ", iPath)
             
             if let videoCell = collectionView?.cellForItem(at: iPath) as? VideoCollectionViewCell {
                 videoCell.playButton.alpha = 1
@@ -133,49 +119,36 @@ extension HomeFeedViewController: UICollectionViewDelegate {
         }
     }
     
+    // Once user finishes scrolling, play current visible cell at center of screen
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // Get center of screen to get the visible cell
-        
         let point = view.convert(collectionView!.center, to: collectionView)
         
-        guard
+        guard // get index of cell at the center of the screen
             let indexPath = collectionView!.indexPathForItem(at: point),
             indexPath.item < data.count
         else {
             return
         }
         
-        print("DidEndDecelerating - visible cell is: ", indexPath)
+        //print("DidEndDecelerating - visible cell is: ", indexPath)
+        // Auto play video
         if let videoCell = collectionView?.cellForItem(at: indexPath) as? VideoCollectionViewCell {
             videoCell.playButton.alpha = 0
             videoCell.player?.play()
             utilities.loopVideo(videoPlayer: videoCell.player!)
         }
-
-        /*
-        if let iPath = collectionView?.indexPathsForVisibleItems.first {
-            print("DidEndDecelerating - visible cell is: ", iPath)
-            // do what you want here..
-            
-            
-            if let videoCell = collectionView?.cellForItem(at: iPath) as? VideoCollectionViewCell {
-                //print("here ")
-                videoCell.player?.play()
-                utilities.loopVideo(videoPlayer: videoCell.player!)
-            }
-        }*/
     }
     
 
 }
 
-
 extension HomeFeedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
+        return data.count // Number of videos
     }
     
-    
+    // Configure current cell with the video supplied by the model
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let model = data[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCollectionViewCell.identifier, for: indexPath) as! VideoCollectionViewCell
@@ -183,8 +156,11 @@ extension HomeFeedViewController: UICollectionViewDataSource {
         cell.delegate = self
         
         cell.playButton.alpha = 0
+         
+        // Auto size cell to fullscreen (DOES NOT FIX BUG WHERE USER NEED TO TAP INITIAL CELL)
+        cell.sizeToFit()
         
-        if initialCell {
+        if initialCell { // Auto play first cell since scrolling controls when cells play
             cell.player!.play()
             initialCell = false
         }
@@ -192,6 +168,7 @@ extension HomeFeedViewController: UICollectionViewDataSource {
     }
 }
 
+// Handle delegate functions from VideoCollectionViewCell
 extension HomeFeedViewController: VideoCollectionViewCellDelegate {
     func didTapLikeButton(with model: VideoModel) {
         print("like button tapped")

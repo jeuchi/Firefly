@@ -7,11 +7,11 @@
 
 import UIKit
 
+// Tab bar UI is in storyboard
 class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("loaded")
         
         self.delegate = self
     }
@@ -20,7 +20,7 @@ class TabBarController: UITabBarController {
 
 extension TabBarController: UITabBarControllerDelegate {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        print("selected item")
+        //print("selected item")
     }
     
 

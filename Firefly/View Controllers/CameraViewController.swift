@@ -119,14 +119,14 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         }
            
     
-        print("Session inputs: \(captureSession.inputs)")
+        //print("Session inputs: \(captureSession.inputs)")
         
         // video output
         guard captureSession.canAddOutput(movieOutput) else { return }
         captureSession.sessionPreset = .hd1920x1080
         captureSession.addOutput(movieOutput)
         captureSession.commitConfiguration()
-        print("Session outputs: \(captureSession.outputs)")
+        //print("Session outputs: \(captureSession.outputs)")
         
         // set up live viewing
         previewView = AVCaptureVideoPreviewLayer(session: captureSession)

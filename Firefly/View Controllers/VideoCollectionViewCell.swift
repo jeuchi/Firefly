@@ -25,7 +25,6 @@ class VideoCollectionViewCell: UICollectionViewCell {
     static let identifier = "VideoCollectionViewCell"
     
     // Labels
-    
     private let usernameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
@@ -48,7 +47,6 @@ class VideoCollectionViewCell: UICollectionViewCell {
     }()
     
     // Buttons
-    
     private let profileButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(systemName: "person.circle"), for: .normal)
@@ -85,10 +83,8 @@ class VideoCollectionViewCell: UICollectionViewCell {
     }()
     
     private let videoContainer = UIView()
-    
-    
+
     // Delegate
-    
     weak var delegate: VideoCollectionViewCellDelegate?
     
     // Subviews
