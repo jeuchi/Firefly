@@ -77,6 +77,13 @@ class VideoCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
+    public let playButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(systemName: "play.fill"), for: .normal)
+        button.tintColor = .green
+        return button
+    }()
+    
     private let videoContainer = UIView()
     
     
@@ -115,6 +122,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(likeButton)
         contentView.addSubview(commentButton)
         contentView.addSubview(shareButton)
+        contentView.addSubview(playButton)
 
         // Add actions
         likeButton.addTarget(self, action: #selector(didTapLikeButton), for: .touchDown)
@@ -160,6 +168,9 @@ class VideoCollectionViewCell: UICollectionViewCell {
         commentButton.frame = CGRect(x: width-size, y: height-(size*2)-60, width: size, height: size)
         likeButton.frame = CGRect(x: width-size, y: height-(size*3)-80, width: size, height: size)
         profileButton.frame = CGRect(x: width-size, y: height-(size*4)-100, width: size, height: size)
+        
+        playButton.frame = CGRect(x: 100, y: 100, width: 50, height: 50)
+        playButton.center = contentView.center
         
         // Labels
         // username, caption, audio
