@@ -21,11 +21,6 @@
 		403BE34124F356AE00A3AFD4 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403BE33F24F356AE00A3AFD4 /* Utilities.swift */; };
 		4054783124F8198E00118F5B /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054783024F8198E00118F5B /* PreviewView.swift */; };
 		4054783324F9F41100118F5B /* kaidClip.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4054783224F9F2E200118F5B /* kaidClip.mp4 */; };
-		4054783724FA25E100118F5B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054783624FA25E100118F5B /* FeedViewController.swift */; };
-		4054783924FA2EF000118F5B /* LastVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054783824FA2EF000118F5B /* LastVideoViewController.swift */; };
-		4054783B24FA324800118F5B /* InitialVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054783A24FA324800118F5B /* InitialVideoViewController.swift */; };
-		4054783D24FA360100118F5B /* NextVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054783C24FA360100118F5B /* NextVideoViewController.swift */; };
-		4054783F24FB36C200118F5B /* FeedHelperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054783E24FB36C200118F5B /* FeedHelperViewController.swift */; };
 		407C3EF324F6FC43001E6104 /* PulseAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407C3EF224F6FC43001E6104 /* PulseAnimation.swift */; };
 		40948A1D24F6D11A0062D79E /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40948A1C24F6D11A0062D79E /* CameraViewController.swift */; };
 		40948A1F24F6D24A0062D79E /* VideoPlayback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40948A1E24F6D24A0062D79E /* VideoPlayback.swift */; };
@@ -52,11 +47,6 @@
 		403BE33F24F356AE00A3AFD4 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		4054783024F8198E00118F5B /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		4054783224F9F2E200118F5B /* kaidClip.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = kaidClip.mp4; sourceTree = "<group>"; };
-		4054783624FA25E100118F5B /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		4054783824FA2EF000118F5B /* LastVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastVideoViewController.swift; sourceTree = "<group>"; };
-		4054783A24FA324800118F5B /* InitialVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialVideoViewController.swift; sourceTree = "<group>"; };
-		4054783C24FA360100118F5B /* NextVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextVideoViewController.swift; sourceTree = "<group>"; };
-		4054783E24FB36C200118F5B /* FeedHelperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedHelperViewController.swift; sourceTree = "<group>"; };
 		407C3EF224F6FC43001E6104 /* PulseAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulseAnimation.swift; sourceTree = "<group>"; };
 		40948A1C24F6D11A0062D79E /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		40948A1E24F6D24A0062D79E /* VideoPlayback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayback.swift; sourceTree = "<group>"; };
@@ -134,8 +124,6 @@
 				40D1EC9324FF53DC00FECE63 /* Authentication */,
 				40D1EC9224FF53BE00FECE63 /* Camera */,
 				4054784024FB7F2000118F5B /* Feed  */,
-				40D1EC8224FC948500FECE63 /* HomeFeedViewController.swift */,
-				40D1EC8424FC95B800FECE63 /* VideoCollectionViewCell.swift */,
 				40D1EC9024FCE2D600FECE63 /* TabBarController.swift */,
 			);
 			path = "View Controllers";
@@ -155,11 +143,8 @@
 		4054784024FB7F2000118F5B /* Feed  */ = {
 			isa = PBXGroup;
 			children = (
-				4054783624FA25E100118F5B /* FeedViewController.swift */,
-				4054783824FA2EF000118F5B /* LastVideoViewController.swift */,
-				4054783A24FA324800118F5B /* InitialVideoViewController.swift */,
-				4054783C24FA360100118F5B /* NextVideoViewController.swift */,
-				4054783E24FB36C200118F5B /* FeedHelperViewController.swift */,
+				40D1EC8224FC948500FECE63 /* HomeFeedViewController.swift */,
+				40D1EC8424FC95B800FECE63 /* VideoCollectionViewCell.swift */,
 			);
 			path = "Feed ";
 			sourceTree = "<group>";
@@ -337,16 +322,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4054783124F8198E00118F5B /* PreviewView.swift in Sources */,
-				4054783D24FA360100118F5B /* NextVideoViewController.swift in Sources */,
 				40948A1F24F6D24A0062D79E /* VideoPlayback.swift in Sources */,
 				40948A1D24F6D11A0062D79E /* CameraViewController.swift in Sources */,
 				403BE33724F3501C00A3AFD4 /* LoginViewController.swift in Sources */,
 				407C3EF324F6FC43001E6104 /* PulseAnimation.swift in Sources */,
-				4054783B24FA324800118F5B /* InitialVideoViewController.swift in Sources */,
 				40D1EC8524FC95B800FECE63 /* VideoCollectionViewCell.swift in Sources */,
-				4054783724FA25E100118F5B /* FeedViewController.swift in Sources */,
 				403BE32524F3313A00A3AFD4 /* ViewController.swift in Sources */,
-				4054783F24FB36C200118F5B /* FeedHelperViewController.swift in Sources */,
 				403BE32124F3313A00A3AFD4 /* AppDelegate.swift in Sources */,
 				40D1EC8324FC948500FECE63 /* HomeFeedViewController.swift in Sources */,
 				40D1EC9124FCE2D600FECE63 /* TabBarController.swift in Sources */,
@@ -354,7 +335,6 @@
 				403BE33C24F3511F00A3AFD4 /* SignUpViewController.swift in Sources */,
 				403BE34124F356AE00A3AFD4 /* Utilities.swift in Sources */,
 				403BE32324F3313A00A3AFD4 /* SceneDelegate.swift in Sources */,
-				4054783924FA2EF000118F5B /* LastVideoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
