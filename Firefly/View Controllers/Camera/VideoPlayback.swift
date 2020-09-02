@@ -1,5 +1,6 @@
 import UIKit
 import AVFoundation
+import AVKit
 
 class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoEditorControllerDelegate {
 
@@ -9,15 +10,18 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
     @IBOutlet weak var editButton: UIButton!
     
     var notificationObserver:NSObjectProtocol?
-    var videoURL: URL!
+    var videoURL: [URL]!
     var editURL: URL!
+    var arrayVideos: [AVAsset] = []
     
     @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var discardButton: UIButton!
     
+    let editController = UIVideoEditorController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
         avPlayerLayer.frame = view.bounds
         avPlayerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
@@ -25,14 +29,63 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
     
         view.layoutIfNeeded()
     
-        let playerItem = AVPlayerItem(url: videoURL as URL)
-        avPlayer.replaceCurrentItem(with: playerItem)
-    
-        editURL = videoURL
-        avPlayer.play()
-        
-        loopVideo(videoPlayer: avPlayer)
+        for url in videoURL {
+            let asset = AVAsset(url: url)
+            arrayVideos.append(asset)
+        }
+        merge(arrayVideos: arrayVideos) { (URL, Error) in
+            if (Error != nil) {
+                print("Error \(Error?.localizedDescription)")
+            }else {
+                let playerItem = AVPlayerItem(url: URL! as URL)
+                self.avPlayer.replaceCurrentItem(with: playerItem)
+                
+                self.editURL = URL!
+                self.avPlayer.play()
+                    
+                self.loopVideo(videoPlayer: self.avPlayer)
+            }
+        }
     }
+    
+    func merge(arrayVideos:[AVAsset], completion:@escaping (URL?, Error?) -> ()) {
+
+      let mainComposition = AVMutableComposition()
+      let compositionVideoTrack = mainComposition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)
+      compositionVideoTrack?.preferredTransform = CGAffineTransform(rotationAngle: .pi / 2)
+
+      let soundtrackTrack = mainComposition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)
+
+        var insertTime = CMTime.zero
+
+      for videoAsset in arrayVideos {
+        try! compositionVideoTrack?.insertTimeRange(CMTimeRangeMake(start: .zero, duration: videoAsset.duration), of: videoAsset.tracks(withMediaType: .video)[0], at: insertTime)
+        try! soundtrackTrack?.insertTimeRange(CMTimeRangeMake(start: .zero, duration: videoAsset.duration), of: videoAsset.tracks(withMediaType: .audio)[0], at: insertTime)
+
+        insertTime = CMTimeAdd(insertTime, videoAsset.duration)
+      }
+
+      let outputFileURL = URL(fileURLWithPath: NSTemporaryDirectory() + "merge.mp4")
+
+      let fileManager = FileManager()
+      try? fileManager.removeItem(at: outputFileURL)
+
+      let exporter = AVAssetExportSession(asset: mainComposition, presetName: AVAssetExportPresetHighestQuality)
+
+      exporter?.outputURL = outputFileURL
+      exporter?.outputFileType = AVFileType.mp4
+      exporter?.shouldOptimizeForNetworkUse = true
+
+      exporter?.exportAsynchronously {
+        if let url = exporter?.outputURL{
+            completion(url, nil)
+        }
+        if let error = exporter?.error {
+            completion(nil, error)
+        }
+      }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
@@ -45,10 +98,14 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
     @IBAction func tappedEdit(_ sender: Any) {
         avPlayer.pause()
         if UIVideoEditorController.canEditVideo(atPath: editURL.path) {
-            let editController = UIVideoEditorController()
             editController.videoPath = editURL.path
             editController.delegate = self
             
+            addChild(editController)
+            editController.view.frame = CGRect(x: 0, y: view.bounds.height/2, width: view.bounds.width, height: view.bounds.height/2)
+            view.addSubview(editController.view)
+            didMove(toParent: self)
+            /*
             var topMostViewController = UIApplication.shared.keyWindow?.rootViewController
 
             while let presentedViewController = topMostViewController?.presentedViewController {
@@ -56,22 +113,29 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
             }
             topMostViewController?.present(editController, animated: true) {
                 print("edit now")
-            }
+            }*/
         }
     }
     
     func videoEditorController(_ editor: UIVideoEditorController, didSaveEditedVideoToPath editedVideoPath: String) {
+    
         avPlayer.pause()
         editURL = URL(fileURLWithPath: editedVideoPath)
         let playerItem = AVPlayerItem(url: editURL as URL)
         avPlayer.replaceCurrentItem(with: playerItem)
+        
+        editController.willMove(toParent: nil)
+        editController.view.removeFromSuperview()
+        editController.removeFromParent()
         avPlayer.play()
         loopVideo(videoPlayer: avPlayer)
         
     }
     
     func videoEditorControllerDidCancel(_ editor: UIVideoEditorController) {
-        dismiss(animated: true, completion: nil)
+        editController.willMove(toParent: nil)
+        editController.view.removeFromSuperview()
+        editController.removeFromParent()
         avPlayer.play()
     }
     
@@ -91,8 +155,8 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
         
         
         alert.addAction(UIAlertAction(title: "Start Over", style: .default, handler: { (action: UIAlertAction!) in
-            self.editURL = self.videoURL
-            let playerItem = AVPlayerItem(url: self.videoURL as URL)
+            self.editURL = self.videoURL[0]
+            let playerItem = AVPlayerItem(url: self.videoURL[0] as URL)
             self.avPlayer.replaceCurrentItem(with: playerItem)
             self.avPlayer.play()
             self.loopVideo(videoPlayer: self.avPlayer)

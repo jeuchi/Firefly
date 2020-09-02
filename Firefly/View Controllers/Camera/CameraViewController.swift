@@ -9,11 +9,14 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     @IBOutlet weak var preview: UIView!
     @IBOutlet weak var backFeedButton: UIButton!
     
+    @IBOutlet weak var saveButton: UIButton!
+    
     @IBOutlet weak var cameraButton: UIButton!
     var cameraSquareFrame: CGFloat = 0.0 // reference to camera frame for animating button
     
     var pulsePoint: CGPoint = CGPoint(x: 207, y: 788)
 
+    private var videoRecorded: [URL] = []
     private var movieOutput = AVCaptureMovieFileOutput()
     var previewView: AVCaptureVideoPreviewLayer!
     @objc dynamic var videoDeviceInput: AVCaptureDeviceInput!
@@ -131,6 +134,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         captureSession.startRunning()
     }
     
+    @IBAction func tappedSaveButton(_ sender: Any) {
+        performSegue(withIdentifier: "showVideo", sender: videoRecorded)
+    }
     
     @IBAction func tappedBackButton(_ sender: Any) {
         self.tabBarController?.selectedIndex = 0
@@ -174,9 +180,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         if error != nil {
             print("Error recording movie: \(error!.localizedDescription)")
         } else {
-            let videoRecorded = outputFileURL
-    
-            performSegue(withIdentifier: "showVideo", sender: videoRecorded)
+            videoRecorded.append(outputFileURL)
         }
     }
     
@@ -184,7 +188,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
            switch segue.identifier {
                case "showVideo":
                    let vc = segue.destination as! VideoPlayback
-                   vc.videoURL = sender as? URL
+                   vc.videoURL = sender as? [URL]
                case "backHome":
                     print("backHome segue")
                    //let vc = segue.destination as! HomeViewController
