@@ -13,11 +13,13 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
     var videoURL: [URL]!
     var editURL: URL!
     var arrayVideos: [AVAsset] = []
+    var mergedURL: URL? = nil
     
     @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var discardButton: UIButton!
     
     let editController = UIVideoEditorController()
+    var myCollectionView: UICollectionView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,7 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
             if (Error != nil) {
                 print("Error \(Error?.localizedDescription)")
             }else {
+                self.mergedURL = URL!
                 let playerItem = AVPlayerItem(url: URL! as URL)
                 self.avPlayer.replaceCurrentItem(with: playerItem)
                 
@@ -97,24 +100,30 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
     
     @IBAction func tappedEdit(_ sender: Any) {
         avPlayer.pause()
-        if UIVideoEditorController.canEditVideo(atPath: editURL.path) {
-            editController.videoPath = editURL.path
+        if UIVideoEditorController.canEditVideo(atPath: mergedURL!.path) {
+            editController.videoPath = mergedURL!.path
             editController.delegate = self
             
             addChild(editController)
             editController.view.frame = CGRect(x: 0, y: view.bounds.height/2, width: view.bounds.width, height: view.bounds.height/2)
             view.addSubview(editController.view)
             didMove(toParent: self)
-            /*
-            var topMostViewController = UIApplication.shared.keyWindow?.rootViewController
-
-            while let presentedViewController = topMostViewController?.presentedViewController {
-                topMostViewController = presentedViewController
-            }
-            topMostViewController?.present(editController, animated: true) {
-                print("edit now")
-            }*/
         }
+        
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+        layout.itemSize = CGSize(width: 60, height: 60)
+        
+        let collectionFrame = CGRect(x: 0, y: view.bounds.height/4, width: view.bounds.width, height: view.bounds.height/6)
+        myCollectionView = UICollectionView(frame: collectionFrame, collectionViewLayout: layout)
+        myCollectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "MyCell")
+        myCollectionView?.backgroundColor = UIColor.white
+        
+
+        myCollectionView?.dataSource = self
+        //myCollectionView?.delegate = self
+        
+        view.addSubview(myCollectionView ?? UICollectionView())
     }
     
     func videoEditorController(_ editor: UIVideoEditorController, didSaveEditedVideoToPath editedVideoPath: String) {
@@ -170,5 +179,17 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
             videoPlayer.seek(to: CMTime.zero)
             videoPlayer.play()
         }
+    }
+}
+
+extension VideoPlayback: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 9 // How many cells to display
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath)
+        myCell.backgroundColor = UIColor.blue
+        return myCell
     }
 }
