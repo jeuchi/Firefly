@@ -20,6 +20,8 @@ struct VideoModel {
 
 class HomeFeedViewController: UIViewController {
     
+    public var utilities = Utilities()
+    
     private var collectionView: UICollectionView?
     
     private var data = [VideoModel]()

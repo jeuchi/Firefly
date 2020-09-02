@@ -137,130 +137,6 @@
             </objects>
             <point key="canvasLocation" x="2086" y="478"/>
         </scene>
-        <!--Last Video View Controller-->
-        <scene sceneID="bTl-1p-Oee">
-            <objects>
-                <viewController storyboardIdentifier="GreenViewController" id="Dgg-Vi-gGK" customClass="LastVideoViewController" customModule="Firefly" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="icw-BN-PLd">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Green" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hn3-Jf-2tF">
-                                <rect key="frame" x="122" y="438" width="227" height="251"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="WHH-ZY-qpJ"/>
-                    </view>
-                    <nil key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="886-Yk-ViT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2257.971014492754" y="1920.5357142857142"/>
-        </scene>
-        <!--Initial Video View Controller-->
-        <scene sceneID="H1d-aB-Wmx">
-            <objects>
-                <viewController storyboardIdentifier="RedViewController" id="YRV-Ga-u9N" customClass="InitialVideoViewController" customModule="Firefly" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="e7m-f9-G8A">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0h-j1-4Bh">
-                                <rect key="frame" x="352" y="524" width="42" height="52"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="wjO-bn-LMp"/>
-                    </view>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="numberLikesInitial" destination="o0h-j1-4Bh" id="NEy-QD-8Od"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zhd-sL-ar5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3108.6956521739135" y="1945.9821428571427"/>
-        </scene>
-        <!--Next Video View Controller-->
-        <scene sceneID="wbI-Ql-dft">
-            <objects>
-                <viewController storyboardIdentifier="BlueViewController" id="dM0-0c-f88" customClass="NextVideoViewController" customModule="Firefly" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="VL5-Sw-BI3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="hWq-LR-y52"/>
-                    </view>
-                    <nil key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6O6-yr-O8U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3912" y="1946"/>
-        </scene>
-        <!--Feed Helper View Controller-->
-        <scene sceneID="Ywo-lg-x7n">
-            <objects>
-                <viewController id="XP4-oi-aqM" customClass="FeedHelperViewController" customModule="Firefly" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ma4-2O-ZQU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yKN-jn-rcp">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <segue destination="55a-xq-mxD" kind="embed" id="wZX-vt-6lN"/>
-                                </connections>
-                            </containerView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4pU-Bh-Xnq">
-                                <rect key="frame" x="-12" y="820" width="438" height="77"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cEz-ZQ-jb2">
-                                        <rect key="frame" x="196" y="8.5" width="46" height="38"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" backgroundImage="camera.fill" catalog="system"/>
-                                        <connections>
-                                            <action selector="tappedCamera:" destination="XP4-oi-aqM" eventType="touchUpInside" id="gVC-py-4N4"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="WZX-fg-Q3w"/>
-                    </view>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="cameraButton" destination="cEz-ZQ-jb2" id="Vbk-X8-aud"/>
-                        <segue destination="Xfq-g3-wfc" kind="presentation" identifier="record" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="3fU-fH-ALH"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Xc-nO-g4O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3109" y="203"/>
-        </scene>
-        <!--Feed View Controller-->
-        <scene sceneID="ZHD-3k-kXV">
-            <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="vertical" spineLocation="none" id="55a-xq-mxD" customClass="FeedViewController" customModule="Firefly" customModuleProvider="target" sceneMemberID="viewController">
-                    <nil key="simulatedBottomBarMetrics"/>
-                </pageViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nTi-ie-yHU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3045" y="1220"/>
-        </scene>
         <!--Camera View Controller-->
         <scene sceneID="Ao0-Rj-lFa">
             <objects>
@@ -319,7 +195,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4008.6956521739135" y="87.723214285714278"/>
+            <point key="canvasLocation" x="4248" y="-46"/>
         </scene>
         <!--Video Playback-->
         <scene sceneID="TfM-17-MrL">
@@ -366,7 +242,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zxh-FF-Q6g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4750.7246376811599" y="87.723214285714278"/>
+            <point key="canvasLocation" x="5542" y="-46"/>
         </scene>
         <!--Sign Up-->
         <scene sceneID="Tc5-WK-nKO">
@@ -463,7 +339,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kp4-my-4KQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3108.6956521739135" y="-702.45535714285711"/>
+            <point key="canvasLocation" x="4248" y="873"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="2YR-xA-gRZ">
@@ -484,7 +360,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wn3-DR-QBu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4009" y="-1347"/>
+            <point key="canvasLocation" x="3120" y="-46"/>
         </scene>
         <!--Profile-->
         <scene sceneID="wCu-S9-CUj">
@@ -500,7 +376,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HRl-we-nvj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4928" y="-1055"/>
+            <point key="canvasLocation" x="4248" y="-883"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="avE-o0-iTA">
@@ -522,7 +398,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="jpz-Sc-of7"/>
+        <segue reference="eU6-Er-LLu"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="FireflyLogo" width="529" height="472"/>
