@@ -4,20 +4,16 @@ import AVFoundation
 
 
 class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate {
-    
-//AVCaptureFileOutputRecordingDelegate {
 
     // Storyboard buttons and preview layer
     @IBOutlet weak var preview: UIView!
-    @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var backFeedButton: UIButton!
     
     @IBOutlet weak var cameraButton: UIButton!
-    var cameraSquareFrame: CGFloat = 0.0
+    var cameraSquareFrame: CGFloat = 0.0 // reference to camera frame for animating button
     
     var pulsePoint: CGPoint = CGPoint(x: 207, y: 788)
-    private var videoFilterOn: Bool = false
-    
+
     private var movieOutput = AVCaptureMovieFileOutput()
     var previewView: AVCaptureVideoPreviewLayer!
     @objc dynamic var videoDeviceInput: AVCaptureDeviceInput!
@@ -117,9 +113,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         } catch {
             print("Error setting audio device: \(error)")
         }
-           
-    
-        //print("Session inputs: \(captureSession.inputs)")
         
         // video output
         guard captureSession.canAddOutput(movieOutput) else { return }
@@ -144,8 +137,6 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    
-    
     @IBAction func tapRecord(_ sender: Any) {
         // Check if not recording
         if movieOutput.isRecording == false {
@@ -163,9 +154,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
             }
             
             // Start recording video to a temporary file.
-                let outputFileName = NSUUID().uuidString
-                let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mov")!)
-                movieOutput.startRecording(to: URL(fileURLWithPath: outputFilePath), recordingDelegate: self)
+            let outputFileName = NSUUID().uuidString
+            let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mov")!)
+            movieOutput.startRecording(to: URL(fileURLWithPath: outputFilePath), recordingDelegate: self)
             } else {
                 // remove pulsing animation layer
                 removePulse()
@@ -195,7 +186,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
                    let vc = segue.destination as! VideoPlayback
                    vc.videoURL = sender as? URL
                case "backHome":
-            print("backHome segue")
+                    print("backHome segue")
                    //let vc = segue.destination as! HomeViewController
                default:
                    break
@@ -279,14 +270,5 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
         }
         
     }
-    
-    @IBAction func tappedFilterButton(_ sender: Any) {
-        videoFilterOn = !videoFilterOn
-        let filteringEnabled = videoFilterOn
-        
-        let stateImage = UIImage(named: filteringEnabled ? "ColorFilterOn" : "ColorFilterOff")
-        self.filterButton.setImage(stateImage, for: .normal)
-    }
-    
     
 }

@@ -27,7 +27,6 @@
 		4054783D24FA360100118F5B /* NextVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054783C24FA360100118F5B /* NextVideoViewController.swift */; };
 		4054783F24FB36C200118F5B /* FeedHelperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4054783E24FB36C200118F5B /* FeedHelperViewController.swift */; };
 		407C3EF324F6FC43001E6104 /* PulseAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407C3EF224F6FC43001E6104 /* PulseAnimation.swift */; };
-		40948A1B24F57F7A0062D79E /* DisplayVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40948A1A24F57F7A0062D79E /* DisplayVideo.swift */; };
 		40948A1D24F6D11A0062D79E /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40948A1C24F6D11A0062D79E /* CameraViewController.swift */; };
 		40948A1F24F6D24A0062D79E /* VideoPlayback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40948A1E24F6D24A0062D79E /* VideoPlayback.swift */; };
 		40AB391824F4A3A80011FEAE /* LoginVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 40AB391724F4A3A80011FEAE /* LoginVideo.mp4 */; };
@@ -59,7 +58,6 @@
 		4054783C24FA360100118F5B /* NextVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextVideoViewController.swift; sourceTree = "<group>"; };
 		4054783E24FB36C200118F5B /* FeedHelperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedHelperViewController.swift; sourceTree = "<group>"; };
 		407C3EF224F6FC43001E6104 /* PulseAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulseAnimation.swift; sourceTree = "<group>"; };
-		40948A1A24F57F7A0062D79E /* DisplayVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayVideo.swift; sourceTree = "<group>"; };
 		40948A1C24F6D11A0062D79E /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		40948A1E24F6D24A0062D79E /* VideoPlayback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayback.swift; sourceTree = "<group>"; };
 		40AB391724F4A3A80011FEAE /* LoginVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoginVideo.mp4; sourceTree = "<group>"; };
@@ -133,12 +131,9 @@
 		403BE33A24F3503000A3AFD4 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				40D1EC9324FF53DC00FECE63 /* Authentication */,
+				40D1EC9224FF53BE00FECE63 /* Camera */,
 				4054784024FB7F2000118F5B /* Feed  */,
-				403BE32424F3313A00A3AFD4 /* ViewController.swift */,
-				403BE33624F3501C00A3AFD4 /* LoginViewController.swift */,
-				403BE33B24F3511F00A3AFD4 /* SignUpViewController.swift */,
-				40948A1C24F6D11A0062D79E /* CameraViewController.swift */,
-				40948A1E24F6D24A0062D79E /* VideoPlayback.swift */,
 				40D1EC8224FC948500FECE63 /* HomeFeedViewController.swift */,
 				40D1EC8424FC95B800FECE63 /* VideoCollectionViewCell.swift */,
 				40D1EC9024FCE2D600FECE63 /* TabBarController.swift */,
@@ -151,7 +146,6 @@
 			children = (
 				403BE33E24F356AE00A3AFD4 /* Constants.swift */,
 				403BE33F24F356AE00A3AFD4 /* Utilities.swift */,
-				40948A1A24F57F7A0062D79E /* DisplayVideo.swift */,
 				407C3EF224F6FC43001E6104 /* PulseAnimation.swift */,
 				4054783024F8198E00118F5B /* PreviewView.swift */,
 			);
@@ -177,6 +171,25 @@
 				40AB391724F4A3A80011FEAE /* LoginVideo.mp4 */,
 			);
 			path = Media;
+			sourceTree = "<group>";
+		};
+		40D1EC9224FF53BE00FECE63 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				40948A1C24F6D11A0062D79E /* CameraViewController.swift */,
+				40948A1E24F6D24A0062D79E /* VideoPlayback.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		40D1EC9324FF53DC00FECE63 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				403BE32424F3313A00A3AFD4 /* ViewController.swift */,
+				403BE33624F3501C00A3AFD4 /* LoginViewController.swift */,
+				403BE33B24F3511F00A3AFD4 /* SignUpViewController.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		4E46EBB2507A421EAC0CDB22 /* Frameworks */ = {
@@ -339,7 +352,6 @@
 				40D1EC9124FCE2D600FECE63 /* TabBarController.swift in Sources */,
 				403BE34024F356AE00A3AFD4 /* Constants.swift in Sources */,
 				403BE33C24F3511F00A3AFD4 /* SignUpViewController.swift in Sources */,
-				40948A1B24F57F7A0062D79E /* DisplayVideo.swift in Sources */,
 				403BE34124F356AE00A3AFD4 /* Utilities.swift in Sources */,
 				403BE32324F3313A00A3AFD4 /* SceneDelegate.swift in Sources */,
 				4054783924FA2EF000118F5B /* LastVideoViewController.swift in Sources */,

@@ -12,8 +12,6 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
     var videoURL: URL!
     var editURL: URL!
     
-    //connect this to your uiview in storyboard
-    
     @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var discardButton: UIButton!
     

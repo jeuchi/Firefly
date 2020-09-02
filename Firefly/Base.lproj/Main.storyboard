@@ -299,15 +299,6 @@
                                     <action selector="tappedBackButton:" destination="Xfq-g3-wfc" eventType="touchUpInside" id="yY7-sb-HBC"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IO3-ri-MGv">
-                                <rect key="frame" x="157" y="398" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" image="ColorFilterOff"/>
-                                <connections>
-                                    <action selector="tappedFilterButton:" destination="Xfq-g3-wfc" eventType="touchUpInside" id="ymc-Yc-OGF"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="dEc-V1-ant"/>
@@ -317,7 +308,6 @@
                     <connections>
                         <outlet property="backFeedButton" destination="pbD-Uj-s5A" id="y5C-0O-tMB"/>
                         <outlet property="cameraButton" destination="c6D-mz-ovK" id="3kP-T2-hX9"/>
-                        <outlet property="filterButton" destination="IO3-ri-MGv" id="mCs-4F-Cdc"/>
                         <outlet property="preview" destination="BdS-B2-8im" id="3qc-0k-kb7"/>
                         <segue destination="VDf-iM-WvJ" kind="presentation" identifier="showVideo" modalPresentationStyle="fullScreen" id="ia5-8D-0fa"/>
                     </connections>
@@ -535,7 +525,6 @@
         <segue reference="jpz-Sc-of7"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="ColorFilterOff" width="150" height="150"/>
         <image name="FireflyLogo" width="529" height="472"/>
         <image name="arrowshape.turn.up.left.2.fill" catalog="system" width="128" height="87"/>
         <image name="camera" catalog="system" width="128" height="96"/>
