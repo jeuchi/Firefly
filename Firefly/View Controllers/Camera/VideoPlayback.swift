@@ -121,7 +121,7 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
         
 
         myCollectionView?.dataSource = self
-        //myCollectionView?.delegate = self
+        myCollectionView?.delegate = self
         
         view.addSubview(myCollectionView ?? UICollectionView())
     }
@@ -154,6 +154,9 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
         let alert = UIAlertController(title: "", message: "Are you sure you want to delete?", preferredStyle: UIAlertController.Style.alert)
 
         alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: { (action: UIAlertAction!) in
+            self.mergedURL = nil
+            self.arrayVideos.removeAll()
+            self.videoURL.removeAll()
             self.dismiss(animated: true, completion: nil)
             //self.performSegue(withIdentifier: "goVideo", sender: nil)
           }))
@@ -180,16 +183,69 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
             videoPlayer.play()
         }
     }
+    
+    func getThumbnailImageFromVideoUrl(url: URL, completion: @escaping ((_ image: UIImage?)->Void)) {
+        DispatchQueue.global().async { //1
+            let asset = AVAsset(url: url) //2
+            let avAssetImageGenerator = AVAssetImageGenerator(asset: asset) //3
+            avAssetImageGenerator.appliesPreferredTrackTransform = true //4
+            let thumnailTime = CMTimeMake(value: 2, timescale: 1) //5
+            do {
+                let cgThumbImage = try avAssetImageGenerator.copyCGImage(at: thumnailTime, actualTime: nil) //6
+                let thumbImage = UIImage(cgImage: cgThumbImage) //7
+                DispatchQueue.main.async { //8
+                    completion(thumbImage) //9
+                }
+            } catch {
+                print(error.localizedDescription) //10
+                DispatchQueue.main.async {
+                    completion(nil) //11
+                }
+            }
+        }
+    }
 }
 
 extension VideoPlayback: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9 // How many cells to display
+        return videoURL.count // How many cells to display
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath)
-        myCell.backgroundColor = UIColor.blue
+        
+        let imageview:UIImageView=UIImageView(frame: CGRect(x: 50, y: 50, width: 200, height: 200));
+
+        getThumbnailImageFromVideoUrl(url: videoURL[indexPath.row]) { (image) in
+            imageview.image = image
+        }
+
+        myCell.backgroundView = imageview
+
+           
         return myCell
     }
+}
+
+extension VideoPlayback: UICollectionViewDelegate {
+ 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       print("User tapped on item \(indexPath.row)")
+        editURL = videoURL[indexPath.row]
+    
+        editController.view.removeFromSuperview()
+        editController.removeFromParent()
+        editController.videoPath = ""
+        if UIVideoEditorController.canEditVideo(atPath: editURL!.path) {
+            editController.videoPath = editURL!.path
+            editController.delegate = self
+            
+            addChild(editController)
+            editController.view.frame = CGRect(x: 0, y: view.bounds.height/2, width: view.bounds.width, height: view.bounds.height/2)
+            view.addSubview(editController.view)
+            didMove(toParent: self)
+        }
+
+    }
+    
 }
