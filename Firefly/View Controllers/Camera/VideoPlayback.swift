@@ -18,7 +18,7 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
     @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var discardButton: UIButton!
     
-    let editController = UIVideoEditorController()
+    var currentEditController: UIVideoEditorController? = nil
     var myCollectionView: UICollectionView?
     
     override func viewDidLoad() {
@@ -31,6 +31,8 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
     
         view.layoutIfNeeded()
     
+        arrayVideos.removeAll()
+        
         for url in videoURL {
             let asset = AVAsset(url: url)
             arrayVideos.append(asset)
@@ -100,15 +102,8 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
     
     @IBAction func tappedEdit(_ sender: Any) {
         avPlayer.pause()
-        if UIVideoEditorController.canEditVideo(atPath: mergedURL!.path) {
-            editController.videoPath = mergedURL!.path
-            editController.delegate = self
-            
-            addChild(editController)
-            editController.view.frame = CGRect(x: 0, y: view.bounds.height/2, width: view.bounds.width, height: view.bounds.height/2)
-            view.addSubview(editController.view)
-            didMove(toParent: self)
-        }
+        
+        createEditorController(url: mergedURL!)
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
@@ -133,19 +128,36 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
         let playerItem = AVPlayerItem(url: editURL as URL)
         avPlayer.replaceCurrentItem(with: playerItem)
         
-        editController.willMove(toParent: nil)
-        editController.view.removeFromSuperview()
-        editController.removeFromParent()
+        removeCurrentEditor(controller: currentEditController!)
         avPlayer.play()
         loopVideo(videoPlayer: avPlayer)
         
     }
     
     func videoEditorControllerDidCancel(_ editor: UIVideoEditorController) {
-        editController.willMove(toParent: nil)
-        editController.view.removeFromSuperview()
-        editController.removeFromParent()
+        removeCurrentEditor(controller: currentEditController!)
+        currentEditController = nil
         avPlayer.play()
+    }
+    
+    func createEditorController(url: URL) {
+        if UIVideoEditorController.canEditVideo(atPath: url.path) {
+            let editController = UIVideoEditorController()
+            currentEditController = editController
+            editController.videoPath = url.path
+            editController.delegate = self
+            
+            addChild(editController)
+            editController.view.frame = CGRect(x: 0, y: view.bounds.height/2, width: view.bounds.width, height: view.bounds.height/2)
+            view.addSubview(editController.view)
+            didMove(toParent: self)
+        }
+    }
+    
+    func removeCurrentEditor(controller: UIVideoEditorController) {
+        controller.willMove(toParent: nil)
+        controller.view.removeFromSuperview()
+        controller.removeFromParent()
     }
     
     @IBAction func tappedDiscard(_ sender: Any) {
@@ -232,20 +244,10 @@ extension VideoPlayback: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        print("User tapped on item \(indexPath.row)")
         editURL = videoURL[indexPath.row]
+        
+        removeCurrentEditor(controller: currentEditController!)
+        createEditorController(url: editURL)
     
-        editController.view.removeFromSuperview()
-        editController.removeFromParent()
-        editController.videoPath = ""
-        if UIVideoEditorController.canEditVideo(atPath: editURL!.path) {
-            editController.videoPath = editURL!.path
-            editController.delegate = self
-            
-            addChild(editController)
-            editController.view.frame = CGRect(x: 0, y: view.bounds.height/2, width: view.bounds.width, height: view.bounds.height/2)
-            view.addSubview(editController.view)
-            didMove(toParent: self)
-        }
-
     }
     
 }
