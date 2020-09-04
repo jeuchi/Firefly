@@ -135,7 +135,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
     }
     
     @IBAction func tappedSaveButton(_ sender: Any) {
-        performSegue(withIdentifier: "showVideo", sender: videoRecorded)
+        if videoRecorded.count > 0 {
+            performSegue(withIdentifier: "showVideo", sender: videoRecorded)
+        } 
     }
     
     @IBAction func tappedBackButton(_ sender: Any) {

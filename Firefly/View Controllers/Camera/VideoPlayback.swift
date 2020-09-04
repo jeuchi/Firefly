@@ -11,9 +11,12 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
     
     var notificationObserver:NSObjectProtocol?
     var videoURL: [URL]!
+    var copyURLS: [URL] = []
     var editURL: URL!
     var arrayVideos: [AVAsset] = []
     var mergedURL: URL? = nil
+    var mergedCopy: URL? = nil
+    var currEdit: Int = 0
     
     @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var discardButton: UIButton!
@@ -36,12 +39,14 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
         for url in videoURL {
             let asset = AVAsset(url: url)
             arrayVideos.append(asset)
+            copyURLS.append(url)
         }
         merge(arrayVideos: arrayVideos) { (URL, Error) in
             if (Error != nil) {
                 print("Error \(Error?.localizedDescription)")
             }else {
                 self.mergedURL = URL!
+                self.mergedCopy = URL!
                 let playerItem = AVPlayerItem(url: URL! as URL)
                 self.avPlayer.replaceCurrentItem(with: playerItem)
                 
@@ -105,6 +110,10 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
         
         createEditorController(url: mergedURL!)
         
+        createCollection()
+    }
+    
+    func createCollection() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
         layout.itemSize = CGSize(width: 60, height: 60)
@@ -124,13 +133,27 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
     func videoEditorController(_ editor: UIVideoEditorController, didSaveEditedVideoToPath editedVideoPath: String) {
     
         avPlayer.pause()
-        editURL = URL(fileURLWithPath: editedVideoPath)
-        let playerItem = AVPlayerItem(url: editURL as URL)
-        avPlayer.replaceCurrentItem(with: playerItem)
+        let asset = AVAsset(url: URL(fileURLWithPath: editedVideoPath))
         
+        videoURL[currEdit] = URL(fileURLWithPath: editedVideoPath)
+        arrayVideos[currEdit] = asset
+       
         removeCurrentEditor(controller: currentEditController!)
-        avPlayer.play()
-        loopVideo(videoPlayer: avPlayer)
+       
+        merge(arrayVideos: arrayVideos) { (URL, Error) in
+            if (Error != nil) {
+                print("Error \(Error?.localizedDescription)")
+            }else {
+                self.mergedURL = URL!
+                let playerItem = AVPlayerItem(url: URL! as URL)
+                self.avPlayer.replaceCurrentItem(with: playerItem)
+                
+                self.editURL = URL!
+                self.avPlayer.play()
+                    
+                self.loopVideo(videoPlayer: self.avPlayer)
+            }
+        }
         
     }
     
@@ -179,11 +202,28 @@ class VideoPlayback: UIViewController, UINavigationControllerDelegate & UIVideoE
         
         
         alert.addAction(UIAlertAction(title: "Start Over", style: .default, handler: { (action: UIAlertAction!) in
-            self.editURL = self.videoURL[0]
-            let playerItem = AVPlayerItem(url: self.videoURL[0] as URL)
-            self.avPlayer.replaceCurrentItem(with: playerItem)
-            self.avPlayer.play()
-            self.loopVideo(videoPlayer: self.avPlayer)
+            self.arrayVideos.removeAll()
+            self.videoURL = self.copyURLS
+            for url in self.videoURL {
+                let asset = AVAsset(url: url)
+                self.arrayVideos.append(asset)
+                self.copyURLS.append(url)
+            }
+            self.merge(arrayVideos: self.arrayVideos) { (URL, Error) in
+                if (Error != nil) {
+                    print("Error \(Error?.localizedDescription)")
+                }else {
+                    self.mergedURL = URL!
+                    self.mergedCopy = URL!
+                    let playerItem = AVPlayerItem(url: URL! as URL)
+                    self.avPlayer.replaceCurrentItem(with: playerItem)
+                    
+                    self.editURL = URL!
+                    self.avPlayer.play()
+                        
+                    self.loopVideo(videoPlayer: self.avPlayer)
+                }
+            }
           }))
 
         present(alert, animated: true, completion: nil)
@@ -244,6 +284,7 @@ extension VideoPlayback: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        print("User tapped on item \(indexPath.row)")
         editURL = videoURL[indexPath.row]
+        currEdit = indexPath.row
         
         removeCurrentEditor(controller: currentEditController!)
         createEditorController(url: editURL)
